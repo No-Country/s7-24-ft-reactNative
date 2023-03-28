@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet } from "react-native";
 import Login from "./src/pages/auth/login/Login";
 import Register from "./src/pages/auth/register/Register";
+import "./src/styles/generic/generic.css";
 const Stack = createNativeStackNavigator();
 export default function App() {
 	const auth = true;
