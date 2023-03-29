@@ -1,31 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
-import Login from "./src/pages/auth/login/Login";
-import Register from "./src/pages/auth/register/Register";
-import "./src/styles/generic/generic.css";
-const Stack = createNativeStackNavigator();
-export default function App() {
-	const auth = true;
+import { lazy, Suspense } from "react";
+import LazyLoadingStart from "./src/components/LazyLoadingStart";
+import UserProviderUser from "./src/context/UserProviderUser";
 
+const IndexPages = lazy(() => import("./src/pages/index/Index"));
+
+export default function App() {
 	return (
-		<NavigationContainer>
-			<Stack.Navigator>
-				{auth === true ? (
-					<Stack.Screen name="Login" component={Login} />
-				) : (
-					<Stack.Screen name="Register" component={Register} />
-				)}
-			</Stack.Navigator>
-		</NavigationContainer>
+		<UserProviderUser>
+			<NavigationContainer>
+				<Suspense fallback={<LazyLoadingStart />}>
+					<IndexPages />
+				</Suspense>
+			</NavigationContainer>
+		</UserProviderUser>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});
