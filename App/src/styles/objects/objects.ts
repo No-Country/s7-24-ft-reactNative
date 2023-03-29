@@ -28,8 +28,24 @@ const ObjectStyles = StyleSheet.create({
 		color: "rgba(149, 149, 149, 1)",
 	},
 	titleForm: {
+		position: "absolute",
+		top: "16%",
 		fontSize: 20,
 		color: RootStyles.typographyMajor,
+	},
+	link: {
+		textDecorationLine: "underline",
+	},
+
+	textLabelForm: {
+		marginBottom: 12,
+		color: RootStyles.colorBck,
+		fontSize: 14,
+	},
+
+	containerFormInput: {
+		display: "flex",
+		height: 60,
 	},
 });
 
