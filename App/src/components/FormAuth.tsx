@@ -8,7 +8,7 @@ const FormAuth = ({ children }: Children) => {
 const styles = StyleSheet.create({
 	FormAuth: {
 		minHeight: 139,
-		gap:20,
+		gap: 20,
 	},
 });
 

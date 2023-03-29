@@ -15,7 +15,7 @@ const ObjectStyles = StyleSheet.create({
 	},
 	backgroundForm: {
 		height: "100%",
-		backgroundColor: RootStyles.colorWhite,
+		backgroundColor: RootStyles.backgroundColorApp,
 	},
 
 	input: {
@@ -25,7 +25,9 @@ const ObjectStyles = StyleSheet.create({
 		borderRadius: 4,
 		fontSize: 14,
 		border: "1px solid #d4d4d4",
+		backgroundColor: RootStyles.colorWhite,
 		color: "rgba(149, 149, 149, 1)",
+		boxShadow: " 0px 2px 2px rgba(0, 0, 0, 0.25)",
 	},
 	titleForm: {
 		position: "absolute",

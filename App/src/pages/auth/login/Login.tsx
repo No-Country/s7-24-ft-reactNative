@@ -7,9 +7,8 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import ButtonFom from "../../../components/ButtonFom";
-import ErrorMessageForm from "../../../components/ErrorMessageForm";
-import FormAuth from "../../../components/FormAuth";
+
+import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
 import Form from "../../../models/login.models";
 import ObjectStyles from "../../../styles/objects/objects";
 
@@ -17,7 +16,7 @@ type Props = {
 	navigation: NativeStackNavigationProp<any, any>;
 };
 
-const Login: React.FC<Props> = ({ navigation }) => {
+const Login = ({ navigation }: Props) => {
 	const {
 		control,
 		handleSubmit,
@@ -36,6 +35,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 	const onSubmit = (data: Form) => {
 		console.log(data);
 	};
+
 	return (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
 			<Text style={ObjectStyles.titleForm}>Iniciar Sesión</Text>
@@ -45,10 +45,11 @@ const Login: React.FC<Props> = ({ navigation }) => {
 					<Text style={ObjectStyles.textLabelForm}>Email:</Text>
 					<Controller
 						control={control}
-						render={({ field: { onChange, value } }) => (
+						render={({ field: { onChange, onBlur, value } }) => (
 							<TextInput
 								placeholder="Ingrese su correo"
 								value={value}
+								onBlur={onBlur}
 								onChangeText={onChange}
 								keyboardType="email-address"
 								style={ObjectStyles.input}
@@ -58,19 +59,22 @@ const Login: React.FC<Props> = ({ navigation }) => {
 						rules={{ required: true }}
 					/>
 
-					{errors && <ErrorMessageForm message={errors.email?.message} />}
+					{errors.email && (
+						<ErrorMessageForm message='Este campo es requirió' />
+					)}
 				</View>
 
 				<View style={ObjectStyles.containerFormInput}>
 					<Text style={ObjectStyles.textLabelForm}>Password:</Text>
 					<Controller
 						control={control}
-						render={({ field: { onChange, value } }) => (
+						render={({ field: { onChange, onBlur, value } }) => (
 							<TextInput
 								placeholder="Ingrese su correo"
 								secureTextEntry={true}
 								textContentType="password"
 								onChangeText={onChange}
+								onBlur={onBlur}
 								value={value}
 								style={ObjectStyles.input}
 							/>
@@ -78,6 +82,9 @@ const Login: React.FC<Props> = ({ navigation }) => {
 						name="password"
 						rules={{ required: true }}
 					/>
+					{errors.password && (
+						<ErrorMessageForm message='Este campo es requirió' />
+					)}
 				</View>
 
 				<ButtonFom
@@ -102,5 +109,9 @@ const style = StyleSheet.create({
 		gap: 12,
 	},
 });
+
+Login.navigationOptions = {
+	title: "",
+};
 
 export default Login;

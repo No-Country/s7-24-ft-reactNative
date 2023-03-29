@@ -3,11 +3,15 @@ import ObjectStyles from "../styles/objects/objects";
 import RootStyles from "../styles/setting/setting";
 interface Props {
 	text: string;
+	handlerSubmit: () => void;
 }
 
-const ButtonFom = ({ text }: Props) => {
+const ButtonFom = ({ text, handlerSubmit }: Props) => {
 	return (
-		<TouchableOpacity style={[ObjectStyles.bottomForm, styles.bottom]}>
+		<TouchableOpacity
+			style={[ObjectStyles.bottomForm, styles.bottom]}
+			onPress={handlerSubmit}
+		>
 			<Text style={styles.text}>{text}</Text>
 		</TouchableOpacity>
 	);

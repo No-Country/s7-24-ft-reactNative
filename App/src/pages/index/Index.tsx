@@ -13,12 +13,18 @@ const Index = () => {
 					<Stack.Screen
 						name="Login"
 						component={Login}
-						options={{ title: "Login" }}
+						options={{
+							title: "",
+							headerShown: false,
+						}}
 					/>
 					<Stack.Screen
 						name="Register"
 						component={Register}
-						options={{ title: "Register" }}
+						options={{
+							title: "Register",
+							headerShown: false,
+						}}
 					/>
 				</>
 			) : (
