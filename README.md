@@ -21,6 +21,8 @@ Settings : se usa con preprocesadores y contiene fuentes, definiciones de colore
 
 Tools :  funciones y mixins utilizados globalmente. Es importante no generar ningún CSS en las primeras 2 capas. 
 
+Generic : restablecer y/o normalizar estilos, definición de tamaño de caja, etc. Esta es la primera capa que genera CSS real.  ! PUEDE SE BORRE 
+
 Objects :  selectores basados ​​en clases que definen patrones de diseño no decorados, por ejemplo, el objeto multimedia conocido de OOCSS 
 
 Utilities : utilidades y clases auxiliares con la capacidad de anular todo lo que sucede antes en el triángulo, por ejemplo, ocultar la clase auxiliar.

@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { lazy, Suspense } from "react";
+import LazyLoadingStart from "./src/components/LazyLoadingStart";
+import UserProviderUser from "./src/context/UserProviderUser";
+
+const IndexPages = lazy(() => import("./src/pages/index/Index"));
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<UserProviderUser>
+			<NavigationContainer>
+				<Suspense fallback={<LazyLoadingStart />}>
+					<IndexPages />
+				</Suspense>
+			</NavigationContainer>
+		</UserProviderUser>
+	);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
