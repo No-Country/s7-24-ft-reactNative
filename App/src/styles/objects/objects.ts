@@ -35,6 +35,7 @@ const ObjectStyles = StyleSheet.create({
 		fontSize: 20,
 		color: RootStyles.typographyMajor,
 	},
+
 	link: {
 		textDecorationLine: "underline",
 	},
