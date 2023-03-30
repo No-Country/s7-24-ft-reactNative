@@ -21,7 +21,6 @@ export default function StackNavigator() {
           backgroundColor: COLORS.background,
         },
       }}
-      initialRouteName="Login"
     >
       <Stack.Screen name="Login" component={LoginTest} />
       <Stack.Screen
