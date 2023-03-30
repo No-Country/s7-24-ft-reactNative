@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // --------------------------------------------------------------------
 
 import { ArrowBackNavigatoHeader, MenuNavigatorHeader } from "../components";
-import { ROUTES } from "../constants";
-import { LoginTest, ServicesScreen } from "../pages";
+import { COLORS, ROUTES } from "../constants";
+import { CategoriesScreen, LoginTest, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
 
 // --------------------------------------------------------------------
@@ -17,13 +17,25 @@ export default function StackNavigator() {
       screenOptions={{
         headerShown: false,
         headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: COLORS.background,
+        },
       }}
       initialRouteName="Login"
     >
       <Stack.Screen name="Login" component={LoginTest} />
       <Stack.Screen
-        name={ROUTES.SERVICES}
-        component={ServicesScreen}
+        name={ROUTES.CATEGORY}
+        component={CategoriesScreen}
+        options={{
+          headerShown: true,
+          headerLeft: () => <ArrowBackNavigatoHeader />,
+          headerRight: () => <MenuNavigatorHeader />,
+        }}
+      />
+      <Stack.Screen
+        name={ROUTES.SERVICE}
+        component={ServiceScreen}
         options={{
           headerShown: true,
           headerLeft: () => <ArrowBackNavigatoHeader />,

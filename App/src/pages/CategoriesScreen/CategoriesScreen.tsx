@@ -13,11 +13,12 @@ import {
 
 import { BottomSheetModal } from "../../components";
 import ServiceCard from "../../components/ServiceCard";
+import { COLORS } from "../../constants";
 import { dataServices } from "../../utils/fakeData";
 
 // --------------------------------------------------------------------
 
-export default function ServicesScreen({ route, navigation }: any) {
+export default function CategoriesScreen({ route, navigation }: any) {
   const { id, title, img } = route.params;
   const [show, setShow] = useState(false);
 
@@ -38,7 +39,7 @@ export default function ServicesScreen({ route, navigation }: any) {
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: COLORS.background }}>
       <TouchableOpacity style={styles.filterContainer} onPress={open}>
         <Text style={{ fontSize: 10 }}>Filtrar</Text>
         <Image

@@ -1,3 +1,4 @@
+import { CommonActions, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 // --------------------------------------------------------------------
@@ -7,12 +8,16 @@ import { CategoryComponentProp } from "../types/types";
 
 // --------------------------------------------------------------------
 
-export default function CategoryCard({
-  data,
-  navigation,
-}: CategoryComponentProp) {
+export default function CategoryCard({ data }: CategoryComponentProp) {
+  const navigation = useNavigation();
+
   const goToTheCategoryScreen = () => {
-    navigation.navigate(ROUTES.SERVICES, data);
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: ROUTES.CATEGORY,
+        params: data,
+      })
+    );
   };
 
   return (
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 4,
     shadowColor: COLORS.shadows,
+    backgroundColor: COLORS.white,
     shadowOffset: {
       width: 2,
       height: 4,

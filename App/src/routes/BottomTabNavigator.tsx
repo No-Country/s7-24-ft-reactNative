@@ -28,6 +28,9 @@ export default function BottomTabNavigator() {
         tabBarActiveTintColor: COLORS.tabColor,
         tabBarInactiveTintColor: COLORS.white,
         headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: COLORS.background,
+        },
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: "500",
@@ -66,6 +69,9 @@ export default function BottomTabNavigator() {
         component={SearchScreen}
         options={{
           title: "Buscar",
+          headerTitleStyle: {
+            display: "none",
+          },
           tabBarIcon: ({ color, size }) => (
             <TabBarIconNavigatorBottom
               color={color}
@@ -73,6 +79,8 @@ export default function BottomTabNavigator() {
               size={size}
             />
           ),
+          headerLeft: () => <ArrowBackNavigatoHeader />,
+          headerRight: () => <MenuNavigatorHeader />,
         }}
       />
       <Tab.Screen

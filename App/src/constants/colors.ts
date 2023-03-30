@@ -1,6 +1,7 @@
 // --------------------------------------------------------------------
 
 export default {
+  background: "#E7E0EC",
   primary: "#410E0B",
   secondary: "#B3261E",
   white: "#FFFFFF",
@@ -8,4 +9,5 @@ export default {
   bottomBar: "#1E1E1E",
   tabColor: "#817A7A",
   shadows: "rgba(0, 0, 0, 0.25)",
+  text: "#666666",
 };

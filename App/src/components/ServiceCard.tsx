@@ -1,15 +1,30 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // --------------------------------------------------------------------
 
-import { COLORS } from "../constants";
+import { COLORS, ROUTES } from "../constants";
 import { ServiceComponentProp } from "../types/types";
 
 // --------------------------------------------------------------------
 
 export default function ServiceCard({ data }: ServiceComponentProp) {
+  const navigation = useNavigation();
+
+  const goToTheServiceScreen = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: ROUTES.SERVICE,
+        params: data,
+      })
+    );
+  };
+
   return (
-    <View style={styles.serviceCardContainer}>
+    <TouchableOpacity
+      style={styles.serviceCardContainer}
+      onPress={goToTheServiceScreen}
+    >
       <Image style={styles.img} source={{ uri: data.img }} />
       <View style={styles.body}>
         <View>
@@ -24,7 +39,7 @@ export default function ServiceCard({ data }: ServiceComponentProp) {
           <Text style={{ fontSize: 10 }}>{data.location}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -38,9 +53,10 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 4,
     shadowColor: COLORS.shadows,
+    backgroundColor: COLORS.white,
     shadowOffset: {
       width: 2,
-      height: 4,
+      height: 2,
     },
   },
   img: {

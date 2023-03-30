@@ -11,5 +11,7 @@ export default {
 
   MESSAGES: "Messages",
 
-  SERVICES: "Services",
+  CATEGORY: "Category",
+
+  SERVICE: "Service",
 };

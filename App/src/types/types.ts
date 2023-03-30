@@ -14,7 +14,6 @@ export type CategoryCardItemData = {
 
 export type CategoryComponentProp = {
   data: CategoryCardItemData;
-  navigation: NativeStackNavigationProp<any, any>;
 };
 
 export type ServiceCardItemData = {
