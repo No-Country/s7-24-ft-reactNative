@@ -19,7 +19,7 @@ const ButtonFom = ({ text, handlerSubmit }: Props) => {
 
 const styles = StyleSheet.create({
 	bottom: {
-		marginTop: 40,
+		marginTop: 35,
 	},
 	text: {
 		fontSize: 15,

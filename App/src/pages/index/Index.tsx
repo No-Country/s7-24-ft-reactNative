@@ -1,14 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext } from "react";
-import { UserContext } from "../../context/UserProviderUser";
+import { Text } from "react-native";
+import UserContext from "../../context/UserContext";
 import Login from "../auth/login/Login";
 import Register from "../auth/register/Register";
 const Stack = createNativeStackNavigator();
 const Index = () => {
 	const { state } = useContext(UserContext);
+	console.log(state);
 	return (
 		<Stack.Navigator>
-			{state.authorization === "not-authorization" ? (
+			{"not-authorization" === "not-authorization" ? (
 				<>
 					<Stack.Screen
 						name="Login"
@@ -28,7 +30,7 @@ const Index = () => {
 					/>
 				</>
 			) : (
-				<>{null}</>
+				<Text>exito</Text>
 			)}
 		</Stack.Navigator>
 	);

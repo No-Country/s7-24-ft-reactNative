@@ -1,5 +1,5 @@
 interface Form {
-	autorización: string;
+	authorization: string;
 	email: string;
 	password: string;
 }

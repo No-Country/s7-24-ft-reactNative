@@ -1,27 +1,8 @@
-import { createContext, useReducer } from "react";
+import { useReducer } from "react";
 import Children from "../models/children.models";
 import User from "../models/user.models";
 import { Action, Reducer } from "../types/types";
-
-const initialState: User = {
-	authorization: "not-authorization",
-	id: "",
-	email: "",
-	name: "",
-	password: "",
-	city: "",
-	country: "",
-	locality: "",
-	photoUrl: "",
-};
-
-export const UserContext = createContext<{
-	state: User;
-	dispatch: React.Dispatch<Action>;
-}>({
-	state: initialState,
-	dispatch: () => null,
-});
+import UserContext, { initialState } from "./UserContext";
 
 const reducer = (state: User, action: Action) => {
 	switch (action.type) {
@@ -47,6 +28,7 @@ const reducer = (state: User, action: Action) => {
 
 const UserProviderUser = ({ children }: Children) => {
 	const [state, dispatch] = useReducer<Reducer>(reducer, initialState);
+
 	return (
 		<UserContext.Provider
 			value={{

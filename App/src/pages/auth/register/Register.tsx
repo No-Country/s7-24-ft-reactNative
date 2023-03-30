@@ -1,10 +1,15 @@
+import { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
+import UserContext from "../../../context/UserContext";
 import RegisterForm from "../../../models/register.models";
+import { createUserEP } from "../../../services/createUserEP.services";
 import ObjectStyles from "../../../styles/objects/objects";
-
 const Register = () => {
+	const [errorPassword, setErrorPassword] = useState("");
+	const { state, dispatch } = useContext(UserContext);
+
 	const {
 		control,
 		handleSubmit,
@@ -18,12 +23,35 @@ const Register = () => {
 	});
 
 	const onSubmit = (data: RegisterForm) => {
-		console.log(data);
+		if (data.password === data.confirmPassword) {
+			const { email, password } = data;
+			setErrorPassword("");
+			dispatch({
+				type: "LOGIN",
+				payload: {
+					authorization: "success",
+					email,
+					password,
+				},
+			});
+		} else if (data.password !== data.confirmPassword) {
+			setErrorPassword(
+				"Error las contraseñas no son iguales vuelva intentarlo",
+			);
+		}
 	};
+
+	useEffect(() => {
+		if (state.authorization === "success") {
+			createUserEP(state);
+		}
+	}, [state]);
 
 	return (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
 			<Text style={ObjectStyles.titleForm}>Regístrate</Text>
+			{errorPassword && <Text>{errorPassword}</Text>}
+
 			<FormAuth>
 				<View style={ObjectStyles.containerFormInput}>
 					<Text style={ObjectStyles.textLabelForm}>Email:</Text>
