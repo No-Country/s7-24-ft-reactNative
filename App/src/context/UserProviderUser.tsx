@@ -23,6 +23,11 @@ const reducer = (state: User, action: Action) => {
 				...state,
 				authorization: action.payload,
 			};
+		case "SET_ID":
+			return {
+				...state,
+				id: action.payload,
+			};
 	}
 };
 

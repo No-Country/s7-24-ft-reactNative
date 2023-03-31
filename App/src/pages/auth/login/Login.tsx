@@ -8,15 +8,22 @@ import {
 	View,
 } from "react-native";
 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useContext, useEffect } from "react";
 import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
+import UserContext from "../../../context/UserContext";
+import { applicationInfo } from "../../../interceptors";
 import Form from "../../../models/login.models";
 import ObjectStyles from "../../../styles/objects/objects";
 
 type Props = {
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	navigation: NativeStackNavigationProp<any, any>;
 };
 
 const Login = ({ navigation }: Props) => {
+	const { state, dispatch } = useContext(UserContext);
+
 	const {
 		control,
 		handleSubmit,
@@ -33,8 +40,31 @@ const Login = ({ navigation }: Props) => {
 	};
 
 	const onSubmit = (data: Form) => {
-		console.log(data);
+		dispatch({
+			type: "LOGIN",
+			payload: {
+				email: data.email,
+				password: data.password,
+			},
+		});
+
+		applicationInfo(data.email, data.password, signInWithEmailAndPassword).then(
+			(res) => {
+				if (res.ok) {
+					dispatch({
+						type: "SET_ID",
+						payload: res.id,
+					});
+					dispatch({
+						type: "SET_AUTHORIZATION",
+						payload: "success",
+					});
+				}
+			},
+		);
 	};
+
+	useEffect(() => {}, []);
 
 	return (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
