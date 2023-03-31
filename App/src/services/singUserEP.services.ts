@@ -1,10 +1,10 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { FirebaseGetAuth } from "../firebase/dist/app";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseGetAuth } from "../firebase/app";
 import Form from "../models/login.models";
 
-export const createUserEP = async (user: Form) => {
+export const singUserEP = async (user: Form) => {
 	try {
-		const response = createUserWithEmailAndPassword(
+		const response = signInWithEmailAndPassword(
 			FirebaseGetAuth,
 			user.email,
 			user.password,
@@ -18,7 +18,7 @@ export const createUserEP = async (user: Form) => {
 		};
 	} catch (error) {
 		return {
-			ok: false,
+			ok: true,
 			id: "",
 		};
 	}
