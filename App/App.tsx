@@ -3,9 +3,8 @@ import { lazy, Suspense } from "react";
 import "react-native-gesture-handler";
 import LazyLoadingStart from "./src/components/LazyLoadingStart";
 import UserProviderUser from "./src/context/UserProviderUser";
-import StackNavigator from "./src/routes/StackNavigator";
 
-const IndexPages = lazy(() => import("./src/pages/index/Index"));
+const IndexPages = lazy(() => import("./src/routes/StackNavigator"));
 
 export default function App() {
   return (
@@ -14,7 +13,6 @@ export default function App() {
         <Suspense fallback={<LazyLoadingStart />}>
           <IndexPages />
         </Suspense>
-        <StackNavigator />
       </NavigationContainer>
     </UserProviderUser>
   );

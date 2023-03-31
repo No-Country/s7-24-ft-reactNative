@@ -14,4 +14,8 @@ export default {
   CATEGORY: "Category",
 
   SERVICE: "Service",
+
+  LOGIN: "Login",
+
+  REGISTER: "Register",
 };

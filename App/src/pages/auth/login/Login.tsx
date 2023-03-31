@@ -33,6 +33,7 @@ const Login = ({ navigation }: Props) => {
   };
 
   const onSubmit = (data: Form) => {
+    navigation.navigate("Home");
     console.log(data);
   };
 
