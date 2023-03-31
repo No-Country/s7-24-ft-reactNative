@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 import RootStyles from "../styles/setting/setting";
 interface Props {
-	message: string | undefined;
+	message: string;
 }
 
 const ErrorMessageForm = ({ message }: Props) => {
