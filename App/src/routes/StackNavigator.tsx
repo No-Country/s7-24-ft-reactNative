@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
 	const { state } = useContext(UserContext);
-	console.log(state);
+
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -46,6 +46,7 @@ export default function StackNavigator() {
 				</Stack.Group>
 			) : (
 				<Stack.Group>
+					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
 					<Stack.Screen
 						name={ROUTES.CATEGORY}
 						component={CategoriesScreen}
@@ -64,7 +65,6 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
-					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
 				</Stack.Group>
 			)}
 		</Stack.Navigator>

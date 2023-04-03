@@ -13,9 +13,13 @@ import { useContext, useEffect } from "react";
 import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
 import UserContext from "../../../context/UserContext";
 import { applicationInfo } from "../../../interceptors";
+import {
+	getUserInformation,
+	setUserInformation,
+} from "../../../interceptors/userInformation.interceptors";
 import Form from "../../../models/login.models";
+import { persistenceAuth } from "../../../services/persistenceAuth";
 import ObjectStyles from "../../../styles/objects/objects";
-
 type Props = {
 	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	navigation: NativeStackNavigationProp<any, any>;
@@ -62,9 +66,36 @@ const Login = ({ navigation }: Props) => {
 				}
 			},
 		);
+
+		setUserInformation("success", data.email, data.password);
 	};
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		const data = getUserInformation();
+
+		if (data !== null) {
+			persistenceAuth(data.email, data.password).then((res) => {
+				if (res.auth === "success") {
+					dispatch({
+						type: "LOGIN",
+						payload: {
+							email: data.email,
+							password: data.password,
+						},
+					});
+
+					dispatch({
+						type: "SET_ID",
+						payload: res.uid,
+					});
+					dispatch({
+						type: "SET_AUTHORIZATION",
+						payload: "success",
+					});
+				}
+			});
+		}
+	}, []);
 
 	return (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
