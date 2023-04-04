@@ -9,17 +9,18 @@ import {
 } from "react-native";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext, useEffect } from "react";
-import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
+import { useContext, useEffect, useState } from "react";
+import {
+	ButtonFom,
+	ErrorMessageForm,
+	FormAuth,
+	LazyLoadingStart,
+} from "../../../components";
 import UserContext from "../../../context/UserContext";
 import { applicationInfo } from "../../../interceptors";
-import {
-	getUserInformation,
-	setUserInformation,
-} from "../../../interceptors/userInformation.interceptors";
 import Form from "../../../models/login.models";
-import { persistenceAuth } from "../../../services/persistenceAuth";
 import ObjectStyles from "../../../styles/objects/objects";
+
 type Props = {
 	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
 	navigation: NativeStackNavigationProp<any, any>;
@@ -27,6 +28,7 @@ type Props = {
 
 const Login = ({ navigation }: Props) => {
 	const { state, dispatch } = useContext(UserContext);
+	const [isPending, setIsPending] = useState(false);
 
 	const {
 		control,
@@ -43,61 +45,27 @@ const Login = ({ navigation }: Props) => {
 		navigation.navigate("Register");
 	};
 
+	useEffect(() => {
+		setIsPending(true);
+	}, []);
 	const onSubmit = (data: Form) => {
-		dispatch({
-			type: "LOGIN",
-			payload: {
-				email: data.email,
-				password: data.password,
-			},
-		});
-
 		applicationInfo(data.email, data.password, signInWithEmailAndPassword).then(
 			(res) => {
 				if (res.ok) {
 					dispatch({
-						type: "SET_ID",
-						payload: res.id,
-					});
-					dispatch({
-						type: "SET_AUTHORIZATION",
-						payload: "success",
+						type: "AUTH",
+						payload: {
+							authorization: "success",
+							email: res.email === null ? "" : res.email,
+							id: res.id,
+						},
 					});
 				}
 			},
 		);
-
-		setUserInformation("success", data.email, data.password);
 	};
 
-	useEffect(() => {
-		const data = getUserInformation();
-
-		if (data !== null) {
-			persistenceAuth(data.email, data.password).then((res) => {
-				if (res.auth === "success") {
-					dispatch({
-						type: "LOGIN",
-						payload: {
-							email: data.email,
-							password: data.password,
-						},
-					});
-
-					dispatch({
-						type: "SET_ID",
-						payload: res.uid,
-					});
-					dispatch({
-						type: "SET_AUTHORIZATION",
-						payload: "success",
-					});
-				}
-			});
-		}
-	}, []);
-
-	return (
+	return isPending !== true ? (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
 			<Text style={ObjectStyles.titleForm}>Iniciar Sesión</Text>
 
@@ -161,6 +129,8 @@ const Login = ({ navigation }: Props) => {
 				</View>
 			</FormAuth>
 		</View>
+	) : (
+		<LazyLoadingStart />
 	);
 };
 

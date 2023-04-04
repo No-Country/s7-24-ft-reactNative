@@ -6,12 +6,12 @@ import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
 import UserContext from "../../../context/UserContext";
 import { applicationInfo } from "../../../interceptors";
 import RegisterForm from "../../../models/register.models";
+import { addUserToDB } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
-
 const Register = () => {
 	const [errorPassword, setErrorPassword] = useState("");
 
-	const { state, dispatch } = useContext(UserContext);
+	const { dispatch } = useContext(UserContext);
 
 	const {
 		control,
@@ -29,31 +29,21 @@ const Register = () => {
 		if (data.password === data.confirmPassword) {
 			const { email, password } = data;
 			setErrorPassword("");
-
-			dispatch({
-				type: "LOGIN",
-				payload: {
-					email,
-					password,
+			applicationInfo(email, password, createUserWithEmailAndPassword).then(
+				(res) => {
+					if (res.ok) {
+						addUserToDB(res.email === null ? "" : res.email, res.id);
+						dispatch({
+							type: "AUTH",
+							payload: {
+								authorization: "success",
+								email: res.email === null ? "" : res.email,
+								id: res.id,
+							},
+						});
+					}
 				},
-			});
-
-			applicationInfo(
-				data.email,
-				data.password,
-				createUserWithEmailAndPassword,
-			).then((res) => {
-				if (res.ok) {
-					dispatch({
-						type: "SET_ID",
-						payload: res.id,
-					});
-					dispatch({
-						type: "SET_AUTHORIZATION",
-						payload: "success",
-					});
-				}
-			});
+			);
 		} else if (data.password !== data.confirmPassword) {
 			setErrorPassword(
 				"Error las contraseñas no son iguales vuelva intentarlo",

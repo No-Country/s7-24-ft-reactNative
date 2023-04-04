@@ -4,5 +4,6 @@
     "module": "esnext",
     "strict": true,
     "esModuleInterop": true,
+
   }
 }

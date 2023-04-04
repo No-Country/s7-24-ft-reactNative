@@ -2,10 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // --------------------------------------------------------------------
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ArrowBackNavigatoHeader, MenuNavigatorHeader } from "../components";
 import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
+import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
 
@@ -14,7 +15,21 @@ import DrawerNavigator from "./DrawerNavigator";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
-	const { state } = useContext(UserContext);
+	const { state, dispatch } = useContext(UserContext);
+	useEffect(() => {
+		FirebaseGetAuth.onAuthStateChanged((user) => {
+			if (user !== null) {
+				dispatch({
+					type: "AUTH",
+					payload: {
+						authorization: "success",
+						email: user.email === null ? "" : user.email,
+						id: user.uid,
+					},
+				});
+			}
+		});
+	}, []);
 
 	return (
 		<Stack.Navigator
