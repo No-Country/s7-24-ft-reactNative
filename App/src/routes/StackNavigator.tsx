@@ -9,6 +9,7 @@ import UserContext from "../context/UserContext";
 import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
+import { HistoryScreen } from "../pages/ProfileScreen/HistoryScreen";
 
 // --------------------------------------------------------------------
 
@@ -80,6 +81,17 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
+
+					<Stack.Screen
+						name={ROUTES.HISTORY}
+						component={HistoryScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+
 				</Stack.Group>
 			)}
 		</Stack.Navigator>
