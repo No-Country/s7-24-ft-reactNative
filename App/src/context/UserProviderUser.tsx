@@ -6,28 +6,22 @@ import UserContext, { initialState } from "./UserContext";
 
 const reducer = (state: User, action: Action) => {
 	switch (action.type) {
-		case "LOGIN":
+		case "AUTH":
 			return {
 				...state,
 				...action.payload,
 			};
 
-		case "REGISTER":
+		case "SET_TOKEN":
 			return {
 				...state,
-				...action.payload,
+				accessToken: action.payload,
 			};
-
-		case "SET_AUTHORIZATION":
+		default: {
 			return {
 				...state,
-				authorization: action.payload,
 			};
-		case "SET_ID":
-			return {
-				...state,
-				id: action.payload,
-			};
+		}
 	}
 };
 

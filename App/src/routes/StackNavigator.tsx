@@ -2,10 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // --------------------------------------------------------------------
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ArrowBackNavigatoHeader, MenuNavigatorHeader } from "../components";
 import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
+import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
 import { HistoryScreen } from "../pages/ProfileScreen/HistoryScreen";
@@ -15,8 +16,22 @@ import { HistoryScreen } from "../pages/ProfileScreen/HistoryScreen";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
-	const { state } = useContext(UserContext);
-	console.log(state);
+	const { state, dispatch } = useContext(UserContext);
+	useEffect(() => {
+		FirebaseGetAuth.onAuthStateChanged((user) => {
+			if (user !== null) {
+				dispatch({
+					type: "AUTH",
+					payload: {
+						authorization: "success",
+						email: user.email === null ? "" : user.email,
+						id: user.uid,
+					},
+				});
+			}
+		});
+	}, []);
+
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -66,6 +81,7 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
+
 					<Stack.Screen
 						name={ROUTES.HISTORY}
 						component={HistoryScreen}
@@ -75,6 +91,7 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
+
 				</Stack.Group>
 			)}
 		</Stack.Navigator>

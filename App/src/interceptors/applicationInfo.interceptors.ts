@@ -1,8 +1,9 @@
 import { Auth, UserCredential } from "firebase/auth";
 import { FirebaseGetAuth } from "../firebase/app";
+
 export const applicationInfo = async (
-	email: string,
-	password: string,
+	emailUser: string,
+	passwordUser: string,
 
 	method: (
 		auth: Auth,
@@ -11,19 +12,22 @@ export const applicationInfo = async (
 	) => Promise<UserCredential>,
 ) => {
 	try {
-		const response = await method(FirebaseGetAuth, email, password);
+		const response = await method(FirebaseGetAuth, emailUser, passwordUser);
 
-		const { uid } = (await response).user;
-
+		const { uid, email } = response.user;
 		return {
 			ok: true,
 			id: uid,
+			email: email,
+			message: "exito",
 		};
 	} catch (error) {
 		console.error(error);
 		return {
-			ok: true,
+			ok: false,
 			id: "",
+			email: "",
+			message: "Algo salio mal",
 		};
 	}
 };
