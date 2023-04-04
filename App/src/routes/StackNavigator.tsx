@@ -8,6 +8,7 @@ import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
+import { HistoryScreen } from "../pages/ProfileScreen/HistoryScreen";
 
 // --------------------------------------------------------------------
 
@@ -46,6 +47,7 @@ export default function StackNavigator() {
 				</Stack.Group>
 			) : (
 				<Stack.Group>
+					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
 					<Stack.Screen
 						name={ROUTES.CATEGORY}
 						component={CategoriesScreen}
@@ -64,7 +66,15 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
-					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
+					<Stack.Screen
+						name={ROUTES.HISTORY}
+						component={HistoryScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
 				</Stack.Group>
 			)}
 		</Stack.Navigator>

@@ -8,6 +8,7 @@ export default {
 	SEARCH: "Search",
 
 	PROFILE: "Profile",
+	HISTORY: "History",
 
 	MESSAGES: "Messages",
 
