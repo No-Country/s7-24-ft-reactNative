@@ -7,7 +7,6 @@ export const initialState: User = {
 	id: "",
 	email: "",
 	name: "",
-	password: "",
 	city: "",
 	country: "",
 	locality: "",

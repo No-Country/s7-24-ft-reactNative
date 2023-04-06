@@ -6,6 +6,10 @@ import Auth from "../models/auth.models";
 import User from "../models/user.models";
 export type Action =
 	| { type: "SET_ID"; payload: string }
+<<<<<<< HEAD
+=======
+	| { type: "SET_TOKEN"; payload: string }
+>>>>>>> dev
 	| { type: "AUTH"; payload: Auth };
 
 export type Reducer = (state: User, action: Action) => User;
