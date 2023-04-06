@@ -2,10 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // --------------------------------------------------------------------
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ArrowBackNavigatoHeader, MenuNavigatorHeader } from "../components";
 import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
+import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
 
@@ -14,8 +15,22 @@ import DrawerNavigator from "./DrawerNavigator";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
-	const { state } = useContext(UserContext);
-	console.log(state);
+	const { state, dispatch } = useContext(UserContext);
+	useEffect(() => {
+		FirebaseGetAuth.onAuthStateChanged((user) => {
+			if (user !== null) {
+				dispatch({
+					type: "AUTH",
+					payload: {
+						authorization: "success",
+						email: user.email === null ? "" : user.email,
+						id: user.uid,
+					},
+				});
+			}
+		});
+	}, []);
+
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -29,16 +44,16 @@ export default function StackNavigator() {
 			{state.authorization !== "success" ? (
 				<Stack.Group>
 					<Stack.Screen
-						name={ROUTES.LOGIN}
 						component={Login}
+						name={ROUTES.LOGIN}
 						options={{
 							headerShown: false,
 						}}
 					/>
 
 					<Stack.Screen
-						name={ROUTES.REGISTER}
 						component={Register}
+						name={ROUTES.REGISTER}
 						options={{
 							headerShown: false,
 						}}
@@ -46,25 +61,27 @@ export default function StackNavigator() {
 				</Stack.Group>
 			) : (
 				<Stack.Group>
+					<Stack.Screen component={DrawerNavigator} name={ROUTES.HOME} />
+
 					<Stack.Screen
-						name={ROUTES.CATEGORY}
 						component={CategoriesScreen}
+						name={ROUTES.CATEGORY}
 						options={{
 							headerShown: true,
 							headerLeft: () => <ArrowBackNavigatoHeader />,
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
+
 					<Stack.Screen
-						name={ROUTES.SERVICE}
 						component={ServiceScreen}
+						name={ROUTES.SERVICE}
 						options={{
 							headerShown: true,
 							headerLeft: () => <ArrowBackNavigatoHeader />,
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
-					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
 				</Stack.Group>
 			)}
 		</Stack.Navigator>

@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import Children from "../models/children.models";
 
@@ -7,8 +8,8 @@ const FormAuth = ({ children }: Children) => {
 
 const styles = StyleSheet.create({
 	FormAuth: {
-		minHeight: 139,
 		gap: 20,
+		minHeight: 139,
 	},
 });
 
