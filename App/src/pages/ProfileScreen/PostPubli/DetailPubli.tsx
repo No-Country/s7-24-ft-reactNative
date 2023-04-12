@@ -138,11 +138,14 @@ export const DetailPubli = ({navigation}:any) => {
 						name="numberAddress"
 					/>
 					</View>
+					<View style={{display:'flex',justifyContent:'center', paddingLeft:40}}>
+						<Text>Sin número</Text>
 					<CheckBox
-        				title='Sin número'
         				checked={isSelected}
         				onPress={() => setIsSelected(!isSelected)}
+						style={styles.containerStyle}
       				/>
+					</View>
 					</View>
 				</View>
                 <View style={ObjectStyles.containerFormInput}>
