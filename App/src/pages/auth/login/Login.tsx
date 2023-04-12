@@ -65,7 +65,7 @@ const Login = ({ navigation }: Props) => {
 		);
 	};
 
-	return isPending !== true ? (
+	return isPending === true ? (
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
 			<Text style={ObjectStyles.titleForm}>Iniciar Sesión</Text>
 

@@ -7,6 +7,13 @@ interface User {
 	country: string;
 	city: string;
 	locality: string;
+	address: string;
+	numberAddress: number;
+	service: string;
+	descriptionService: string;
+	moreInformation: string;
+	phone: number;
+	whatsApp: number;
 }
 
 export default User;

@@ -4,10 +4,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Auth from "../models/auth.models";
 import User from "../models/user.models";
+import Dates from "../models/datesUsers.models";
 export type Action =
 	| { type: "SET_ID"; payload: string }
 	| { type: "SET_TOKEN"; payload: string }
-	| { type: "AUTH"; payload: Auth };
+	| { type: "AUTH"; payload: Auth }
+	| { type: "DATES"; payload: Dates };
 
 export type Reducer = (state: User, action: Action) => User;
 

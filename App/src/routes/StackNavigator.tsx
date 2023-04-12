@@ -9,8 +9,14 @@ import UserContext from "../context/UserContext";
 import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
 import DrawerNavigator from "./DrawerNavigator";
-import { HistoryScreen } from "../pages/ProfileScreen/HistoryScreen";
-
+import { HistoryScreen } from "../pages/ProfileScreen/History/HistoryScreen";
+import { CountScreen } from "../pages/ProfileScreen/Count/CountScreen";
+import { PostScreen } from "../pages/ProfileScreen/PostPubli/PostScreen";
+import { DetailPubli } from "../pages/ProfileScreen/PostPubli/DetailPubli"
+import { PublicacionScreen } from "../pages/ProfileScreen/PostPubli/PublicacionScreen"
+import { FinalizadoScreen } from "../pages/ProfileScreen/PostPubli/FinalizadoScreen"
+import { HelpScreen } from "../pages/ProfileScreen/Help/HelpScreen"
+import { MyServiceScreen } from "../pages/ProfileScreen/MyServices/MyServiceScreen"
 // --------------------------------------------------------------------
 
 const Stack = createNativeStackNavigator();
@@ -85,6 +91,69 @@ export default function StackNavigator() {
 					<Stack.Screen
 						name={ROUTES.HISTORY}
 						component={HistoryScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.COUNT}
+						component={CountScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.POST}
+						component={PostScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.DETAILPUB}
+						component={DetailPubli}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.PUBLICACION}
+						component={PublicacionScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.FINALIZADO}
+						component={FinalizadoScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.HELP}
+						component={HelpScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.MYSERVICE}
+						component={MyServiceScreen}
 						options={{
 							headerShown: true,
 							headerLeft: () => <ArrowBackNavigatoHeader />,
