@@ -14,59 +14,62 @@ import DrawerNavigator from "./DrawerNavigator";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
-	const { state } = useContext(UserContext);
-	console.log(state);
-	return (
-		<Stack.Navigator
-			screenOptions={{
-				headerShown: false,
-				headerTitleAlign: "center",
-				headerStyle: {
-					backgroundColor: COLORS.background,
-				},
-			}}
-		>
-			{state.authorization !== "success" ? (
-				<Stack.Group>
-					<Stack.Screen
-						name={ROUTES.LOGIN}
-						component={Login}
-						options={{
-							headerShown: false,
-						}}
-					/>
+    const { state } = useContext(UserContext);
+    console.log(state);
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+                headerTitleAlign: "center",
+                headerStyle: {
+                    backgroundColor: COLORS.background,
+                },
+            }}
+        >
+            {state.authorization !== "success" ? (
+                <Stack.Group>
+                    <Stack.Screen
+                        name={ROUTES.LOGIN}
+                        component={Login}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
 
-					<Stack.Screen
-						name={ROUTES.REGISTER}
-						component={Register}
-						options={{
-							headerShown: false,
-						}}
-					/>
-				</Stack.Group>
-			) : (
-				<Stack.Group>
-					<Stack.Screen
-						name={ROUTES.CATEGORY}
-						component={CategoriesScreen}
-						options={{
-							headerShown: true,
-							headerLeft: () => <ArrowBackNavigatoHeader />,
-							headerRight: () => <MenuNavigatorHeader />,
-						}}
-					/>
-					<Stack.Screen
-						name={ROUTES.SERVICE}
-						component={ServiceScreen}
-						options={{
-							headerShown: true,
-							headerLeft: () => <ArrowBackNavigatoHeader />,
-							headerRight: () => <MenuNavigatorHeader />,
-						}}
-					/>
-					<Stack.Screen name={ROUTES.HOME} component={DrawerNavigator} />
-				</Stack.Group>
-			)}
-		</Stack.Navigator>
-	);
+                    <Stack.Screen
+                        name={ROUTES.REGISTER}
+                        component={Register}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                </Stack.Group>
+            ) : (
+                <Stack.Group>
+                    <Stack.Screen
+                        name={ROUTES.HOME}
+                        component={DrawerNavigator}
+                    />
+                    <Stack.Screen
+                        name={ROUTES.CATEGORY}
+                        component={CategoriesScreen}
+                        options={{
+                            headerShown: true,
+                            headerLeft: () => <ArrowBackNavigatoHeader />,
+                            headerRight: () => <MenuNavigatorHeader />,
+                        }}
+                    />
+                    <Stack.Screen
+                        name={ROUTES.SERVICE}
+                        component={ServiceScreen}
+                        options={{
+                            headerShown: true,
+                            headerLeft: () => <ArrowBackNavigatoHeader />,
+                            headerRight: () => <MenuNavigatorHeader />,
+                        }}
+                    />
+                </Stack.Group>
+            )}
+        </Stack.Navigator>
+    );
 }

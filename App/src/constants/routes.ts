@@ -1,21 +1,21 @@
 // --------------------------------------------------------------------
 
 export default {
-	HOME: "Home",
-	HOME_TAB: "Home Tab",
-	HOME_DRAWER: "Home Drawer",
+    HOME: "Home",
+    HOME_TAB: "Home Tab",
+    HOME_DRAWER: "Home Drawer",
 
-	SEARCH: "Search",
+    SEARCH: "Search",
 
-	PROFILE: "Profile",
+    PROFILE: "Profile",
 
-	MESSAGES: "Messages",
+    MESSAGES: "Messages",
 
-	CATEGORY: "Category",
+    CATEGORY: "Category",
 
-	SERVICE: "Service",
+    SERVICE: "Service",
 
-	LOGIN: "Login",
+    LOGIN: "Login",
 
-	REGISTER: "Register",
+    REGISTER: "Register",
 };

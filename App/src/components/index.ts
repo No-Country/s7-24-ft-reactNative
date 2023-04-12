@@ -7,5 +7,7 @@ export { default as FormAuth } from "./FormAuth";
 export { default as LazyLoadingStart } from "./LazyLoadingStart";
 export { default as LogoNavigatorHeader } from "./LogoNavigatorHeader";
 export { default as MenuNavigatorHeader } from "./MenuNavigatorHeader";
+export { default as PublishedBy } from "./PublishedBy";
+export { default as SearchBar } from "./SearchBar";
 export { default as ServiceCard } from "./ServiceCard";
 export { default as TabBarIconNavigatorBottom } from "./TabBarIconNavigatorBottom";
