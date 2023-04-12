@@ -17,6 +17,11 @@ const reducer = (state: User, action: Action) => {
 				...state,
 				accessToken: action.payload,
 			};
+		case "DATES":
+				return{
+				...state,
+				...action.payload
+			}
 		default: {
 			return {
 				...state,

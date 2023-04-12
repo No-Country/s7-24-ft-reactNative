@@ -11,6 +11,13 @@ export const initialState: User = {
 	country: "",
 	locality: "",
 	photoUrl: "",
+	address: "",
+	numberAddress: 0,
+	service: "",
+	descriptionService: "",
+	moreInformation: "",
+	phone: 0,
+	whatsApp: 0,
 };
 
 const UserContext = createContext<{
