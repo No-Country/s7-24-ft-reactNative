@@ -5,16 +5,16 @@ import { COLORS, ROUTES } from "../constants";
 // --------------------------------------------------------------------
 
 import {
-  ArrowBackNavigatoHeader,
-  LogoNavigatorHeader,
-  MenuNavigatorHeader,
-  TabBarIconNavigatorBottom,
+    ArrowBackNavigatoHeader,
+    LogoNavigatorHeader,
+    MenuNavigatorHeader,
+    TabBarIconNavigatorBottom,
 } from "../components";
 import {
-  HomeScreen,
-  MessagesScreen,
-  ProfileScreen,
-  SearchScreen,
+    HomeScreen,
+    MessagesScreen,
+    ProfileScreen,
+    SearchScreen,
 } from "../pages";
 
 // --------------------------------------------------------------------
@@ -22,107 +22,110 @@ import {
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: COLORS.tabColor,
-        tabBarInactiveTintColor: COLORS.white,
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: COLORS.background,
-        },
-        headerTitleStyle: {
-          fontSize: 20,
-          fontWeight: "500",
-        },
-        tabBarStyle: {
-          backgroundColor: COLORS.bottomBar,
-          paddingBottom: 10,
-          paddingTop: 10,
-          position: "absolute",
-          bottom: 0,
-          height: 80,
-        },
-      }}
-    >
-      <Tab.Screen
-        name={ROUTES.HOME_TAB}
-        component={HomeScreen}
-        options={{
-          title: "Home",
-          headerTitleStyle: {
-            display: "none",
-          },
-          tabBarIcon: ({ color, size }) => (
-            <TabBarIconNavigatorBottom
-              color={color}
-              iconName="Home"
-              size={size}
+    return (
+        <Tab.Navigator
+            screenOptions={{
+                tabBarActiveTintColor: COLORS.tabColor,
+                tabBarInactiveTintColor: COLORS.white,
+                headerTitleAlign: "center",
+                headerStyle: {
+                    backgroundColor: COLORS.background,
+                },
+                headerTitleStyle: {
+                    fontSize: 20,
+                    fontWeight: "500",
+                },
+                tabBarStyle: {
+                    backgroundColor: COLORS.bottomBar,
+                    paddingBottom: 10,
+                    paddingTop: 10,
+                    position: "absolute",
+                    bottom: 0,
+                    height: 80,
+                },
+            }}
+        >
+            <Tab.Screen
+                name={ROUTES.HOME_TAB}
+                component={HomeScreen}
+                options={{
+                    title: "Home",
+                    headerTitleStyle: {
+                        display: "none",
+                    },
+                    tabBarIcon: ({ color, size }) => (
+                        <TabBarIconNavigatorBottom
+                            color={color}
+                            iconName="Home"
+                            size={size}
+                        />
+                    ),
+                    headerLeft: () => <LogoNavigatorHeader />,
+                    headerRight: () => <MenuNavigatorHeader />,
+                }}
             />
-          ),
-          headerLeft: () => <LogoNavigatorHeader />,
-          headerRight: () => <MenuNavigatorHeader />,
-        }}
-      />
-      <Tab.Screen
-        name={ROUTES.SEARCH}
-        component={SearchScreen}
-        options={{
-          title: "Buscar",
-          headerTitleStyle: {
-            display: "none",
-          },
-          tabBarIcon: ({ color, size }) => (
-            <TabBarIconNavigatorBottom
-              color={color}
-              iconName="Search"
-              size={size}
+            <Tab.Screen
+                name={ROUTES.SEARCH}
+                component={SearchScreen}
+                options={{
+                    title: "Buscar",
+                    headerTitleStyle: {
+                        display: "none",
+                    },
+                    tabBarIcon: ({ color, size }) => (
+                        <TabBarIconNavigatorBottom
+                            color={color}
+                            iconName="Search"
+                            size={size}
+                        />
+                    ),
+                    headerLeft: () => <ArrowBackNavigatoHeader />,
+                }}
             />
-          ),
-          headerLeft: () => <ArrowBackNavigatoHeader />,
-          headerRight: () => <MenuNavigatorHeader />,
-        }}
-      />
-      <Tab.Screen
-        name={ROUTES.PROFILE}
-        component={ProfileScreen}
-        options={{
-          title: "Perfil",
-          tabBarIcon: ({ color, size }) => (
-            <TabBarIconNavigatorBottom
-              color={color}
-              iconName="Profile"
-              size={size}
+            <Tab.Screen
+                name={ROUTES.PROFILE}
+                component={ProfileScreen}
+                options={{
+                    title: "Perfil",
+                    tabBarIcon: ({ color, size }) => (
+                        <TabBarIconNavigatorBottom
+                            color={color}
+                            iconName="Profile"
+                            size={size}
+                        />
+                    ),
+                    headerLeft: () => <ArrowBackNavigatoHeader />,
+                    headerRight: () => <MenuNavigatorHeader />,
+                }}
             />
-          ),
-          headerLeft: () => <ArrowBackNavigatoHeader />,
-          headerRight: () => <MenuNavigatorHeader />,
-        }}
-      />
-      <Tab.Screen
-        name={ROUTES.MESSAGES}
-        component={MessagesScreen}
-        options={{
-          title: "Mensajes",
-          headerTitle: "Chat",
-          tabBarIcon: ({ color, size }) => (
-            <TabBarIconNavigatorBottom
-              color={color}
-              iconName="Messages"
-              size={size}
+            <Tab.Screen
+                name={ROUTES.MESSAGES}
+                component={MessagesScreen}
+                options={{
+                    title: "Mensajes",
+                    headerTitle: "Chat",
+                    tabBarIcon: ({ color, size }) => (
+                        <TabBarIconNavigatorBottom
+                            color={color}
+                            iconName="Messages"
+                            size={size}
+                        />
+                    ),
+                    headerLeft: () => {
+                        return (
+                            <Image
+                                style={{
+                                    width: 30,
+                                    height: 29,
+                                    marginLeft: 24,
+                                }}
+                                source={require("../assets/icons/UserIcon.svg")}
+                            />
+                        );
+                    },
+                    headerRight: () => <MenuNavigatorHeader />,
+                }}
             />
-          ),
-          headerLeft: () => {
-            return (
-              <Image
-                style={{ width: 30, height: 29, marginLeft: 24 }}
-                source={require("../assets/icons/UserIcon.svg")}
-              />
-            );
-          },
-          headerRight: () => <MenuNavigatorHeader />,
-        }}
-      />
-    </Tab.Navigator>
-  );
+        </Tab.Navigator>
+    );
 }

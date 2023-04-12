@@ -21,11 +21,11 @@ export const initialState: User = {
 };
 
 const UserContext = createContext<{
-	state: User;
-	dispatch: React.Dispatch<Action>;
+    state: User;
+    dispatch: React.Dispatch<Action>;
 }>({
-	state: initialState,
-	dispatch: () => null,
+    state: initialState,
+    dispatch: () => null,
 });
 
 export default UserContext;

@@ -31,18 +31,18 @@ const reducer = (state: User, action: Action) => {
 };
 
 const UserProviderUser = ({ children }: Children) => {
-	const [state, dispatch] = useReducer<Reducer>(reducer, initialState);
+    const [state, dispatch] = useReducer<Reducer>(reducer, initialState);
 
-	return (
-		<UserContext.Provider
-			value={{
-				state,
-				dispatch,
-			}}
-		>
-			{children}
-		</UserContext.Provider>
-	);
+    return (
+        <UserContext.Provider
+            value={{
+                state,
+                dispatch,
+            }}
+        >
+            {children}
+        </UserContext.Provider>
+    );
 };
 
 export default UserProviderUser;

@@ -10,11 +10,14 @@ import BottomTabNavigator from "./BottomTabNavigator";
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
-  return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name={ROUTES.HOME_DRAWER} component={BottomTabNavigator} />
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator screenOptions={{ headerShown: false }}>
+            <Drawer.Screen
+                name={ROUTES.HOME_DRAWER}
+                component={BottomTabNavigator}
+            />
+        </Drawer.Navigator>
+    );
 }
 
 export default DrawerNavigator;

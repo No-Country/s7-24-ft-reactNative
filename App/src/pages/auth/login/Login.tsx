@@ -1,11 +1,11 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
 import {
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -22,8 +22,8 @@ import Form from "../../../models/login.models";
 import ObjectStyles from "../../../styles/objects/objects";
 
 type Props = {
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
-	navigation: NativeStackNavigationProp<any, any>;
+    // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+    navigation: NativeStackNavigationProp<any, any>;
 };
 
 const Login = ({ navigation }: Props) => {
@@ -135,14 +135,14 @@ const Login = ({ navigation }: Props) => {
 };
 
 const style = StyleSheet.create({
-	containerLink: {
-		height: 69,
-		gap: 12,
-	},
+    containerLink: {
+        height: 69,
+        gap: 12,
+    },
 });
 
 Login.navigationOptions = {
-	title: "",
+    title: "",
 };
 
 export default Login;

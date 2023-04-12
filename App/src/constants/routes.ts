@@ -1,31 +1,29 @@
 // --------------------------------------------------------------------
 
 export default {
-	HOME: "Home",
-	HOME_TAB: "Home Tab",
-	HOME_DRAWER: "Home Drawer",
+    HOME: "Home",
+    HOME_TAB: "Home Tab",
+    HOME_DRAWER: "Home Drawer",
 
-	SEARCH: "Search",
+    SEARCH: "Search",
 
-	PROFILE: "Profile",
-	HISTORY: "History",
-	COUNT: "Count",
-	HELP: "Help",
-	MYSERVICE: "MyService",
-	POST: "Post",
-	DETAILPUB: "DetailP",
-	PUBLICACION: "Publicacion",
-	FINALIZADO: "Finalizado",
+	  PROFILE: "Profile",
+	  HISTORY: "History",
+	  COUNT: "Count",
+	  HELP: "Help",
+	  MYSERVICE: "MyService",
+	  POST: "Post",
+	  DETAILPUB: "DetailP",
+	  PUBLICACION: "Publicacion",
+	  FINALIZADO: "Finalizado",
 
+    MESSAGES: "Messages",
 
+    CATEGORY: "Category",
 
-	MESSAGES: "Messages",
+    SERVICE: "Service",
 
-	CATEGORY: "Category",
+    LOGIN: "Login",
 
-	SERVICE: "Service",
-
-	LOGIN: "Login",
-
-	REGISTER: "Register",
+    REGISTER: "Register",
 };

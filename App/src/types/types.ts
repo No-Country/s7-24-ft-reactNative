@@ -14,34 +14,29 @@ export type Action =
 export type Reducer = (state: User, action: Action) => User;
 
 export type NavigateProp = {
-	navigation: NativeStackNavigationProp<any, any>;
+    navigation: NativeStackNavigationProp<any, any>;
 };
 
 export type CategoryCardItemData = {
-	id: number;
-	title: string;
-	img: string;
+    name: string;
+    img: string;
 };
 
 export type CategoryComponentProp = {
-	data: CategoryCardItemData;
+    data: CategoryCardItemData;
 };
 
 export type ServiceCardItemData = {
-	id: number;
-	title: string;
-	service: string;
-	location: string;
-	img: string;
-	rating: number;
-};
-
-export type ServiceComponentProp = {
-	data: ServiceCardItemData;
+    id: number;
+    title: string;
+    service: string;
+    location: string;
+    img: string;
+    rating: number;
 };
 
 export type TabBarComponentProp = {
-	color: string;
-	size: number;
-	iconName: string;
+    color: string;
+    size: number;
+    iconName: string;
 };

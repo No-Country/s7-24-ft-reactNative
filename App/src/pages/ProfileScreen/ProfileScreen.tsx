@@ -18,8 +18,6 @@ import { LogoProfile } from '../../components/LogoProfile'
 // --------------------------------------------------------------------
 
 export default function ProfileScreen({navigation}:any) {
-  
-
   return (
     <View style={{ backgroundColor: COLORS.background, height:'100%'}}>
      <LogoProfile/>

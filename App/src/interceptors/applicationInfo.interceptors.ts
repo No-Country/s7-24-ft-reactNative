@@ -5,11 +5,11 @@ export const applicationInfo = async (
 	emailUser: string,
 	passwordUser: string,
 
-	method: (
-		auth: Auth,
-		email: string,
-		password: string,
-	) => Promise<UserCredential>,
+    method: (
+        auth: Auth,
+        email: string,
+        password: string
+    ) => Promise<UserCredential>
 ) => {
 	try {
 		const response = await method(FirebaseGetAuth, emailUser, passwordUser);
