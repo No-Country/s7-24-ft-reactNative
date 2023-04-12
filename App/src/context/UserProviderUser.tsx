@@ -5,30 +5,29 @@ import { Action, Reducer } from "../types/types";
 import UserContext, { initialState } from "./UserContext";
 
 const reducer = (state: User, action: Action) => {
-    switch (action.type) {
-        case "LOGIN":
-            return {
-                ...state,
-                ...action.payload,
-            };
+	switch (action.type) {
+		case "AUTH":
+			return {
+				...state,
+				...action.payload,
+			};
 
-        case "REGISTER":
-            return {
-                ...state,
-                ...action.payload,
-            };
-
-        case "SET_AUTHORIZATION":
-            return {
-                ...state,
-                authorization: action.payload,
-            };
-        case "SET_ID":
-            return {
-                ...state,
-                id: action.payload,
-            };
-    }
+		case "SET_TOKEN":
+			return {
+				...state,
+				accessToken: action.payload,
+			};
+		case "DATES":
+				return{
+				...state,
+				...action.payload
+			}
+		default: {
+			return {
+				...state,
+			};
+		}
+	}
 };
 
 const UserProviderUser = ({ children }: Children) => {

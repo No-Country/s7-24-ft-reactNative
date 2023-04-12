@@ -7,7 +7,15 @@ export default {
 
     SEARCH: "Search",
 
-    PROFILE: "Profile",
+	  PROFILE: "Profile",
+	  HISTORY: "History",
+	  COUNT: "Count",
+	  HELP: "Help",
+	  MYSERVICE: "MyService",
+	  POST: "Post",
+	  DETAILPUB: "DetailP",
+	  PUBLICACION: "Publicacion",
+	  FINALIZADO: "Finalizado",
 
     MESSAGES: "Messages",
 

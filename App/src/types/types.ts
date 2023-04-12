@@ -2,13 +2,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 // --------------------------------------------------------------------
 
-import Form from "../models/login.models";
+import Auth from "../models/auth.models";
 import User from "../models/user.models";
+import Dates from "../models/datesUsers.models";
 export type Action =
-    | { type: "REGISTER"; payload: Form }
-    | { type: "LOGIN"; payload: Form }
-    | { type: "SET_AUTHORIZATION"; payload: string }
-    | { type: "SET_ID"; payload: string };
+	| { type: "SET_ID"; payload: string }
+	| { type: "SET_TOKEN"; payload: string }
+	| { type: "AUTH"; payload: Auth }
+	| { type: "DATES"; payload: Dates };
 
 export type Reducer = (state: User, action: Action) => User;
 
