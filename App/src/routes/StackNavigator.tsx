@@ -8,15 +8,15 @@ import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
 import { FirebaseGetAuth } from "../firebase/app";
 import { CategoriesScreen, Login, Register, ServiceScreen } from "../pages";
-import DrawerNavigator from "./DrawerNavigator";
-import { HistoryScreen } from "../pages/ProfileScreen/History/HistoryScreen";
 import { CountScreen } from "../pages/ProfileScreen/Count/CountScreen";
+import { HelpScreen } from "../pages/ProfileScreen/Help/HelpScreen";
+import { HistoryScreen } from "../pages/ProfileScreen/History/HistoryScreen";
+import { MyServiceScreen } from "../pages/ProfileScreen/MyServices/MyServiceScreen";
+import { DetailPubli } from "../pages/ProfileScreen/PostPubli/DetailPubli";
+import { FinalizadoScreen } from "../pages/ProfileScreen/PostPubli/FinalizadoScreen";
 import { PostScreen } from "../pages/ProfileScreen/PostPubli/PostScreen";
-import { DetailPubli } from "../pages/ProfileScreen/PostPubli/DetailPubli"
-import { PublicacionScreen } from "../pages/ProfileScreen/PostPubli/PublicacionScreen"
-import { FinalizadoScreen } from "../pages/ProfileScreen/PostPubli/FinalizadoScreen"
-import { HelpScreen } from "../pages/ProfileScreen/Help/HelpScreen"
-import { MyServiceScreen } from "../pages/ProfileScreen/MyServices/MyServiceScreen"
+import { PublicacionScreen } from "../pages/ProfileScreen/PostPubli/PublicacionScreen";
+import DrawerNavigator from "./DrawerNavigator";
 // --------------------------------------------------------------------
 
 const Stack = createNativeStackNavigator();
@@ -160,7 +160,6 @@ export default function StackNavigator() {
 							headerRight: () => <MenuNavigatorHeader />,
 						}}
 					/>
-
 				</Stack.Group>
 			)}
 		</Stack.Navigator>

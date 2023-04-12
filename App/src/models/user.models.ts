@@ -14,6 +14,7 @@ interface User {
 	moreInformation: string;
 	phone: number;
 	whatsApp: number;
+	searchHistory: string[];
 }
 
 export default User;
