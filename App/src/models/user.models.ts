@@ -1,3 +1,4 @@
+import SubCategoryModel from "./subCategory.models";
 interface User {
 	authorization: string;
 	id: string;
@@ -14,7 +15,7 @@ interface User {
 	moreInformation: string;
 	phone: number;
 	whatsApp: number;
-	searchHistory: string[];
+	searchHistory: SubCategoryModel[];
 }
 
 export default User;
