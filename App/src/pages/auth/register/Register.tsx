@@ -1,19 +1,38 @@
+import { ref, uploadBytes } from "firebase/storage";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
 import UserContext from "../../../context/UserContext";
+import { FirebaseStorage } from "../../../firebase/app";
 import { applicationInfo } from "../../../interceptors";
 import RegisterForm from "../../../models/register.models";
 import { addDBDoc } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
+import { NavigateProp } from "../../../types/types";
 
-const Register = () => {
+const mountainsRef = ref(
+	FirebaseStorage,
+	require("../../../assets/img/personFill.png"),
+);
+const metadata = {
+	contentType: "image/png",
+};
+const Register = ({ navigation }: NavigateProp) => {
 	const [errorPassword, setErrorPassword] = useState("");
 
 	const { state, dispatch } = useContext(UserContext);
 
+	const result = uploadBytes(
+		mountainsRef,
+		new File(["per"], "personFill.png", {
+			type: "image/png",
+		}),
+		metadata,
+	);
+	result.then((res) => console.log(res));
 	const {
 		control,
 		handleSubmit,
@@ -31,13 +50,23 @@ const Register = () => {
 		if (data.password === data.confirmPassword) {
 			const { email, password } = data;
 			setErrorPassword("");
-			applicationInfo(email, password, createUserWithEmailAndPassword).then(
-				(res) => {
-					if (res.ok) {
-						addDBDoc("users", state);
-					}
-				},
-			);
+			applicationInfo(
+				email,
+				password,
+				true,
+				createUserWithEmailAndPassword,
+			).then((res) => {
+				if (res.ok) {
+					addDBDoc("users", {
+						...state,
+						email: res.email,
+						id: res.id,
+						name: res.name,
+					});
+
+					navigation.navigate("Home");
+				}
+			});
 			reset();
 		} else if (data.password !== data.confirmPassword) {
 			setErrorPassword(

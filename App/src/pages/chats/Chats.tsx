@@ -1,9 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import UserContext from "../../context/UserContext";
 import { getDataBase } from "../../services/getDataBase.services";
+import UserInfo from "./components/UserInfo";
+interface Props {
+	_id: string;
+	avatar: string;
+	name: string;
+}
 const Chats = () => {
-	const [users, setUsers] = useState([]);
+	const [users, setUsers] = useState<Props[]>([]);
 	const { state } = useContext(UserContext);
 
 	useEffect(() => {
@@ -13,9 +19,8 @@ const Chats = () => {
 		getDataBase("chats").then((res) => {
 			if (res.status && res.result !== null) {
 				res.result.forEach((item) => {
-					console.log(item.data().user._id, state.id);
 					if (state.id === item.data().user._id) {
-						data.push(item.data().user);
+						data.push(item.data());
 					}
 				});
 
@@ -23,10 +28,15 @@ const Chats = () => {
 			}
 		});
 	}, []);
-	console.log(users);
+
 	return (
 		<View>
-			<FlatList data={users} renderItem={({ item }) => <Text>item</Text>} />
+			<FlatList
+				data={users}
+				renderItem={({ item }) => (
+					<UserInfo avatar="s" id="d" name="d" isTalking={false} />
+				)}
+			/>
 		</View>
 	);
 };

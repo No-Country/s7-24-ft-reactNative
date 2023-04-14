@@ -1,12 +1,9 @@
+import UserModel from "./userChatModel.model";
 interface ChatProps {
 	id: string;
 	text: string;
 	createdAt: Date;
-	user: {
-		id: string;
-		name: string;
-		avatar: string;
-	};
+	user: UserModel;
 }
 
 export default ChatProps;

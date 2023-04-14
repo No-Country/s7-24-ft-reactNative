@@ -1,33 +1,31 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+	StyleSheet,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View,
 } from "react-native";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	ButtonFom,
 	ErrorMessageForm,
 	FormAuth,
 	LazyLoadingStart,
 } from "../../../components";
-import UserContext from "../../../context/UserContext";
 import { applicationInfo } from "../../../interceptors";
 import Form from "../../../models/login.models";
 import ObjectStyles from "../../../styles/objects/objects";
 
 type Props = {
-    // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-    navigation: NativeStackNavigationProp<any, any>;
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	navigation: NativeStackNavigationProp<any, any>;
 };
 
 const Login = ({ navigation }: Props) => {
-	const { state, dispatch } = useContext(UserContext);
 	const [isPending, setIsPending] = useState(false);
 
 	const {
@@ -49,20 +47,16 @@ const Login = ({ navigation }: Props) => {
 		setIsPending(true);
 	}, []);
 	const onSubmit = (data: Form) => {
-		applicationInfo(data.email, data.password, signInWithEmailAndPassword).then(
-			(res) => {
-				if (res.ok) {
-					dispatch({
-						type: "AUTH",
-						payload: {
-							authorization: "success",
-							email: res.email === null ? "" : res.email,
-							id: res.id,
-						},
-					});
-				}
-			},
-		);
+		applicationInfo(
+			data.email,
+			data.password,
+			false,
+			signInWithEmailAndPassword,
+		).then((res) => {
+			if (res.ok) {
+				navigation.navigate("Home");
+			}
+		});
 	};
 
 	return isPending === true ? (
@@ -135,14 +129,14 @@ const Login = ({ navigation }: Props) => {
 };
 
 const style = StyleSheet.create({
-    containerLink: {
-        height: 69,
-        gap: 12,
-    },
+	containerLink: {
+		height: 69,
+		gap: 12,
+	},
 });
 
 Login.navigationOptions = {
-    title: "",
+	title: "",
 };
 
 export default Login;

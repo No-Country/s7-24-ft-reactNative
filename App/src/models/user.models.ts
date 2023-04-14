@@ -1,6 +1,5 @@
 import SubCategoryModel from "./subCategory.models";
 interface User {
-	authorization: string;
 	id: string;
 	photoUrl: string;
 	name: string;

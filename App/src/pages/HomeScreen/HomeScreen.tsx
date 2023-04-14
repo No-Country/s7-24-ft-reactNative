@@ -1,18 +1,41 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 // --------------------------------------------------------------------
 
+import { onAuthStateChanged } from "firebase/auth";
 import { CategoryCard, SearchBar, ServiceCard } from "../../components";
 import { COLORS } from "../../constants";
+import UserContext from "../../context/UserContext";
 import { getCategories } from "../../controllers/categories.controller";
 import { getServices } from "../../controllers/services.controller";
+import { FirebaseGetAuth } from "../../firebase/app";
 import CategoryModel from "../../models/category.models";
 import ServiceModel from "../../models/services.models";
+import { NavigateProp } from "../../types/types";
 // --------------------------------------------------------------------
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: NavigateProp) {
 	const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
 	const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
+	const { dispatch } = useContext(UserContext);
+	useEffect(() => {
+		onAuthStateChanged(FirebaseGetAuth, (user) => {
+			console.log(user);
+			if (user) {
+				dispatch({
+					type: "AUTH",
+					payload: {
+						id: user.uid,
+						email: user.email || "",
+						name: user.displayName || "",
+					},
+				});
+			} else {
+				navigation.navigate("Login");
+			}
+		});
+	}, []);
+
 	useEffect(() => {
 		async function getData() {
 			const dataCat = await getCategories();

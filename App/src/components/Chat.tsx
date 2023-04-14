@@ -21,20 +21,6 @@ const Chat = () => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const { state } = useContext(UserContext);
 	useEffect(() => {
-		setMessages([
-			{
-				_id: 1,
-				text: "Hello developer",
-				createdAt: new Date(),
-				user: {
-					_id: 2,
-					message: "",
-					avatar: "",
-					isTalking: true,
-				},
-			},
-		]);
-
 		const collectionUser = getDataDB("chats");
 		const q = query(collectionUser, orderBy("createdAt", "desc"));
 
@@ -64,7 +50,7 @@ const Chat = () => {
 			user,
 		});
 	}, []);
-
+	console.log(state);
 	return (
 		<GiftedChat
 			messages={messages}
