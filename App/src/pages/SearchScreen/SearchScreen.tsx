@@ -1,11 +1,16 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+
+// --------------------------------------------------------------------
+
+import { SearchBar } from "../../components";
+import { COLORS } from "../../constants";
 
 // --------------------------------------------------------------------
 
 export default function SearchScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Search Screen</Text>
-    </View>
-  );
+    return (
+        <View style={{ backgroundColor: COLORS.background, flex: 1 }}>
+            <SearchBar />
+        </View>
+    );
 }

@@ -1,17 +1,17 @@
 import { StyleSheet, Text } from "react-native";
 import RootStyles from "../styles/setting/setting";
 interface Props {
-	message: string;
+    message: string;
 }
 
 const ErrorMessageForm = ({ message }: Props) => {
-	return <Text style={styles.text}>{message}</Text>;
+    return <Text style={styles.text}>{message}</Text>;
 };
 
 const styles = StyleSheet.create({
-	text: {
-		color: RootStyles.colorRed,
-	},
+    text: {
+        color: RootStyles.colorRed,
+    },
 });
 
 export default ErrorMessageForm;

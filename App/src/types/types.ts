@@ -3,11 +3,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // --------------------------------------------------------------------
 
 import Auth from "../models/auth.models";
-import User from "../models/user.models";
 import Dates from "../models/datesUsers.models";
+import User from "../models/user.models";
 export type Action =
 	| { type: "SET_ID"; payload: string }
 	| { type: "SET_TOKEN"; payload: string }
+
 	| { type: "AUTH"; payload: Auth }
 	| { type: "DATES"; payload: Dates };
 
@@ -18,8 +19,7 @@ export type NavigateProp = {
 };
 
 export type CategoryCardItemData = {
-	id: number;
-	title: string;
+	name: string;
 	img: string;
 };
 
@@ -34,10 +34,6 @@ export type ServiceCardItemData = {
 	location: string;
 	img: string;
 	rating: number;
-};
-
-export type ServiceComponentProp = {
-	data: ServiceCardItemData;
 };
 
 export type TabBarComponentProp = {

@@ -3,7 +3,6 @@ import User from "../models/user.models";
 import { Action } from "../types/types";
 
 export const initialState: User = {
-	authorization: "not-authorization",
 	id: "",
 	email: "",
 	name: "",
@@ -18,6 +17,7 @@ export const initialState: User = {
 	moreInformation: "",
 	phone: 0,
 	whatsApp: 0,
+	searchHistory: [],
 };
 
 const UserContext = createContext<{
