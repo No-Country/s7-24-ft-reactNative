@@ -8,7 +8,6 @@ import User from "../models/user.models";
 export type Action =
 	| { type: "SET_ID"; payload: string }
 	| { type: "SET_TOKEN"; payload: string }
-
 	| { type: "AUTH"; payload: Auth }
 	| { type: "DATES"; payload: Dates };
 

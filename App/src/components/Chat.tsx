@@ -50,7 +50,7 @@ const Chat = () => {
 			user,
 		});
 	}, []);
-	console.log(state);
+	
 	return (
 		<GiftedChat
 			messages={messages}

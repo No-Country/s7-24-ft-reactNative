@@ -13,7 +13,7 @@ export const applicationInfo = async (
 	try {
 		const response = await method(FirebaseGetAuth, emailUser, passwordUser);
 
-		const { uid, email } = response.user;
+		const { uid, email, photoURL } = response.user;
 		const name = email?.split("@") || "";
 
 		if (register) {
@@ -25,6 +25,7 @@ export const applicationInfo = async (
 			id: uid,
 			email: email,
 			name: name[0],
+			photoURL,
 			message: "exito",
 		};
 	} catch (error) {

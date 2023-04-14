@@ -1,4 +1,4 @@
-const RootStyles = {
+    const RootStyles = {
     colorRed: "#B3261E",
     colorWhite: "#fff",
     colorOnErrorContainer: "#410E0B",

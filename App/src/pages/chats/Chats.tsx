@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import UserContext from "../../context/UserContext";
 import { getDataBase } from "../../services/getDataBase.services";
+import NoUsers from "./components/NoUsers";
 import UserInfo from "./components/UserInfo";
 interface Props {
 	_id: string;
@@ -20,7 +21,7 @@ const Chats = () => {
 			if (res.status && res.result !== null) {
 				res.result.forEach((item) => {
 					if (state.id === item.data().user._id) {
-						data.push(item.data());
+						data.push(item.data().user);
 					}
 				});
 
@@ -31,12 +32,23 @@ const Chats = () => {
 
 	return (
 		<View>
-			<FlatList
-				data={users}
-				renderItem={({ item }) => (
-					<UserInfo avatar="s" id="d" name="d" isTalking={false} />
-				)}
-			/>
+			{users.length === 0 ? (
+				<NoUsers />
+			) : (
+				<>
+					<FlatList
+						data={users}
+						renderItem={({ item }) => (
+							<UserInfo
+								avatar={item.avatar}
+								id={item._id}
+								name={item.name}
+								isTalking={false}
+							/>
+						)}
+					/>
+				</>
+			)}
 		</View>
 	);
 };

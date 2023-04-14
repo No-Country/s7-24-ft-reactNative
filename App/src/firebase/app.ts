@@ -8,6 +8,7 @@ import { getStorage } from "firebase/storage";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
 	apiKey: "AIzaSyAhbNBPL2U3GWRKHjEp0E3JPyDcKtSmSW8",
 	authDomain: "nc-reactnative.firebaseapp.com",
@@ -21,4 +22,4 @@ const firebaseConfig = {
 export const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseGetAuth = getAuth(FirebaseApp);
 export const FirebaseGetFireStore = getFirestore(FirebaseApp);
-export const FirebaseStorage = getStorage();
+export const FirebaseStorage = getStorage(FirebaseApp);

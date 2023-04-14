@@ -1,13 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import UserModel from "../../../models/userChatModel.model";
 
 const UserInfo = ({ name, avatar, id, isTalking }: UserModel) => {
 	return (
-		<View>
+		<View key={id}>
+			<Image
+				source={require(avatar || "../../../assets/img/personFill.png")}
+				style={{ width: 40, height: 40 }}
+			/>
 			<Text>{name}</Text>
 			<Text>{avatar}</Text>
-			<Text>{id}</Text>
 		</View>
 	);
 };

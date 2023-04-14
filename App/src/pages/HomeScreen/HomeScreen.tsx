@@ -18,6 +18,7 @@ export default function HomeScreen({ navigation }: NavigateProp) {
 	const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
 	const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
 	const { dispatch } = useContext(UserContext);
+
 	useEffect(() => {
 		onAuthStateChanged(FirebaseGetAuth, (user) => {
 			console.log(user);
