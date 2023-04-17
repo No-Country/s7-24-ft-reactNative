@@ -30,7 +30,6 @@ export default function StackNavigator() {
 				dispatch({
 					type: "AUTH",
 					payload: {
-						authorization: "success",
 						email: user.email === null ? "" : user.email,
 						id: user.uid,
 						name: user.displayName === null ? "" : user.displayName,
