@@ -3,7 +3,6 @@ import User from "../models/user.models";
 import { Action } from "../types/types";
 
 export const initialState: User = {
-	authorization: "not-authorization",
 	id: "",
 	email: "",
 	name: "",

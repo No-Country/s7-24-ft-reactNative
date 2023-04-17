@@ -1,7 +1,8 @@
 interface Auth {
-	authorization: string;
 	id: string;
 	email: string;
+	name: string;
+	photoUrl?: string;
 }
 
 export default Auth;

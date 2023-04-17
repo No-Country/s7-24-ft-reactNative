@@ -8,8 +8,9 @@ import { applicationInfo } from "../../../interceptors";
 import RegisterForm from "../../../models/register.models";
 import { addDBDoc } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
+import { NavigateProp } from "../../../types/types";
 
-const Register = () => {
+const Register = ({ navigation }: NavigateProp) => {
 	const [errorPassword, setErrorPassword] = useState("");
 
 	const { state, dispatch } = useContext(UserContext);
@@ -30,13 +31,23 @@ const Register = () => {
 		if (data.password === data.confirmPassword) {
 			const { email, password } = data;
 			setErrorPassword("");
-			applicationInfo(email, password, createUserWithEmailAndPassword).then(
-				(res) => {
-					if (res.ok) {
-						addDBDoc("users", state);
-					}
-				},
-			);
+			applicationInfo(
+				email,
+				password,
+				true,
+				createUserWithEmailAndPassword,
+			).then((res) => {
+				if (res.ok) {
+					addDBDoc("users", {
+						...state,
+						email: res.email,
+						id: res.id,
+						name: res.name,
+					});
+
+					navigation.navigate("Home");
+				}
+			});
 			reset();
 		} else if (data.password !== data.confirmPassword) {
 			setErrorPassword(

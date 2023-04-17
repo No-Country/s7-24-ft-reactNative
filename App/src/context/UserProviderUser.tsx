@@ -22,11 +22,6 @@ const reducer = (state: User, action: Action) => {
 				...state,
 				...action.payload,
 			};
-		case "SET_AUTHORIZATION":
-			return {
-				...state,
-				authorization: action.payload,
-			};
 
 		default: {
 			return {
