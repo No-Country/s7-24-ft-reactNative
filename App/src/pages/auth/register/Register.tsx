@@ -11,7 +11,7 @@ import ObjectStyles from "../../../styles/objects/objects";
 const Register = () => {
     const [errorPassword, setErrorPassword] = useState("");
 
-	const { dispatch } = useContext(UserContext);
+    const { dispatch } = useContext(UserContext);
 
     const {
         control,
@@ -25,40 +25,44 @@ const Register = () => {
         },
     });
 
-	const onSubmit = (data: RegisterForm) => {
-		if (data.password === data.confirmPassword) {
-			const { email, password } = data;
-			setErrorPassword("");
-			applicationInfo(email, password, createUserWithEmailAndPassword).then(
-				(res) => {
-					if (res.ok) {
-						addUserToDB(res.email === null ? "" : res.email, res.id);
-						dispatch({
-							type: "AUTH",
-							payload: {
-								authorization: "success",
-								email: res.email === null ? "" : res.email,
-								id: res.id,
-							},
-						});
-					}
-				},
-			);
-		} else if (data.password !== data.confirmPassword) {
-			setErrorPassword(
-				"Error las contraseñas no son iguales vuelva intentarlo",
-			);
-		}
-	};
+    const onSubmit = (data: RegisterForm) => {
+        if (data.password === data.confirmPassword) {
+            const { email, password } = data;
+            setErrorPassword("");
+            applicationInfo(
+                email,
+                password,
+                createUserWithEmailAndPassword
+            ).then((res) => {
+                if (res.ok) {
+                    addUserToDB(res.email === null ? "" : res.email, res.id);
+                    dispatch({
+                        type: "AUTH",
+                        payload: {
+                            authorization: "success",
+                            email: res.email === null ? "" : res.email,
+                            id: res.id,
+                        },
+                    });
+                }
+            });
+        } else if (data.password !== data.confirmPassword) {
+            setErrorPassword(
+                "Error las contraseñas no son iguales vuelva intentarlo"
+            );
+        }
+    };
 
     return (
         <View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
-            <Text style={ObjectStyles.titleForm}>Regístrate</Text>
+            <Text style={ObjectStyles.titleForm}>Registro</Text>
             {errorPassword && <Text>{errorPassword}</Text>}
 
             <FormAuth>
                 <View style={ObjectStyles.containerFormInput}>
-                    <Text style={ObjectStyles.textLabelForm}>Email:</Text>
+                    <Text style={ObjectStyles.textLabelForm}>
+                        Correo electrónico:
+                    </Text>
                     <Controller
                         control={control}
                         render={({ field: { onChange, onBlur, value } }) => (
@@ -81,12 +85,12 @@ const Register = () => {
                 </View>
 
                 <View style={ObjectStyles.containerFormInput}>
-                    <Text style={ObjectStyles.textLabelForm}>Password:</Text>
+                    <Text style={ObjectStyles.textLabelForm}>Contraseña:</Text>
                     <Controller
                         control={control}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
-                                placeholder="Ingrese su correo"
+                                placeholder="Ingrese su contraseña"
                                 secureTextEntry={true}
                                 textContentType="password"
                                 onChangeText={onChange}
@@ -105,13 +109,13 @@ const Register = () => {
 
                 <View style={ObjectStyles.containerFormInput}>
                     <Text style={ObjectStyles.textLabelForm}>
-                        Confirmar Password:
+                        Confirme contraseña:
                     </Text>
                     <Controller
                         control={control}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
-                                placeholder="Ingrese su correo"
+                                placeholder="Ingrese su contraseña"
                                 secureTextEntry={true}
                                 textContentType="password"
                                 onChangeText={onChange}

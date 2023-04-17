@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------
 
 export default {
-    background: "#E7E0EC",
-    primary: "#410E0B",
-    secondary: "#B3261E",
+    background: "#F7FCF8",
+    primary: "#0A7E54",
+    secondary: "#C6E9C7",
     white: "#FFFFFF",
     dark: "#11C1B1F",
     bottomBar: "#1E1E1E",

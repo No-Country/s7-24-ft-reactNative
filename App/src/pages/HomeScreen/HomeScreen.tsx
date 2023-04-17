@@ -1,10 +1,18 @@
-import { useEffect, useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import {
+    FlatList,
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
 
 // --------------------------------------------------------------------
 
 import { CategoryCard, SearchBar, ServiceCard } from "../../components";
 import { COLORS } from "../../constants";
+import { LoaderContext } from "../../context/LoaderContext";
 import { getCategories } from "../../controllers/categories.controller";
 import { getServices } from "../../controllers/services.controller";
 import CategoryModel from "../../models/category.models";
@@ -15,6 +23,7 @@ import ServiceModel from "../../models/services.models";
 export default function HomeScreen() {
     const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
     const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
+    const { setShowLoader }: any = useContext(LoaderContext);
 
     useEffect(() => {
         async function getData() {
@@ -23,6 +32,10 @@ export default function HomeScreen() {
 
             setCategoriesData(dataCat);
             setServicesData(dataServices);
+
+            setTimeout(() => {
+                setShowLoader(false);
+            }, 4000);
         }
 
         getData();
@@ -32,7 +45,11 @@ export default function HomeScreen() {
         <ScrollView style={{ backgroundColor: COLORS.background }}>
             <SearchBar />
             <View style={styles.boxBrownContainer}>
-                <Text style={{ color: "#fff", fontSize: 20 }}>
+                <Image
+                    style={styles.boxBrownImage}
+                    source={require("../../assets/images/SettingsHome.svg")}
+                />
+                <Text style={styles.boxBrownText}>
                     Todo lo que buscas, en un {"\n"} solo lugar.
                 </Text>
             </View>
@@ -52,7 +69,7 @@ export default function HomeScreen() {
                 </Text>
                 <FlatList
                     style={styles.categoryTable}
-                    data={servicesData}
+                    data={servicesData.slice(0, 4)}
                     renderItem={({ item }) => <ServiceCard data={item} />}
                     ItemSeparatorComponent={() => (
                         <View style={{ margin: 5 }} />
@@ -65,10 +82,25 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     boxBrownContainer: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.secondary,
         paddingHorizontal: 24,
         paddingTop: 40,
         paddingBottom: 40,
+        minHeight: 145,
+    },
+    boxBrownText: {
+        color: "#000",
+        fontSize: 20,
+        margin: "auto",
+        fontWeight: "500",
+    },
+    boxBrownImage: {
+        position: "absolute",
+        left: 0,
+        top: 7,
+        width: 136,
+        height: 131,
+        zIndex: -1,
     },
     categoriesContainer: {
         paddingHorizontal: 24,

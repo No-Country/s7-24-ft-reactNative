@@ -4,18 +4,20 @@ import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 // --------------------------------------------------------------------
 
 import { COLORS, ROUTES } from "../constants";
-import { CategoryComponentProp } from "../types/types";
 
 // --------------------------------------------------------------------
 
-export default function CategoryCard({ data }: CategoryComponentProp) {
+export default function CategoryCard({ data }: any) {
     const navigation = useNavigation();
 
     const goToTheCategoryScreen = () => {
         navigation.dispatch(
             CommonActions.navigate({
                 name: ROUTES.CATEGORY,
-                params: data,
+                params: {
+                    id: data.id,
+                    filter: [],
+                },
             })
         );
     };

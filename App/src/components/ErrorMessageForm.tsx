@@ -11,6 +11,7 @@ const ErrorMessageForm = ({ message }: Props) => {
 const styles = StyleSheet.create({
     text: {
         color: RootStyles.colorRed,
+        fontSize: 8,
     },
 });
 

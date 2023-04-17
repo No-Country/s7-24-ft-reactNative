@@ -7,11 +7,11 @@ const ObjectStyles = StyleSheet.create({
         alignItems: "center",
     },
     bottomForm: {
-        width: 328,
+        width: "100%",
         height: 39,
-        borderRadius: 2,
+        borderRadius: 10,
         textAlign: "center",
-        backgroundColor: RootStyles.colorRed,
+        backgroundColor: RootStyles.colorOnErrorContainer,
     },
     backgroundForm: {
         height: "100%",
@@ -20,18 +20,18 @@ const ObjectStyles = StyleSheet.create({
 
     input: {
         width: 328,
-        height: 32,
+        height: 36,
         padding: "1em",
-        borderRadius: 4,
+        borderRadius: 10,
         fontSize: 14,
-        border: "1px solid #d4d4d4",
+        border: ".2px solid #0C0C0C50",
         backgroundColor: RootStyles.colorWhite,
         color: "rgba(149, 149, 149, 1)",
-        boxShadow: " 0px 2px 2px rgba(0, 0, 0, 0.25)",
+        boxShadow: " 0px 2px 5px rgba(0, 0, 0, 0.09)",
     },
     titleForm: {
         position: "absolute",
-        top: "16%",
+        top: "20%",
         fontSize: 20,
         color: RootStyles.typographyMajor,
     },
