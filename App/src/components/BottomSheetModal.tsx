@@ -1,173 +1,204 @@
+import React, { useEffect, useRef, useState } from "react";
 import {
     Dimensions,
-    Modal,
+    Image,
     StyleSheet,
     Text,
-    TouchableWithoutFeedback,
+    TouchableOpacity,
     View,
 } from "react-native";
+import BottomSheet from "react-native-raw-bottom-sheet";
 
 // --------------------------------------------------------------------
-
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { COLORS } from "../constants";
-import { FirebaseGetFireStore } from "../firebase/app";
+import { getSubCategoriesPerMainCategory } from "../controllers/subCategory.controller";
+import SubCategoryModel from "../models/subCategory.models";
+import ObjectStyles from "../styles/objects/objects";
 
 // --------------------------------------------------------------------
 
 const deviceHeight = Dimensions.get("window").height;
-interface MyComponentState {
-    name: string;
-    id: string;
-}
-export default function BottomSheetModal({
-    isVisible,
-    closeSheet,
-    onTouchOutside,
-    categoryData,
+
+function BottomSheetContent({
+    title,
+    subCatData,
+    activesFilter,
+    changeFilters,
 }: any) {
-    const { id, name } = categoryData;
-    const [subCategoriesData, setSubCategoriesData] = useState<
-        MyComponentState[]
-    >([]);
+    const [newsFilters, setNewsFilters] = useState<any[]>([]);
 
-    const renderTouchClose = (onTouch: any) => {
-        const view = <View style={{ flex: 1, width: "100%" }} />;
+    function pushNewFilter(id: string) {
+        if (!newsFilters.some((elem: any) => elem.includes(id))) {
+            setNewsFilters([...newsFilters, id]);
+        } else {
+            setNewsFilters(newsFilters.filter((elem) => elem !== id));
+        }
+    }
 
-        if (!onTouch) return view;
-
-        return (
-            <TouchableWithoutFeedback
-                onPress={onTouch}
-                style={{ flex: 1, width: "100%" }}
-            >
-                {view}
-            </TouchableWithoutFeedback>
-        );
-    };
-
-    useEffect(() => {
-        getSubCategories();
-    }, []);
-
-    async function getSubCategories() {
-        const querySnapshot = await getDocs(
-            collection(FirebaseGetFireStore, "subCategories")
-        );
-        const categoriesList = querySnapshot.docs.map((doc) => {
-            const data = doc.data();
-            const res = {
-                id: data.category.id,
-                name: data.name,
-            };
-            return res;
-        });
-
-        const categoriesInId = categoriesList.filter(
-            (e) => e.id === id
-        ) as MyComponentState[];
-        setSubCategoriesData(categoriesInId);
+    function aplicar() {
+        changeFilters(false, newsFilters);
     }
 
     return (
-        <Modal
-            animationType="fade"
-            transparent={true}
-            visible={isVisible}
-            onRequestClose={closeSheet}
-        >
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: "#000000AA",
-                    justifyContent: "flex-end",
+        <View style={styles.bottomSheetContainer}>
+            <View style={styles.bottomSheetHeader}>
+                <Text style={{ fontSize: 20 }}>Filtrar</Text>
+                <TouchableOpacity onPress={() => changeFilters(true, [])}>
+                    <Text style={{ fontSize: 12 }}>Restablecer</Text>
+                </TouchableOpacity>
+            </View>
+            <Text style={{ fontWeight: "600", marginTop: 30, marginLeft: 5 }}>
+                {title}
+            </Text>
+            <View style={styles.subCategoriesContainer}>
+                {subCatData.map((e: any) => {
+                    return (
+                        <TouchableOpacity
+                            onPress={() => pushNewFilter(e.id)}
+                            style={[
+                                styles.item,
+                                {
+                                    backgroundColor: activesFilter.some(
+                                        (elem: any) => elem.includes(e.id)
+                                    )
+                                        ? COLORS.primary
+                                        : newsFilters.some((elem: any) =>
+                                              elem.includes(e.id)
+                                          )
+                                        ? COLORS.secondary
+                                        : COLORS.white,
+                                },
+                            ]}
+                            key={e.id}
+                        >
+                            <Text
+                                style={{
+                                    color: activesFilter.some((elem: any) =>
+                                        elem.includes(e.id)
+                                    )
+                                        ? "#fff"
+                                        : "#000",
+                                }}
+                            >
+                                {e.name}
+                            </Text>
+                        </TouchableOpacity>
+                    );
+                })}
+            </View>
+            <TouchableOpacity
+                onPress={aplicar}
+                style={[ObjectStyles.bottomForm, { marginTop: 15 }]}
+            >
+                <Text style={styles.btnText}>Aplicar</Text>
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+export default function BottomSheetModal({
+    categoryId,
+    activesFilter,
+    title,
+    changeFilters,
+}: any) {
+    const refRBSheet = useRef(null);
+    const [subCatData, setSubCatData] = useState<SubCategoryModel[]>([]);
+
+    useEffect(() => {
+        async function getData() {
+            const data = await getSubCategoriesPerMainCategory(categoryId);
+            setSubCatData(data);
+        }
+
+        getData();
+    }, []);
+
+    return (
+        <View style={styles.filterContainer}>
+            <TouchableOpacity
+                style={styles.btnFilter}
+                onPress={() => refRBSheet.current?.open()}
+            >
+                <Text style={{ fontSize: 10 }}>Filtrar</Text>
+                <Image
+                    style={{ width: 10, height: 10 }}
+                    source={require("../assets/icons/FilterIcon.svg")}
+                />
+            </TouchableOpacity>
+            <BottomSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={deviceHeight * 0.45}
+                openDuration={1000}
+                closeDuration={1000}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: "#FFFFFF60",
+                    },
+                    draggableIcon: {
+                        backgroundColor: "#8C8C8C",
+                    },
+                    container: {
+                        borderRadius: 20,
+                    },
                 }}
             >
-                {renderTouchClose(onTouchOutside)}
-                <View style={styles.bottomSheetContainer}>
-                    <View
-                        style={{
-                            margin: "auto",
-                            width: 40,
-                            height: 5,
-                            backgroundColor: "#8C8C8C",
-                        }}
-                    />
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            marginTop: 20,
-                        }}
-                    >
-                        <Text style={{ fontSize: 20 }}>Filtrar</Text>
-                        <Text>Restablecer</Text>
-                    </View>
-                    <Text
-                        style={{
-                            fontWeight: "600",
-                            marginTop: 30,
-                            marginLeft: 5,
-                        }}
-                    >
-                        {name}
-                    </Text>
-                    <View style={styles.subCategoriesContainer}>
-                        {subCategoriesData.map((e, i) => (
-                            <View style={styles.item} key={i + 1}>
-                                <Text>{e.name}</Text>
-                            </View>
-                        ))}
-                    </View>
-                    <View
-                        style={{
-                            marginTop: 30,
-                            marginBottom: 10,
-                            backgroundColor: "#B3261E",
-                            paddingVertical: 10,
-                            borderRadius: 5,
-                        }}
-                    >
-                        <Text style={{ textAlign: "center", color: "#fff" }}>
-                            Aplicar
-                        </Text>
-                    </View>
-                </View>
-            </View>
-        </Modal>
+                <BottomSheetContent
+                    title={title}
+                    subCatData={subCatData}
+                    activesFilter={activesFilter}
+                    changeFilters={changeFilters}
+                />
+            </BottomSheet>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    bottomSheetContainer: {
+    filterContainer: {
+        alignItems: "flex-end",
+        paddingHorizontal: 24,
+        paddingVertical: 10,
+    },
+    btnFilter: {
         backgroundColor: COLORS.white,
+        flexDirection: "row",
+        gap: 5,
+        alignItems: "center",
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        filter: "drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.09))",
+    },
+    bottomSheetContainer: {
         width: "100%",
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
         paddingHorizontal: 24,
         paddingBottom: 30,
-        paddingTop: 10,
-        maxHeight: deviceHeight * 0.7,
     },
-    item: {
-        paddingHorizontal: 7,
-        paddingVertical: 5,
-        borderRadius: 10,
-        width: "auto",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
+    bottomSheetHeader: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 20,
     },
     subCategoriesContainer: {
         marginTop: 20,
         flexDirection: "row",
         flexWrap: "wrap",
-        gap: 5,
+        columnGap: 5,
+        rowGap: 10,
+    },
+    item: {
+        paddingHorizontal: 14,
+        paddingVertical: 7,
+        borderRadius: 10,
+        width: "auto",
+        boxShadow:
+            "0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)",
+    },
+    btnText: {
+        fontSize: 15,
+        lineHeight: 39,
+        color: COLORS.white,
     },
 });

@@ -1,50 +1,70 @@
 import { useEffect, useState } from "react";
-import {
-    FlatList,
-    Image,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // --------------------------------------------------------------------
 
-import ServiceCard from "../../components/ServiceCard";
+import { BottomSheetModal, ServiceCard } from "../../components";
 import { COLORS } from "../../constants";
+import { getCategoryPerId } from "../../controllers/categories.controller";
 import { getServicesPerCategory } from "../../controllers/services.controller";
 import ServiceModel from "../../models/services.models";
 
 // --------------------------------------------------------------------
 
 export default function CategoriesScreen({ route, navigation }: any) {
-    const { id, name } = route.params;
+    const { id, filter } = route.params;
     const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
+    const [catData, setCatDat] = useState<any>({});
+    const [activesFilters, setActiveFilters] = useState(filter);
 
     useEffect(() => {
         async function getData() {
-            const dataServices = await getServicesPerCategory(id);
+            const dataCat = await getCategoryPerId(id);
 
-            setServicesData(dataServices);
+            setCatDat(dataCat);
+            changeFilters(true, []);
+            navigation.setOptions({ title: dataCat.name });
         }
-
-        navigation.setOptions({ title: name });
 
         getData();
     }, []);
 
+    async function getServices() {
+        const dataServices = await getServicesPerCategory(id);
+
+        return dataServices;
+    }
+
+    async function changeFilters(typeChange: boolean, newFilters: []) {
+        const dataServices = await getServices();
+
+        if (typeChange) {
+            console.log(dataServices);
+            setActiveFilters([]);
+            setServicesData(dataServices);
+        } else {
+            setActiveFilters([...activesFilters, newFilters]);
+
+            console.log(activesFilters);
+
+            const data = dataServices.filter((e: any) =>
+                activesFilters.includes(e.subCatecoryId)
+            );
+
+            console.log(data);
+
+            setServicesData(data);
+        }
+    }
+
     return (
         <ScrollView style={{ backgroundColor: COLORS.background }}>
-            <View style={styles.filterContainer}>
-                <TouchableOpacity style={styles.btnFilter}>
-                    <Text style={{ fontSize: 10 }}>Filtrar</Text>
-                    <Image
-                        style={{ width: 10, height: 10 }}
-                        source={require("../../assets/icons/FilterIcon.svg")}
-                    />
-                </TouchableOpacity>
-            </View>
+            <BottomSheetModal
+                categoryId={id}
+                title={catData.name}
+                activesFilter={activesFilters}
+                changeFilters={changeFilters}
+            />
             <View style={{ paddingHorizontal: 24 }}>
                 <Text style={{ fontSize: 15 }}>Destacados</Text>
                 <FlatList
@@ -61,19 +81,6 @@ export default function CategoriesScreen({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-    filterContainer: {
-        alignItems: "flex-end",
-        paddingHorizontal: 24,
-        paddingVertical: 10,
-    },
-    btnFilter: {
-        backgroundColor: COLORS.white,
-        flexDirection: "row",
-        gap: 5,
-        alignItems: "center",
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-    },
     categoryTable: {
         marginTop: 10,
         gap: 5,

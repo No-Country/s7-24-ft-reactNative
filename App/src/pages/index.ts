@@ -1,4 +1,5 @@
 export { default as CategoriesScreen } from "./CategoriesScreen/CategoriesScreen";
+export { default as GetLocationScreen } from "./GetLocationScreen/GetLocationScreen";
 export { default as HomeScreen } from "./HomeScreen/HomeScreen";
 export { default as MessagesScreen } from "./MessagesScreen/MessagesScreen";
 export { default as ProfileScreen } from "./ProfileScreen/ProfileScreen";

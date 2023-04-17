@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+    Image,
+    Share,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 // --------------------------------------------------------------------
 
@@ -30,6 +37,25 @@ export default function ServiceScreen({ route, navigation }: any) {
         getData();
     }, []);
 
+    const onShare = async () => {
+        const shareContent = {
+            title: serviceData?.service,
+            message: serviceData?.description,
+            url: "https://ejemplo.com/publicacion", // URL de la publicación a compartir
+        };
+
+        const shareOptions = {
+            dialogTitle: subCatName,
+        };
+
+        try {
+            const result = await Share.share(shareContent, shareOptions);
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <View style={styles.serviceScreen}>
             <View style={styles.serviceHeader}>
@@ -48,7 +74,7 @@ export default function ServiceScreen({ route, navigation }: any) {
                 style={styles.serviceImage}
                 source={{ uri: serviceData?.img }}
             />
-            <TouchableOpacity style={styles.btnShare}>
+            <TouchableOpacity style={styles.btnShare} onPress={onShare}>
                 <Image
                     style={{ width: 17, height: 16 }}
                     source={require("../../assets/icons/ShareIcon.svg")}
@@ -93,6 +119,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-end",
+        marginTop: 20,
     },
     serviceImage: {
         width: "100%",

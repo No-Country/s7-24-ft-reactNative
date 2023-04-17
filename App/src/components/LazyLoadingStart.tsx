@@ -8,7 +8,7 @@ const LazyLoadingStart = () => {
                 source={require("../../assets/logoIndex.svg")}
                 style={styles.img}
             />
-            <Text style={styles.text}>Servis</Text>
+            <Text style={styles.text}>Servify.</Text>
         </View>
     );
 };
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     },
     text: {
         position: "absolute",
-        bottom: 77,
+        bottom: 35,
         fontSize: 32,
         color: RootStyles.colorWhite,
     },
 
     img: {
-        minWidth: 179,
-        height: 181,
+        minWidth: 170,
+        height: 165,
         textAlign: "center",
     },
 });
