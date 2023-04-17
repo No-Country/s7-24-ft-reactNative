@@ -1,7 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
-=======
 import {
     FlatList,
     Image,
@@ -11,17 +8,13 @@ import {
     View,
 } from "react-native";
 
->>>>>>> dev
 // --------------------------------------------------------------------
 
 import { onAuthStateChanged } from "firebase/auth";
 import { CategoryCard, SearchBar, ServiceCard } from "../../components";
 import { COLORS } from "../../constants";
-<<<<<<< HEAD
-import UserContext from "../../context/UserContext";
-=======
 import { LoaderContext } from "../../context/LoaderContext";
->>>>>>> dev
+import UserContext from "../../context/UserContext";
 import { getCategories } from "../../controllers/categories.controller";
 import { getServices } from "../../controllers/services.controller";
 import { FirebaseGetAuth } from "../../firebase/app";
@@ -30,40 +23,29 @@ import ServiceModel from "../../models/services.models";
 import { NavigateProp } from "../../types/types";
 // --------------------------------------------------------------------
 
-<<<<<<< HEAD
 export default function HomeScreen({ navigation }: NavigateProp) {
-	const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
-	const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
-	const { dispatch } = useContext(UserContext);
-
-	useEffect(() => {
-		onAuthStateChanged(FirebaseGetAuth, (user) => {
-			console.log(user);
-			if (user) {
-				dispatch({
-					type: "AUTH",
-					payload: {
-						id: user.uid,
-						email: user.email || "",
-						name: user.displayName || "",
-					},
-				});
-			} else {
-				navigation.navigate("Login");
-			}
-		});
-	}, []);
-
-	useEffect(() => {
-		async function getData() {
-			const dataCat = await getCategories();
-			const dataServices = await getServices();
-=======
-export default function HomeScreen() {
     const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
     const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
     const { setShowLoader }: any = useContext(LoaderContext);
->>>>>>> dev
+    const { dispatch } = useContext(UserContext);
+
+    useEffect(() => {
+        onAuthStateChanged(FirebaseGetAuth, (user) => {
+            console.log(user);
+            if (user) {
+                dispatch({
+                    type: "AUTH",
+                    payload: {
+                        id: user.uid,
+                        email: user.email || "",
+                        name: user.displayName || "",
+                    },
+                });
+            } else {
+                navigation.navigate("Login");
+            }
+        });
+    }, []);
 
     useEffect(() => {
         async function getData() {

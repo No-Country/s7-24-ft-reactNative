@@ -20,6 +20,7 @@ export default {
     FINALIZADO: "Finalizado",
 
     MESSAGES: "Messages",
+    CHAT: "Chat",
 
     CATEGORY: "Category",
 

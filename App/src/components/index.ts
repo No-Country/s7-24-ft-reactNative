@@ -3,6 +3,7 @@ export { default as BottomLogo } from "./BottomLogo";
 export { default as BottomSheetModal } from "./BottomSheetModal";
 export { default as ButtonFom } from "./ButtonFom";
 export { default as CategoryCard } from "./CategoryCard";
+export { default as Chat } from "./Chat";
 export { default as ErrorMessageForm } from "./ErrorMessageForm";
 export { default as FormAuth } from "./FormAuth";
 export { default as LazyLoadingStart } from "./LazyLoadingStart";
