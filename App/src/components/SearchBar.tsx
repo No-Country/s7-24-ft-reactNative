@@ -1,85 +1,107 @@
-import { useRoute } from "@react-navigation/native";
-import { collection, getDocs } from "firebase/firestore";
+import {
+    CommonActions,
+    useNavigation,
+    useRoute,
+} from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 // --------------------------------------------------------------------
 
-import { COLORS } from "../constants";
-import { FirebaseGetFireStore } from "../firebase/app";
+import { COLORS, ROUTES } from "../constants";
+import { getSubCategories } from "../controllers/subCategory.controller";
+import SubCategoryModel from "../models/subCategory.models";
 import { historySearch } from "../utils/fakeData";
 
 // --------------------------------------------------------------------
-interface SubCategory {
-    id: string;
-    name: string;
-}
 
 const Recommendations = ({ recommendation }: any) => {
+    const navigation = useNavigation();
+    const activeFilters: any = [];
+
+    const goToTheCategoryScreen = () => {
+        activeFilters.push(recommendation.id);
+
+        navigation.dispatch(
+            CommonActions.navigate({
+                name: ROUTES.CATEGORY,
+                params: {
+                    id: recommendation.categoryId,
+                    filter: activeFilters,
+                },
+            })
+        );
+    };
+
     return (
-        <View style={styles.recommendationContainer}>
-            <Text>{recommendation}</Text>
+        <TouchableOpacity
+            style={styles.recommendationContainer}
+            onPress={goToTheCategoryScreen}
+        >
+            <Text>{recommendation.name}</Text>
             <Image
                 style={{ width: 14, height: 14 }}
                 source={require("../assets/icons/XIcon.svg")}
             />
-        </View>
+        </TouchableOpacity>
     );
 };
 
 const SearchBar = () => {
     const [inputController, setInputController] = useState("");
-    const [recommendations, setRecomendations] = useState<SubCategory[]>([]);
-    const [subCategoriesData, setSubCategoriesData] = useState<SubCategory[]>(
-        []
-    );
+    const [isFocused, setIsFocused] = useState(false);
+    const [suggestions, setSuggestions] = useState<SubCategoryModel[]>([]);
+    const [subCatData, setSubCatData] = useState<SubCategoryModel[]>([]);
     const [showHist, setShowHist] = useState(true);
+
     const route = useRoute();
 
     useEffect(() => {
-        getSubCategories();
-    }, []);
+        async function getData() {
+            const data = await getSubCategories();
+            setSubCatData(data);
+        }
 
-    async function getSubCategories() {
-        const querySnapshot = await getDocs(
-            collection(FirebaseGetFireStore, "subCategories")
-        );
-        const categoriesList = querySnapshot.docs.map((doc) => {
-            const data = doc.data();
-            const res = {
-                id: doc.id,
-                name: data.name,
-            };
-            return res;
-        }) as SubCategory[];
-        setSubCategoriesData(categoriesList);
-    }
+        getData();
+    }, []);
 
     function handleTextChange(newText: any) {
         setInputController(newText);
         if (newText.length === 0) {
             setShowHist(true);
-            setRecomendations([]);
+            setSuggestions([]);
         } else {
             setShowHist(false);
-            const subCategoriesFilter = subCategoriesData.filter(
-                (subCategory) => {
-                    return subCategory.name
-                        .toLowerCase()
-                        .startsWith(newText.toLowerCase());
-                }
-            );
-            setRecomendations(subCategoriesFilter);
+            const subCategoriesFilter = subCatData.filter((subCategory) => {
+                return subCategory.name
+                    .toLowerCase()
+                    .startsWith(newText.toLowerCase());
+            });
+            setSuggestions(subCategoriesFilter);
         }
     }
 
     return (
         <View style={styles.searchBar}>
-            <View style={styles.searchContainer}>
+            <View
+                style={[
+                    styles.searchContainer,
+                    isFocused && styles.inputFocused,
+                ]}
+            >
                 <TextInput
                     placeholder="Buscar"
-                    style={{ fontSize: 16, width: "100%" }}
+                    style={styles.input}
                     value={inputController}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                     onChangeText={handleTextChange}
                 />
                 <Image
@@ -91,10 +113,10 @@ const SearchBar = () => {
                 {showHist
                     ? route.name !== "Home Tab" &&
                       historySearch.map((e, i) => (
-                          <Recommendations recommendation={e.name} key={i} />
+                          <Recommendations recommendation={e} key={i} />
                       ))
-                    : recommendations.map((e, i) => (
-                          <Recommendations recommendation={e.name} key={i} />
+                    : suggestions.map((e, i) => (
+                          <Recommendations recommendation={e} key={i} />
                       ))}
             </View>
         </View>
@@ -110,9 +132,13 @@ const styles = StyleSheet.create({
     searchContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
         backgroundColor: COLORS.white,
-        padding: 10,
-        borderRadius: 5,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        borderWidth: 0.5,
+        borderColor: COLORS.white,
+        filter: "drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.09))",
     },
     icon: {
         width: 24,
@@ -120,11 +146,20 @@ const styles = StyleSheet.create({
         tintColor: "#49454F",
     },
     recommendations: {
-        paddingTop: 10,
         backgroundColor: COLORS.white,
         position: "absolute",
         width: "100%",
-        top: 40,
+        top: 60,
+    },
+    input: {
+        fontSize: 16,
+        width: "100%",
+        height: 56,
+        outlineWidth: 0,
+    },
+    inputFocused: {
+        borderColor: "#05C883",
+        borderWidth: 0.5,
     },
     recommendationContainer: {
         flexDirection: "row",

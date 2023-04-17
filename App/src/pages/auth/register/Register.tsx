@@ -26,7 +26,6 @@ const Register = () => {
 			confirmPassword: "",
 		},
 	});
-
 	const onSubmit = (data: RegisterForm) => {
 		if (data.password === data.confirmPassword) {
 			const { email, password } = data;
@@ -69,12 +68,10 @@ const Register = () => {
 						name="email"
 						rules={{ required: true }}
 					/>
-
 					{errors.email && (
 						<ErrorMessageForm message="Este campo es requirió" />
 					)}
 				</View>
-
 				<View style={ObjectStyles.containerFormInput}>
 					<Text style={ObjectStyles.textLabelForm}>Password:</Text>
 					<Controller

@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 // --------------------------------------------------------------------
 
@@ -23,4 +23,22 @@ export async function getCategories() {
     }) as CategoryModel[];
 
     return categoriesList;
+}
+
+export async function getCategoryPerId(catId: string) {
+    const docRef = doc(FirebaseGetFireStore, "categories", catId);
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        const res = {
+            id: docSnap.id,
+            name: data.name,
+        };
+
+        return res;
+    } else {
+        return "El documento no existe";
+    }
 }

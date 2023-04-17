@@ -1,12 +1,13 @@
 export { default as ArrowBackNavigatoHeader } from "./ArrowBackNavigatorHeader";
+export { default as BottomLogo } from "./BottomLogo";
 export { default as BottomSheetModal } from "./BottomSheetModal";
 export { default as ButtonFom } from "./ButtonFom";
 export { default as CategoryCard } from "./CategoryCard";
 export { default as ErrorMessageForm } from "./ErrorMessageForm";
 export { default as FormAuth } from "./FormAuth";
 export { default as LazyLoadingStart } from "./LazyLoadingStart";
+export { default as Loader } from "./Loader";
 export { default as LogoNavigatorHeader } from "./LogoNavigatorHeader";
-export { default as MenuNavigatorHeader } from "./MenuNavigatorHeader";
 export { default as PublishedBy } from "./PublishedBy";
 export { default as SearchBar } from "./SearchBar";
 export { default as ServiceCard } from "./ServiceCard";

@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
-import { COLORS, ROUTES } from "../constants";
 
 // --------------------------------------------------------------------
 
 import {
     ArrowBackNavigatoHeader,
     LogoNavigatorHeader,
-    MenuNavigatorHeader,
     TabBarIconNavigatorBottom,
 } from "../components";
+import { COLORS, ROUTES } from "../constants";
 import {
     HomeScreen,
     MessagesScreen,
@@ -25,23 +24,27 @@ export default function BottomTabNavigator() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: COLORS.tabColor,
-                tabBarInactiveTintColor: COLORS.white,
+                tabBarActiveTintColor: COLORS.primary,
+                tabBarInactiveTintColor: COLORS.tabColor,
                 headerTitleAlign: "center",
                 headerStyle: {
                     backgroundColor: COLORS.background,
+                    borderBottomWidth: 0,
                 },
                 headerTitleStyle: {
                     fontSize: 20,
                     fontWeight: "500",
                 },
                 tabBarStyle: {
-                    backgroundColor: COLORS.bottomBar,
+                    backgroundColor: COLORS.white,
                     paddingBottom: 10,
                     paddingTop: 10,
                     position: "absolute",
-                    bottom: 0,
-                    height: 80,
+                    bottom: 10,
+                    minHeight: 68,
+                    marginHorizontal: 3,
+                    boxShadow: "0px 0px 23px rgba(0, 0, 0, 0.12)",
+                    borderRadius: 20,
                 },
             }}
         >
@@ -61,7 +64,6 @@ export default function BottomTabNavigator() {
                         />
                     ),
                     headerLeft: () => <LogoNavigatorHeader />,
-                    headerRight: () => <MenuNavigatorHeader />,
                 }}
             />
             <Tab.Screen
@@ -95,7 +97,6 @@ export default function BottomTabNavigator() {
                         />
                     ),
                     headerLeft: () => <ArrowBackNavigatoHeader />,
-                    headerRight: () => <MenuNavigatorHeader />,
                 }}
             />
             <Tab.Screen
@@ -123,7 +124,6 @@ export default function BottomTabNavigator() {
                             />
                         );
                     },
-                    headerRight: () => <MenuNavigatorHeader />,
                 }}
             />
         </Tab.Navigator>

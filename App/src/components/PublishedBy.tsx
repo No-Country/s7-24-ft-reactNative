@@ -1,11 +1,25 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+    Image,
+    Linking,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { COLORS } from "../constants";
 
 // --------------------------------------------------------------------
 
 // --------------------------------------------------------------------
 
 export default function PublishedBy() {
+    const groupId = "JVTHZOnI05oANnQtsiGB63";
+
+    const openWhatsApp = () => {
+        Linking.openURL(`whatsapp://group/${groupId}`);
+    };
+
     return (
         <View style={styles.publishByContainer}>
             <Text style={{ color: "#1C1B1F" }}>Publicado por:</Text>
@@ -25,11 +39,14 @@ export default function PublishedBy() {
             </View>
             <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.btnMessage}>
-                    <Text style={{ color: "#B3261E", textAlign: "center" }}>
+                    <Text style={{ color: "#000", textAlign: "center" }}>
                         Mensaje
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnWhatsApp}>
+                <TouchableOpacity
+                    style={styles.btnWhatsApp}
+                    onPress={openWhatsApp}
+                >
                     <Text style={{ color: "#fff" }}>WhatsApp</Text>
                     <Image
                         style={{ width: 18, height: 18 }}
@@ -62,7 +79,7 @@ const styles = StyleSheet.create({
     },
     btnWhatsApp: {
         paddingVertical: 10,
-        backgroundColor: "#B3261E",
+        backgroundColor: COLORS.primary,
         borderRadius: 5,
         width: "50%",
         flexDirection: "row",
@@ -71,7 +88,7 @@ const styles = StyleSheet.create({
     },
     btnMessage: {
         paddingVertical: 10,
-        backgroundColor: "#F9DEDC",
+        backgroundColor: COLORS.secondary,
         borderRadius: 5,
         width: "50%",
     },
