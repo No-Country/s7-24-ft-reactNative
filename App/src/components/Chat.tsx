@@ -1,12 +1,16 @@
 import { onSnapshot, orderBy, query } from "firebase/firestore";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { GiftedChat, IMessage, InputToolbar } from "react-native-gifted-chat";
+import UserContext from "../context/UserContext";
 import { addDBDoc } from "../services/addUserToDB.services";
-import { dataDB } from "../services/getDataDB.services";
+import { getDataDB } from "../services/getDataDB.services";
 
 interface User {
 	_id: number;
+	message: string;
+	avatar: string;
+	isTalking: boolean;
 }
 
 interface Message extends IMessage {
@@ -15,7 +19,7 @@ interface Message extends IMessage {
 
 const Chat = () => {
 	const [messages, setMessages] = useState<Message[]>([]);
-
+	const { state } = useContext(UserContext);
 	useEffect(() => {
 		setMessages([
 			{
@@ -24,11 +28,14 @@ const Chat = () => {
 				createdAt: new Date(),
 				user: {
 					_id: 2,
+					message: "",
+					avatar: "",
+					isTalking: true,
 				},
 			},
 		]);
 
-		const collectionUser = dataDB("chats");
+		const collectionUser = getDataDB("chats");
 		const q = query(collectionUser, orderBy("createdAt", "desc"));
 
 		onSnapshot(q, (QuerySnapshot) => {
@@ -63,7 +70,9 @@ const Chat = () => {
 			messages={messages}
 			onSend={(message) => onSend(message)}
 			user={{
-				_id: 1,
+				_id: state.id,
+				avatar: state.photoUrl,
+				name: state.name,
 			}}
 			showAvatarForEveryMessage={false}
 			showUserAvatar={false}

@@ -17,7 +17,6 @@ import { getCategories } from "../../controllers/categories.controller";
 import { getServices } from "../../controllers/services.controller";
 import CategoryModel from "../../models/category.models";
 import ServiceModel from "../../models/services.models";
-
 // --------------------------------------------------------------------
 
 export default function HomeScreen() {
@@ -37,11 +36,10 @@ export default function HomeScreen() {
                 setShowLoader(false);
             }, 4000);
         }
+		getData();
+	}, []);
 
-        getData();
-    }, []);
-
-    return (
+return (
         <ScrollView style={{ backgroundColor: COLORS.background }}>
             <SearchBar />
             <View style={styles.boxBrownContainer}>
@@ -117,4 +115,3 @@ const styles = StyleSheet.create({
         height: 24,
         tintColor: "#49454F",
     },
-});

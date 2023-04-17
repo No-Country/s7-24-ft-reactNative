@@ -1,12 +1,13 @@
 import { Text, View } from "react-native";
-import Chat from "../../components/Chat";
+import Chats from "../chats/Chats";
 // --------------------------------------------------------------------
 
 export default function MessagesScreen() {
 	return (
 		<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 			<Text>Messages Screen</Text>
-			<Chat />
+			{/* 			<Chat /> */}
+			<Chats />
 		</View>
 	);
 }

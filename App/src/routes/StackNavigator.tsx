@@ -44,7 +44,7 @@ export default function StackNavigator() {
         });
     }, []);
 
-    return (
+return (
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
@@ -155,4 +155,80 @@ export default function StackNavigator() {
             )}
         </Stack.Navigator>
     );
+					<Stack.Screen
+						name={ROUTES.HISTORY}
+						component={HistoryScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.COUNT}
+						component={CountScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.POST}
+						component={PostScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.DETAILPUB}
+						component={DetailPubli}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.PUBLICACION}
+						component={PublicacionScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.FINALIZADO}
+						component={FinalizadoScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.HELP}
+						component={HelpScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+					<Stack.Screen
+						name={ROUTES.MYSERVICE}
+						component={MyServiceScreen}
+						options={{
+							headerShown: true,
+							headerLeft: () => <ArrowBackNavigatoHeader />,
+							headerRight: () => <MenuNavigatorHeader />,
+						}}
+					/>
+				</Stack.Group>
+			)}
+		</Stack.Navigator>
+	);
 }

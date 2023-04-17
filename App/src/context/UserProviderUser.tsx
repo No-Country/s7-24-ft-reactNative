@@ -18,10 +18,16 @@ const reducer = (state: User, action: Action) => {
 				accessToken: action.payload,
 			};
 		case "DATES":
-				return{
+			return {
 				...state,
-				...action.payload
-			}
+				...action.payload,
+			};
+		case "SET_AUTHORIZATION":
+			return {
+				...state,
+				authorization: action.payload,
+			};
+
 		default: {
 			return {
 				...state,
@@ -31,18 +37,18 @@ const reducer = (state: User, action: Action) => {
 };
 
 const UserProviderUser = ({ children }: Children) => {
-    const [state, dispatch] = useReducer<Reducer>(reducer, initialState);
+	const [state, dispatch] = useReducer<Reducer>(reducer, initialState);
 
-    return (
-        <UserContext.Provider
-            value={{
-                state,
-                dispatch,
-            }}
-        >
-            {children}
-        </UserContext.Provider>
-    );
+	return (
+		<UserContext.Provider
+			value={{
+				state,
+				dispatch,
+			}}
+		>
+			{children}
+		</UserContext.Provider>
+	);
 };
 
 export default UserProviderUser;
