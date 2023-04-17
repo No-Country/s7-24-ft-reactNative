@@ -36,10 +36,10 @@ export default function HomeScreen() {
                 setShowLoader(false);
             }, 4000);
         }
-		getData();
-	}, []);
+        getData();
+    }, []);
 
-return (
+    return (
         <ScrollView style={{ backgroundColor: COLORS.background }}>
             <SearchBar />
             <View style={styles.boxBrownContainer}>
@@ -115,3 +115,4 @@ const styles = StyleSheet.create({
         height: 24,
         tintColor: "#49454F",
     },
+});
