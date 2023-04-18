@@ -1,7 +1,10 @@
 
 <div align="center" >
     <img src="./imgReadme/Logo.svg"  width="30%"/>
-</div><br/>
+</div>
+
+<br/>
+<br />
 
 <p align="center"><a href="https://expo.dev"><img width="30%" src="./imgReadme/BtnPrimary.svg"></a></p>
 
