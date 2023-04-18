@@ -1,4 +1,7 @@
-# SERVIFY
+# SERVIFY.
+
+<br/>
+<br />
 
 <div align="center" >
     <img src="./imgReadme/Logo.svg"  width="30%"/>
