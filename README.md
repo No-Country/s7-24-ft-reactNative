@@ -93,8 +93,8 @@ npm start -c
 
 ## Autores
 
--   [Vanina Restell](https://github.com/AlexQS96)
--   [Sebastian de la Cruz](https://github.com/Francormin)
--   [Gabriel Flores](https://github.com/LautiSantillan)
--   [Rodolfo Hernández](https://github.com/ernestoaaramayo)
--   [Diego Nieves](https://github.com/davidfcopozo)
+-   [Vanina Restell]
+-   [Sebastian de la Cruz]
+-   [Gabriel Flores]
+-   [Rodolfo Hernández]
+-   [Diego Nieves]
