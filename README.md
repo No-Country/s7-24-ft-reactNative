@@ -60,31 +60,6 @@ En resumen, este proyecto de React Native busca simplificar el proceso de encont
 <br />
 <br />
 
-## Variables de Entorno
-
-### Frontend
-
-```sh
-
-- api -> Backend URL
-- FB_API_KEY -> Firebase
-- FB_AUTH_DOMAIN -> Firebase
-- FB_PROJECT_ID -> Firebase
-- FB_STORAGE_BUCKET -> Firebase
-- FB_MESSAGING_SENDER_ID -> Firebase
-- FB_APP_ID -> Firebase
-
-```
-
-### Backend
-
-```sh
-- DB_DEPLOY = Postgres uri
-- PORT = Server Port
-```
-
-<br />
-
 ## Instalación
 
 ### Frontend
