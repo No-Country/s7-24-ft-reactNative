@@ -3,7 +3,7 @@
     <img src="./imgReadme/Logo.svg"  width="30%"/>
 </div><br/>
 
-<p align="center"><a href="https://mascotapp.netlify.app"><img width="30%" src="./imgReadme/BtnPrimary.svg"></a></p>
+<p align="center"><a href="https://expo.dev"><img width="30%" src="./imgReadme/BtnPrimary.svg"></a></p>
 
 <br />
 <br />
