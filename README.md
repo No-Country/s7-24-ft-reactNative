@@ -1,9 +1,10 @@
 
 <div align="center" width="50">
-    ![Logo](./imgReadme/Logo.svg)
+    <img src="./imgReadme/Logo.svg"/>
 </div><br/>
 
 <button style="background-color: green; color: white;">Descargar APK</button>
+
 <br />
 <br />
 
