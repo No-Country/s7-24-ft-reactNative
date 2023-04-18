@@ -14,10 +14,10 @@ export const DropdownExample: React.FC = () => {
           setSelectedValue(itemValue)
         }
         style={ObjectStyles.input}>
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-        <Picker.Item label="Python" value="python" />
-        <Picker.Item label="Ruby" value="ruby" />
+        <Picker.Item label="Hogar" value="Hogar" />
+        <Picker.Item label="Tecnología" value="Tecnología" />
+        <Picker.Item label="Profesionales" value="Profesionales" />
+        <Picker.Item label="Otros servicios" value="Otros servicios" />
       </Picker>
     </View>
   );

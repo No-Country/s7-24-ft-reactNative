@@ -41,6 +41,11 @@ export const DetailPubli = ({navigation}:any) => {
 		dispatch({type:'DATES',payload:{address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp}})
 	}
 
+	const form = () =>{
+		onSubmit;
+		navigation.navigate('Publicacion')
+	}
+
 	return (
         <KeyboardAwareScrollView>
 		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
@@ -181,7 +186,7 @@ export const DetailPubli = ({navigation}:any) => {
 					/>
 				</View>
 			</FormAuth>
-            <TouchableOpacity style={styles.buttonContainer} onPress={()=> navigation.navigate('Publicacion')}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={form}>
              <Text style={styles.buttonText}>Continuar</Text>
             </TouchableOpacity>
 		</View>
