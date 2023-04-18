@@ -1,6 +1,9 @@
-![Logo](./imgReadme/Logo.svg)
 
-<p align="center"><a href="https://mascotapp.netlify.app"><img width=200 src="./imgReadme/BtnPrimary.svg"></a></p>
+<div align="center" width="50">
+    ![Logo](./imgReadme/Logo.svg)
+</div><br/>
+
+<button style="background-color: green; color: white;">Descargar APK</button>
 <br />
 <br />
 
