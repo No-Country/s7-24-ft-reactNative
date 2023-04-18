@@ -1,5 +1,5 @@
 <div align="center" >
-    <img src="./imgReadme/Servify.svg"  width="50%"/>
+    <img src="./imgReadme/Servify..svg"  width="50%"/>
 </div>
 
 <br/>
