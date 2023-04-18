@@ -1,4 +1,4 @@
-![Logo](https://res.cloudinary.com/dizfi5qoy/image/upload/v1677872198/paw_durtut.png)
+![Logo](./imgReadme/Logo.svg)
 
 <p align="center"><a href="https://mascotapp.netlify.app"><img width=200 src="https://res.cloudinary.com/dizfi5qoy/image/upload/v1677875491/Screenshot_2023-03-03_at_17.31.12_sxhm8e.png"></a></p>
 <br />
@@ -9,10 +9,10 @@
 Aplicación Movil que permite a los usuario hacer match con gente que ofrece servicios.
 Con la posibilidad de poder hablar con ellos , calificarlos y comentar el buen trabajo que hicieron los profesionales.
 
-Este proyecto fue desarrollado en React Native usando las tecnologías de NativeWind para estilar la Aplicación.
-Para el backend se utilizó Node.js junto con Express para gestionar los usuarios y su actividad en la app.
-Por su parte, para la base de datos se utilizó PostgreSQL, teniendo como ORM a Sequelize.
-Y por último, tanto para realizar la autenticación como para integrar la funcionalidad del chat en tiempo real se implementó Firebase.
+La aplicación permitirá a los usuarios buscar servicios específicos, como limpieza de hogar, reparación de electrodomésticos, plomería, electricidad, jardinería, cuidado de mascotas y mucho más. Además, podrán filtrar su búsqueda según su ubicación, disponibilidad y precio.
+
+En resumen, este proyecto de React Native busca simplificar el proceso de encontrar servicios domésticos y profesionales confiables, ahorrando tiempo y esfuerzo a los usuarios y proporcionando una plataforma de fácil acceso y uso para los proveedores de servicios.
+
 <br />
 <br />
 
@@ -26,11 +26,11 @@ Y por último, tanto para realizar la autenticación como para integrar la funci
 
 ### 📚 Tecnologías
 
-- Frontend
+-   Frontend
 
 ![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37) ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black) ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
 
-- Backend y base de datos
+-   Backend y base de datos
 
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white) ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 <br />
@@ -82,6 +82,7 @@ Y por último, tanto para realizar la autenticación como para integrar la funci
 - DB_DEPLOY = Postgres uri
 - PORT = Server Port
 ```
+
 <br />
 
 ## Instalación
@@ -113,21 +114,22 @@ npm install
 ```sh
 npm start
 ```
+
 <br />
 
 ## Funcionalidades
 
-- Registro
-- Inicio de Sesión
-- Chat
-- Multiplataforma - Android - iOS - Web
-- Contratación de Servicios
-<br />
+-   Registro
+-   Inicio de Sesión
+-   Chat
+-   Multiplataforma - Android - iOS - Web
+-   Contratación de Servicios
+    <br />
 
 ## Autores
 
-- [Alexander Mamani](https://github.com/AlexQS96)
-- [Franco Corniglione](https://github.com/Francormin)
-- [Lautaro Santillan](https://github.com/LautiSantillan)
-- [Ernesto Aramayo](https://github.com/ernestoaaramayo)
-- [David Francisco](https://github.com/davidfcopozo)
+-   [Alexander Mamani](https://github.com/AlexQS96)
+-   [Franco Corniglione](https://github.com/Francormin)
+-   [Lautaro Santillan](https://github.com/LautiSantillan)
+-   [Ernesto Aramayo](https://github.com/ernestoaaramayo)
+-   [David Francisco](https://github.com/davidfcopozo)
