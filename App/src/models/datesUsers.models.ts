@@ -1,4 +1,6 @@
 interface Dates {
+	idUser: string;
+	nameUser: string;
 	address: string;
 	numberAddress: number;
 	service: string;

@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }: NavigateProp) {
 
             setCategoriesData(dataCat);
             setServicesData(dataServices);
-
+            console.log(dataCat)
             setTimeout(() => {
                 setShowLoader(false);
             }, 4000);

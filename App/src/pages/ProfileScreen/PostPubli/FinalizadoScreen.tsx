@@ -34,7 +34,7 @@ import {
           <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate()}>
              <Text style={styles.buttonText}>Ver publicación</Text>
             </TouchableOpacity>
-            <Text style={{ fontSize: 14, textDecorationLine: 'underline', marginVertical: 15, color:COLORS.primary }} onPress={() => navigation.navigate('DetailP')}>Eliminar</Text>
+            <Text style={{ fontSize: 14, textDecorationLine: 'underline', marginVertical: 15, color:COLORS.primary }} onPress={() => navigation.navigate('Home')}>Ir a la home</Text>
           </View>
       </View>
     )

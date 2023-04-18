@@ -11,13 +11,16 @@ import { DropdownExample } from "../../../components/Dropdown";
 import { COLORS, ROUTES } from "../../../constants";
 import { CheckBox } from 'react-native-elements';
 import RootStyles from "../../../styles/setting/setting"
+import { addServiceToDB } from "../../../services/addServiceToDB.services"
 
 
-export const DetailPubli = ({navigation}:any) => {
+export const DetailPubli = ({navigation, route}:any) => {
 	const [errorPassword, setErrorPassword] = useState("");
 	const [isSelected, setIsSelected] = useState(false);
+	//const initialState:Dates = {idUser:'', nameUser:'',address:'',descriptionService:'', moreInformation:'', numberAddress: 0, phone: 0, service:'', whatsApp: 0}
+	const [serviceStatus, setServiceStatus] = useState()
 
-	const { dispatch } = useContext(UserContext);
+	const { dispatch, state } = useContext(UserContext);
 
 	const {
 		control,
@@ -38,11 +41,12 @@ export const DetailPubli = ({navigation}:any) => {
 	
 	const onSubmit = (data: Dates) => {
 		const {address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp} = data
-		dispatch({type:'DATES',payload:{address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp}})
+		//setServiceStatus({state.id, state.name,address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp})
 	}
 
 	const form = () =>{
 		onSubmit;
+		//addServiceToDB('services');
 		navigation.navigate('Publicacion')
 	}
 
@@ -76,7 +80,6 @@ export const DetailPubli = ({navigation}:any) => {
 						render={({ field: { onChange, onBlur, value } }) => (
 							<TextInput
 								placeholder="Descríbelo con detalles"
-								secureTextEntry={true}
 								onChangeText={onChange}
 								onBlur={onBlur}
 								value={value}

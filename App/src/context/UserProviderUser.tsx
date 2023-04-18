@@ -22,6 +22,12 @@ const reducer = (state: User, action: Action) => {
 				...state,
 				...action.payload,
 			};
+		case "SET-IMAGE":
+			return {
+				...state,
+				...action.payload,
+			};
+
 
 		default: {
 			return {

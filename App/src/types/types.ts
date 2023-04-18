@@ -9,7 +9,8 @@ export type Action =
 	| { type: "SET_ID"; payload: string }
 	| { type: "SET_TOKEN"; payload: string }
 	| { type: "AUTH"; payload: Auth }
-	| { type: "DATES"; payload: Dates };
+	| { type: "DATES"; payload: Dates }
+	| { type: "SET-IMAGE"; payload: string };
 
 export type Reducer = (state: User, action: Action) => User;
 

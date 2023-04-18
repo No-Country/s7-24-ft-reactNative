@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Image, View, StyleSheet, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { COLORS } from '../constants';
+interface Props {imageUri:string, setImageUri:(change:string) => void} 
 
-export const BtnPhoto = () => {
-  const [imageUri, setImageUri] = useState(null);
+export const BtnPhoto = ({imageUri, setImageUri}: Props) => {
 
   const handleImagePicker = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({

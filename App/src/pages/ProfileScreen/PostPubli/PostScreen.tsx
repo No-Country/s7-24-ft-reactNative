@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     View,
   } from "react-native";
+  import {useState} from 'react'
   
   
   // --------------------------------------------------------------------
@@ -17,6 +18,7 @@ import {
   
   // --------------------------------------------------------------------
   export const PostScreen = ({navigation}:any) => {
+    const [imageUri, setImageUri] = useState('');
     return (
       <View style={{ backgroundColor: COLORS.background, height:'100%'}}>
           <View style={{justifyContent: 'center', alignItems: 'center', height:'70%'}}>
@@ -25,8 +27,8 @@ import {
           <View style={{display:'flex', justifyContent:'center', alignItems:'center', width: '100%'}}>
           <Text style={{fontSize: 16, marginBottom:10}}>Agregá fotos de tu servicio</Text>
           <Text style={{fontSize: 12, marginBottom:10}}>Asegúrate de que sean de calidad para atraer al público</Text>
-          <BtnPhoto />
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('DetailP')}>
+          <BtnPhoto imageUri={imageUri} setImageUri={setImageUri}/>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('DetailP', {imgurl: imageUri})}>
              <Text style={styles.buttonText}>Continuar</Text>
             </TouchableOpacity>
           </View>
