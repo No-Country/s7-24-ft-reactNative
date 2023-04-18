@@ -86,7 +86,7 @@ npm i
 ```
 
 ```sh
-npm start -c
+npm start 
 ```
 
 <br />
