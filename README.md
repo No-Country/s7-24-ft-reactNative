@@ -128,8 +128,8 @@ npm start
 
 ## Autores
 
--   [Alexander Mamani](https://github.com/AlexQS96)
--   [Franco Corniglione](https://github.com/Francormin)
--   [Lautaro Santillan](https://github.com/LautiSantillan)
--   [Ernesto Aramayo](https://github.com/ernestoaaramayo)
--   [David Francisco](https://github.com/davidfcopozo)
+-   [Vanina Restell](https://github.com/AlexQS96)
+-   [Sebastian de la Cruz](https://github.com/Francormin)
+-   [Gabriel Flores](https://github.com/LautiSantillan)
+-   [Rodolfo Hernández](https://github.com/ernestoaaramayo)
+-   [Diego Nieves](https://github.com/davidfcopozo)
