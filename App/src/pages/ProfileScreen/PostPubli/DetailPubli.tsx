@@ -1,24 +1,25 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, TextInput, View, TouchableOpacity  } from "react-native";
-import { ButtonFom, ErrorMessageForm, FormAuth } from "../../../components";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { CheckBox } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { FormAuth } from "../../../components";
+import { DropdownExample } from "../../../components/Dropdown";
+import { COLORS } from "../../../constants";
 import UserContext from "../../../context/UserContext";
 import Dates from "../../../models/datesUsers.models";
+import { addDBDoc } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { DropdownExample } from "../../../components/Dropdown";
-import { COLORS, ROUTES } from "../../../constants";
-import { CheckBox } from 'react-native-elements';
-import RootStyles from "../../../styles/setting/setting"
-import { addServiceToDB } from "../../../services/addServiceToDB.services"
+import RootStyles from "../../../styles/setting/setting";
+export const DetailPubli = ({ navigation, route }: any) => {
+
+	const { imgurl } = route.params;
 
 
-export const DetailPubli = ({navigation, route}:any) => {
 	const [errorPassword, setErrorPassword] = useState("");
 	const [isSelected, setIsSelected] = useState(false);
-	//const initialState:Dates = {idUser:'', nameUser:'',address:'',descriptionService:'', moreInformation:'', numberAddress: 0, phone: 0, service:'', whatsApp: 0}
-	const [serviceStatus, setServiceStatus] = useState()
+
+
 
 	const { dispatch, state } = useContext(UserContext);
 
@@ -32,168 +33,167 @@ export const DetailPubli = ({navigation, route}:any) => {
 			numberAddress: 0,
 			service: "",
 			descriptionService: "",
-			moreInformation:"",
+			moreInformation: "",
 			phone: 0,
 			whatsApp: 0,
 		},
 	});
 
-	
-	const onSubmit = (data: Dates) => {
-		const {address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp} = data
-		//setServiceStatus({state.id, state.name,address,numberAddress,service,descriptionService,moreInformation,phone,whatsApp})
-	}
 
-	const form = () =>{
-		onSubmit;
-		//addServiceToDB('services');
-		navigation.navigate('Publicacion')
+	const onSubmit = (data: Dates) => {
+		const template = { ...data, idUser: state.email, nameUser: state.name, imgurl: imgurl };
+
+		addDBDoc('services', template);
+
+		navigation.navigate('Publicacion');
+
+
 	}
 
 	return (
-        <KeyboardAwareScrollView>
-		<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
-			<FormAuth>
-            <DropdownExample/>
-				<View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>¿Cúal es el título de tu publicación?</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Ej: Masajes a domicilio"
-								value={value}
-								onBlur={onBlur}
-								onChangeText={onChange}
-								style={ObjectStyles.input}
-							/>
-						)}
-						name="service"
-						rules={{ required: true }}
-					/>
-				</View>
-
-				<View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>¿Qué incluye el servicio?</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Descríbelo con detalles"
-								onChangeText={onChange}
-								onBlur={onBlur}
-								value={value}
-								style={ObjectStyles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="descriptionService"
-					/>
-				</View>
-
-				<View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>Más información</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Incluir detalle"
-								onChangeText={onChange}
-								onBlur={onBlur}
-								value={value}
-								style={ObjectStyles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="moreInformation"
-					/>
-				</View>
-
-                <Text style={{fontSize:16, }}>Tu ubicación</Text>
-
-                <View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>Calle</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Nombre de la calle"
-								onBlur={onBlur}
-								onChangeText={onChange}
-								style={ObjectStyles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="address"
-					/>
-				</View>
-
-                <View style={ObjectStyles.containerFormInput}>
-				<View style={{display:'flex', flexDirection:'row'}}>
-				<View>
-					<Text style={ObjectStyles.textLabelForm}>Número</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Ej: 123"
-								onBlur={onBlur}
-								onChangeText={onChange}
-								style={styles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="numberAddress"
-					/>
+		<KeyboardAwareScrollView>
+			<View style={[ObjectStyles.backgroundForm, ObjectStyles.flexBox]}>
+				<FormAuth>
+					<DropdownExample />
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>¿Cúal es el título de tu publicación?</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Ej: Masajes a domicilio"
+									value={value}
+									onBlur={onBlur}
+									onChangeText={onChange}
+									style={ObjectStyles.input}
+								/>
+							)}
+							name="service"
+							rules={{ required: true }}
+						/>
 					</View>
-					<View style={{display:'flex',justifyContent:'center', paddingLeft:40}}>
-						<Text>Sin número</Text>
-					<CheckBox
-        				checked={isSelected}
-        				onPress={() => setIsSelected(!isSelected)}
-						style={styles.containerStyle}
-      				/>
+
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>¿Qué incluye el servicio?</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Descríbelo con detalles"
+									onChangeText={onChange}
+									onBlur={onBlur}
+									value={value}
+									style={ObjectStyles.input}
+								/>
+							)}
+							rules={{ required: true }}
+							name="descriptionService"
+						/>
 					</View>
+
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>Más información</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Incluir detalle"
+									onChangeText={onChange}
+									onBlur={onBlur}
+									value={value}
+									style={ObjectStyles.input}
+								/>
+							)}
+							rules={{ required: true }}
+							name="moreInformation"
+						/>
 					</View>
-				</View>
-                <View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>Número de teléfono</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Ingrese teléfono"
-								onBlur={onBlur}
-								onChangeText={onChange}
-								style={ObjectStyles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="phone"
-					/>
-				</View>
-                <View style={ObjectStyles.containerFormInput}>
-					<Text style={ObjectStyles.textLabelForm}>WhatsApp</Text>
-					<Controller
-						control={control}
-						render={({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="Ingrese número"
-								onBlur={onBlur}
-								onChangeText={onChange}
-								style={ObjectStyles.input}
-							/>
-						)}
-						rules={{ required: true }}
-						name="whatsApp"
-					/>
-				</View>
-			</FormAuth>
-            <TouchableOpacity style={styles.buttonContainer} onPress={form}>
-             <Text style={styles.buttonText}>Continuar</Text>
-            </TouchableOpacity>
-		</View>
-        </KeyboardAwareScrollView>
+
+					<Text style={{ fontSize: 16, }}>Tu ubicación</Text>
+
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>Calle</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Nombre de la calle"
+									onBlur={onBlur}
+									onChangeText={onChange}
+									style={ObjectStyles.input}
+								/>
+							)}
+							rules={{ required: true }}
+							name="address"
+						/>
+					</View>
+
+					<View style={ObjectStyles.containerFormInput}>
+						<View style={{ display: 'flex', flexDirection: 'row' }}>
+							<View>
+								<Text style={ObjectStyles.textLabelForm}>Número</Text>
+								<Controller
+									control={control}
+									render={({ field: { onChange, onBlur, value } }) => (
+										<TextInput
+											placeholder="Ej: 123"
+											onBlur={onBlur}
+											onChangeText={onChange}
+											style={styles.input}
+										/>
+									)}
+									rules={{ required: true }}
+									name="numberAddress"
+								/>
+							</View>
+							<View style={{ display: 'flex', justifyContent: 'center', paddingLeft: 40 }}>
+								<Text>Sin número</Text>
+								<CheckBox
+									checked={isSelected}
+									onPress={() => setIsSelected(!isSelected)}
+									style={styles.containerStyle}
+								/>
+							</View>
+						</View>
+					</View>
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>Número de teléfono</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Ingrese teléfono"
+									onBlur={onBlur}
+									onChangeText={onChange}
+									style={ObjectStyles.input}
+								/>
+							)}
+							rules={{ required: true }}
+							name="phone"
+						/>
+					</View>
+					<View style={ObjectStyles.containerFormInput}>
+						<Text style={ObjectStyles.textLabelForm}>WhatsApp</Text>
+						<Controller
+							control={control}
+							render={({ field: { onChange, onBlur, value } }) => (
+								<TextInput
+									placeholder="Ingrese número"
+									onBlur={onBlur}
+									onChangeText={onChange}
+									style={ObjectStyles.input}
+								/>
+							)}
+							rules={{ required: true }}
+							name="whatsApp"
+						/>
+					</View>
+				</FormAuth>
+				<TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit(onSubmit)}>
+					<Text style={styles.buttonText}>Continuar</Text>
+				</TouchableOpacity>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 };
 
@@ -206,24 +206,24 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		color: "#000",
 	},
-    icon: {
-         width: 280,
-         height: 300,
-    },
-    buttonContainer: {
-        width: 350,
-        height: 40,
-        backgroundColor: COLORS.secondary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
-        marginTop: 35,
-        marginBottom:15
-    },
-    buttonText: {
-        color: COLORS.white,
-        fontSize: 18,
-    },
+	icon: {
+		width: 280,
+		height: 300,
+	},
+	buttonContainer: {
+		width: 350,
+		height: 40,
+		backgroundColor: COLORS.secondary,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRadius: 5,
+		marginTop: 35,
+		marginBottom: 15
+	},
+	buttonText: {
+		color: COLORS.white,
+		fontSize: 18,
+	},
 	input: {
 		width: 164,
 		height: 32,
@@ -238,9 +238,9 @@ const styles = StyleSheet.create({
 	containerStyle: {
 		backgroundColor: COLORS.background,
 		borderWidth: 0,
-		margin:0,
-		padding:0
-	  },
-    
+		margin: 0,
+		padding: 0
+	},
+
 
 });

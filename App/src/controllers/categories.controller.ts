@@ -25,6 +25,7 @@ export async function getCategories() {
     return categoriesList;
 }
 
+
 export async function getCategoryPerId(catId: string) {
     const docRef = doc(FirebaseGetFireStore, "categories", catId);
 

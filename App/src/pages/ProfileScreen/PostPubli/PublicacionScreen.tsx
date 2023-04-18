@@ -1,19 +1,15 @@
 import {
-    FlatList,
-    Image,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-  } from "react-native";
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
   
   
   // --------------------------------------------------------------------
   
-  import { COLORS, ROUTES } from "../../../constants";
-  import { BtnPhoto } from '../../../components/BtnPhoto'
+  import { COLORS } from "../../../constants";
   
   // --------------------------------------------------------------------
 

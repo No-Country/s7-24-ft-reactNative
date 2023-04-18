@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, View, StyleSheet, Text } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { COLORS } from '../constants';
-interface Props {imageUri:string, setImageUri:(change:string) => void} 
 
-export const BtnPhoto = ({imageUri, setImageUri}: Props) => {
+import * as ImagePicker from 'expo-image-picker';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS } from '../constants';
+import { FirebaseStorage } from '../firebase/app';
+
+interface Props { imageUri: string, setImageUri: (change: string) => void }
+
+export const BtnPhoto = ({ imageUri, setImageUri }: Props) => {
 
   const handleImagePicker = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -13,9 +16,18 @@ export const BtnPhoto = ({imageUri, setImageUri}: Props) => {
       quality: 1,
     });
 
+
     if (!result.cancelled) {
-      setImageUri(result.uri);
+
+      const name = Math.random().toString(36).substring(7);
+      const response = await fetch(result.uri);
+      const storageRef = ref(FirebaseStorage, `Services/${name}`);
+      const uploadTask = await uploadBytes(storageRef, await response.blob());
+      const url = await getDownloadURL(storageRef);
+
+      setImageUri(url);
     }
+
   };
 
   return (

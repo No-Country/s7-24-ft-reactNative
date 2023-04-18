@@ -1,40 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Picker} from 'react-native';
-import ObjectStyles from "../styles/objects/objects"
-import { getCategories } from '../controllers/categories.controller';
+import React, { useState } from 'react';
+import { Picker, Text, View } from 'react-native';
 import CategoryModel from '../models/category.models';
+import ObjectStyles from "../styles/objects/objects";
 
 
 export const DropdownExample = () => {
   const [selectedValue, setSelectedValue] = useState<string>('');
   const [categoriesData, setCategoriesData] = useState<CategoryModel[]>([]);
 
-  useEffect(() => {
-    async function getData() {
-        const dataCat = await getCategories();
-        console.log(dataCat)
-        setCategoriesData(dataCat);
+  const category = [
 
-    }
-    getData();
-}, [categoriesData]);
+    { id: "MzerAWuTGCLcN38zWtJB", name: "Hogar" },
 
-console.log(categoriesData)
+    { id: "X36NrvoLMZsCnF29g8FS", name: "Tecnología" },
+
+    { id: "j6PFgmZO4t4P8eXL9e2W", name: "Profesionales" },
+
+    { id: "q0p5VQgo0s9cWs0ar2uk", name: "Otros servicios" }
+  ]
+
 
 
   return (
     <View style={ObjectStyles.containerFormInput}>
-	  <Text style={ObjectStyles.textLabelForm}>Elija la categoría de su servicio</Text>
+      <Text style={ObjectStyles.textLabelForm}>Elija la categoría de su servicio</Text>
       <Picker
         selectedValue={selectedValue}
         onValueChange={(itemValue: string, itemIndex: number) =>
           setSelectedValue(itemValue)
         }
         style={ObjectStyles.input}>
-        <Picker.Item label="Hogar" value="Hogar" />
-        <Picker.Item label="Tecnología" value="Tecnología" />
-        <Picker.Item label="Profesionales" value="Profesionales" />
-        <Picker.Item label="Otros servicios" value="Otros servicios" />
+        {
+          category.map((item) => <Picker.Item label={item.name} value={item.id} />)
+        }
+
       </Picker>
     </View>
   );
