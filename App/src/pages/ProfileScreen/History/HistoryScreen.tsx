@@ -14,7 +14,7 @@ import {
 import { COLORS, ROUTES } from "../../../constants";
 
 // --------------------------------------------------------------------
-export const HistoryScreen = () => {
+export const HistoryScreen = ({navigation}:any) => {
   return (
     <View style={{ backgroundColor: COLORS.background, height:'100%'}}>
         <View style={{justifyContent: 'center', alignItems: 'center', height:'70%'}}>
@@ -22,7 +22,7 @@ export const HistoryScreen = () => {
         </View>
         <View style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
         <Text style={{fontSize: 16, marginBottom:20}}>Aún no tienes búsquedas recientes</Text>
-        <Text style={{fontSize: 12, color:'red'}}>Explora los servicios</Text>
+        <Text onPress={() => navigation.navigate('Home')}  style={{fontSize: 12, color:'red',textDecorationLine: 'underline'}}>Explora los servicios</Text>
         </View>
     </View>
   )
