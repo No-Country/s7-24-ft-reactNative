@@ -1,6 +1,6 @@
 ![Logo](./imgReadme/Logo.svg)
 
-<p align="center"><a href="https://mascotapp.netlify.app"><img width=200 src="https://res.cloudinary.com/dizfi5qoy/image/upload/v1677875491/Screenshot_2023-03-03_at_17.31.12_sxhm8e.png"></a></p>
+<p align="center"><a href="https://mascotapp.netlify.app"><img width=200 src="./imgReadme/BtnPrimary.svg"></a></p>
 <br />
 <br />
 
