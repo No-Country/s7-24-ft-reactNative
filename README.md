@@ -90,29 +90,15 @@ En resumen, este proyecto de React Native busca simplificar el proceso de encont
 ### Frontend
 
 ```sh
-cd Client
+cd App
 ```
 
 ```sh
-yarn install
+npm i
 ```
 
 ```sh
-npx expo start -c
-```
-
-### Backend
-
-```sh
-cd Server
-```
-
-```sh
-npm install
-```
-
-```sh
-npm start
+npm start -c
 ```
 
 <br />
