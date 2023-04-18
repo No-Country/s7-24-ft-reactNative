@@ -87,7 +87,7 @@ npm start -c
 -   Registro
 -   Inicio de Sesión
 -   Chat
--   Multiplataforma - Android - iOS - Web
+-   Multiplataforma - Android - Web
 -   Contratación de Servicios
     <br />
 
