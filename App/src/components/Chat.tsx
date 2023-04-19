@@ -17,9 +17,13 @@ interface Message extends IMessage {
 	user: User;
 }
 
-const Chat = () => {
+const Chat = ({ route }: any) => {
+
 	const [messages, setMessages] = useState<Message[]>([]);
 	const { state } = useContext(UserContext);
+
+	const { dataUser } = route.params;
+
 	useEffect(() => {
 		const collectionUser = getDataDB("chats");
 		const q = query(collectionUser, orderBy("createdAt", "desc"));
@@ -42,15 +46,17 @@ const Chat = () => {
 		);
 
 		const { _id, createdAt, text, user } = message[message.length - 1];
-
+		console.log(message);
 		addDBDoc("chats", {
 			_id,
+			idUser: dataUser.id,
+			nameUser: dataUser.name,
 			createdAt,
 			text,
 			user,
 		});
 	}, []);
-	
+
 	return (
 		<GiftedChat
 			messages={messages}

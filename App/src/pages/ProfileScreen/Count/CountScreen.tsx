@@ -17,11 +17,12 @@ export const CountScreen = ({ navigation }: any) => {
     const logout = () => {
         signOut(FirebaseGetAuth)
             .then(() => {
-                // Sign-out successful.
+                /*                 navigation.navigate('Login') */
             })
             .catch((error) => {
                 // An error happened.
             });
+        window.location.reload();
     };
 
     return (

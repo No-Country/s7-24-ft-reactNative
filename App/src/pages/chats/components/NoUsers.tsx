@@ -1,8 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ObjectStyles from "../../../styles/objects/objects";
-import { NavigateProp } from "../../../types/types";
-const NoUsers = ({ navigation }: NavigateProp) => {
+const NoUsers = ({ navigation }: any) => {
     return (
         <View style={[ObjectStyles.flexBox, { marginHorizontal: 24 }]}>
             <Image
