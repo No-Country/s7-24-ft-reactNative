@@ -12,7 +12,7 @@ export const initialState: User = {
 	photoUrl: "",
 	address: "",
 	numberAddress: 0,
-	service: "",
+	service: [],
 	descriptionService: "",
 	moreInformation: "",
 	phone: 0,

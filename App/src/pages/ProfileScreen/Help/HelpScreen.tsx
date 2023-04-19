@@ -12,16 +12,6 @@ export function HelpScreen({ navigation }: any) {
     return (
         <View style={{ backgroundColor: COLORS.background, height: "100%" }}>
             <LogoProfile />
-            <Text
-                style={{
-                    fontSize: 18,
-                    fontWeight: "500",
-                    marginHorizontal: 12,
-                    marginBottom: 15,
-                }}
-            >
-                ¿En qué podemos ayudarte?
-            </Text>
             <View style={{ paddingHorizontal: 10 }}>
                 <BtnNavigate
                     onPress={() => navigation.navigate("")}

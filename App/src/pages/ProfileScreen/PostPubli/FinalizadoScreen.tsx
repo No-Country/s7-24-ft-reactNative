@@ -61,9 +61,9 @@ export const FinalizadoScreen = ({ navigation }: any) => {
             >
                 <TouchableOpacity
                     style={styles.buttonContainer}
-                    onPress={() => navigation.navigate()}
+                    onPress={() => navigation.navigate("MyService")}
                 >
-                    <Text style={styles.buttonText}>Ver publicación</Text>
+                    <Text style={styles.buttonText}>Ver mis servicios</Text>
                 </TouchableOpacity>
                 <Text
                     style={{

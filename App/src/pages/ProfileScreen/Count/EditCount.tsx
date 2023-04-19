@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import UserContext from "../../../context/UserContext";
 import { FirebaseGetAuth } from "../../../firebase/app";
-import { updateProfile, User, signOut } from "firebase/auth";
+import { updateProfile, User, updateEmail } from "firebase/auth";
 
 // --------------------------------------------------------------------
 
@@ -11,27 +11,42 @@ import { LogoProfile } from "../../../components/LogoProfile";
 import { COLORS } from "../../../constants";
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ObjectStyles from "../../../styles/objects/objects";
+import RootStyles from "../../../styles/setting/setting"
 import { Button } from "react-native-elements";
 
 // --------------------------------------------------------------------
 export const EditCount = ({ navigation }: any) => {
     const { state } = useContext(UserContext);
-    const [inputValue, setInputValue] = useState(state.name);
+    const [inputName, SetInputName] = useState(state.name);
+    const [inputEmail, SetInputEmail] = useState(state.email);
 
-    const handleInputChange = (value:string) => {
-        setInputValue(value);
+    const handleInputName = (value:string) => {
+        SetInputName(value);
       }
-      console.log(inputValue)
 
-    const updateUser = () => {
+    const handleInputEmail = (value:string) => {
+        SetInputEmail(value);
+      }
+      console.log(inputName)
+      console.log(inputEmail)
+
+    const updateNameUser = () => {
         const res = FirebaseGetAuth.currentUser as User
-        updateProfile(res ,{displayName:inputValue})
+        updateProfile(res ,{displayName:inputName})
             .then(() => {
             }).catch((error) => {
     });
-    navigation.navigate("Count");
+    window.location.reload();
+    navigation.navigate("Count")
     };
 
+    const updateEmailUser = () => {
+        const res = FirebaseGetAuth.currentUser as User
+        updateEmail(res, inputEmail).then(() => {
+        }).catch((error) => {
+        });
+        window.location.reload()
+    };
     return (
         <View
             style={{
@@ -58,14 +73,14 @@ export const EditCount = ({ navigation }: any) => {
                         </Text>
                         <TextInput
                                     placeholder="Nombre y Apellido"
-                                    style={ObjectStyles.input}
-                                    value={inputValue}
-                                    onChangeText={handleInputChange}
+                                    style={styles.input}
+                                    value={inputName}
+                                    onChangeText={handleInputName}
 
                         />
                     </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                <Icon name="pencil" size={15} color={"#00000"} onPress={updateUser} />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={updateNameUser} />
                 </View>
             </View>
             <View
@@ -85,12 +100,40 @@ export const EditCount = ({ navigation }: any) => {
                         </Text>
                         <TextInput
                                     placeholder="E-mail"
-                                    style={ObjectStyles.input}
-                                    value={state.email}
+                                    style={styles.input}
+                                    value={inputEmail}
+                                    onChangeText={handleInputEmail}
                         />
                     </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate()} />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={updateEmailUser} />
+                </View>
+            </View>
+            <View
+                style={{
+                    backgroundColor: "#ffffff",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    borderRadius: 5,
+                    marginBottom: 20,
+                    marginHorizontal: 12,
+                }}
+            >
+                <View style={ObjectStyles.containerFormInput}>
+                        <Text style={ObjectStyles.textLabelForm}>
+                        Contraseña
+                        </Text>
+                        <TextInput
+                                    placeholder="Contraseña"
+                                    style={styles.input}
+                                    value='··········'
+                                    secureTextEntry={true}
+
+                        />
+                    </View>
+                <View style={{ paddingRight: 20, justifyContent: "center" }}>
+                <Icon name="pencil" size={15} color={"#00000"} onPress={updateNameUser} />
                 </View>
             </View>
         </View>
@@ -110,4 +153,16 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: 18,
     },
+    input: {
+        width: 300,
+        height: 36,
+        padding: "1em",
+        borderRadius: 10,
+        fontSize: 14,
+        border: ".2px solid #0C0C0C50",
+        backgroundColor: RootStyles.colorWhite,
+        color: "rgba(149, 149, 149, 1)",
+        boxShadow: " 0px 2px 5px rgba(0, 0, 0, 0.09)",
+    },
+
 });

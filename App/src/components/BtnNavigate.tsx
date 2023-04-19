@@ -35,6 +35,8 @@ const style = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         marginBottom: 5,
+        shadowOpacity: 0.25,
+        shadowRadius:3.85
     },
     text: {
         color: "#323232",

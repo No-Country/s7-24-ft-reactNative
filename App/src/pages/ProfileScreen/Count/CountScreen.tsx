@@ -43,17 +43,7 @@ export const CountScreen = ({ navigation }: any) => {
         >
             <LogoProfile />
 
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text style={{ fontSize: 16, marginVertical: 10 }}>
                         {state.name}
@@ -66,17 +56,8 @@ export const CountScreen = ({ navigation }: any) => {
                 <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text style={{ fontSize: 16, marginVertical: 10 }}>
                         {state.email}
@@ -89,17 +70,7 @@ export const CountScreen = ({ navigation }: any) => {
                 <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text style={{ fontSize: 16, marginVertical: 10 }}>
                         ··········
@@ -142,4 +113,15 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: 18,
     },
+    container: {
+        backgroundColor: "#ffffff",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    borderRadius: 5,
+                    marginBottom: 5,
+                    marginHorizontal: 12,
+                    shadowOpacity: 0.25,
+                    shadowRadius:3.85
+    }
 });
