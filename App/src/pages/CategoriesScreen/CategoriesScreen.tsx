@@ -39,19 +39,14 @@ export default function CategoriesScreen({ route, navigation }: any) {
         const dataServices = await getServices();
 
         if (typeChange) {
-            console.log(dataServices);
             setActiveFilters([]);
             setServicesData(dataServices);
         } else {
             setActiveFilters([...activesFilters, newFilters]);
 
-            console.log(activesFilters);
-
             const data = dataServices.filter((e: any) =>
                 activesFilters.includes(e.subCatecoryId)
             );
-
-            console.log(data);
 
             setServicesData(data);
         }

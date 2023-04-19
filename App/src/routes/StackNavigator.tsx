@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useContext, useEffect } from "react";
 
 // --------------------------------------------------------------------
 
-import { useContext, useEffect } from "react";
 import { ArrowBackNavigatoHeader, Chat } from "../components";
 import { COLORS, ROUTES } from "../constants";
 import UserContext from "../context/UserContext";
@@ -30,6 +30,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
     const { state, dispatch } = useContext(UserContext);
+
     useEffect(() => {
         FirebaseGetAuth.onAuthStateChanged((user) => {
             if (user !== null) {
@@ -45,6 +46,8 @@ export default function StackNavigator() {
         });
     }, []);
 
+    useEffect(() => {}, []);
+
     return (
         <Stack.Navigator
             screenOptions={{
@@ -59,7 +62,6 @@ export default function StackNavigator() {
             {state.authorization !== "success" ? (
                 <Stack.Group>
                     <Stack.Screen name={ROUTES.LOGIN} component={Login} />
-
                     <Stack.Screen name={ROUTES.REGISTER} component={Register} />
                 </Stack.Group>
             ) : (
@@ -92,6 +94,7 @@ export default function StackNavigator() {
                         name={ROUTES.HISTORY}
                         component={HistoryScreen}
                         options={{
+                            headerTitle: "Historial",
                             headerShown: true,
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}
@@ -100,6 +103,7 @@ export default function StackNavigator() {
                         name={ROUTES.COUNT}
                         component={CountScreen}
                         options={{
+                            headerTitle: "Mi cuenta",
                             headerShown: true,
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}
@@ -108,6 +112,7 @@ export default function StackNavigator() {
                         name={ROUTES.POST}
                         component={PostScreen}
                         options={{
+                            headerTitle: "Publicar",
                             headerShown: true,
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}
@@ -140,6 +145,7 @@ export default function StackNavigator() {
                         name={ROUTES.HELP}
                         component={HelpScreen}
                         options={{
+                            headerTitle: "Ayuda",
                             headerShown: true,
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}

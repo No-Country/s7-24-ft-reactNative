@@ -1,10 +1,12 @@
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // --------------------------------------------------------------------
 
 import { useEffect, useState } from "react";
 import { COLORS, ROUTES } from "../constants";
+import { LoaderContext } from "../context/LoaderContext";
 import { getSubCategoryPerId } from "../controllers/subCategory.controller";
 import ServiceModel from "../models/services.models";
 import SubCategoryModel from "../models/subCategory.models";
@@ -22,6 +24,7 @@ function StarIcon() {
 
 export default function ServiceCard({ data }: { data: ServiceModel }) {
     const [nameSubCategory, setNameSubCategory] = useState("");
+    const { setShowLoader }: any = useContext(LoaderContext);
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -35,6 +38,8 @@ export default function ServiceCard({ data }: { data: ServiceModel }) {
     }, []);
 
     const goToTheServiceScreen = () => {
+        setShowLoader(true);
+
         navigation.dispatch(
             CommonActions.navigate({
                 name: ROUTES.SERVICE,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     Image,
     Share,
@@ -12,6 +12,7 @@ import {
 
 import { PublishedBy } from "../../components";
 import { COLORS } from "../../constants";
+import { LoaderContext } from "../../context/LoaderContext";
 import { getServicePerId } from "../../controllers/services.controller";
 import ServiceModel from "../../models/services.models";
 
@@ -19,17 +20,25 @@ import ServiceModel from "../../models/services.models";
 
 interface ServiceData extends ServiceModel {
     description: string;
+    moreDescription: string;
+    userId: string;
+    whats: string;
 }
 
 export default function ServiceScreen({ route, navigation }: any) {
     const { id, subCatName } = route.params;
     const [serviceData, setServiceData] = useState<ServiceData>();
+    const { setShowLoader }: any = useContext(LoaderContext);
 
     useEffect(() => {
         async function getData() {
             const serviceData = (await getServicePerId(id)) as ServiceData;
 
             setServiceData(serviceData);
+
+            setTimeout(() => {
+                setShowLoader(false);
+            }, 1000);
         }
 
         navigation.setOptions({ title: subCatName });
@@ -86,6 +95,9 @@ export default function ServiceScreen({ route, navigation }: any) {
                 <Text style={{ color: COLORS.text }}>
                     {serviceData?.description}
                 </Text>
+                <Text style={{ color: COLORS.text }}>
+                    {serviceData?.moreDescription}
+                </Text>
             </View>
             <View
                 style={{
@@ -104,7 +116,10 @@ export default function ServiceScreen({ route, navigation }: any) {
                     </Text>
                 </View>
             </View>
-            <PublishedBy />
+            <PublishedBy
+                userId={serviceData?.userId}
+                whats={serviceData?.whats}
+            />
         </View>
     );
 }
