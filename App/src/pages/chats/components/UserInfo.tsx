@@ -23,6 +23,7 @@ export default UserInfo;
 const styles = StyleSheet.create({
     container: {
         width: "89%",
+        justifyContent: 'center',
         height: "100%",
         flexDirection: "row",
         alignItems: "center",
