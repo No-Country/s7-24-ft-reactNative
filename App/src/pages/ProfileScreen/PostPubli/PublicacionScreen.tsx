@@ -57,7 +57,7 @@ export const PublicacionScreen = ({ navigation }: any) => {
                         marginVertical: 15,
                         color: COLORS.primary,
                     }}
-                    onPress={() => navigation.navigate("DetailP")}
+                    onPress={() => navigation.goBack()}
                 >
                     Revisar
                 </Text>

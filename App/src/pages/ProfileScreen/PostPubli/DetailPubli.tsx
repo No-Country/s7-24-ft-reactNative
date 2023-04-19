@@ -105,7 +105,6 @@ export const DetailPubli = ({ navigation, route }: any) => {
                                 <TextInput
                                     placeholder="Ej: Masajes a domicilio"
                                     value={value}
-                                    onBlur={onBlur}
                                     onChangeText={onChange}
                                     style={ObjectStyles.input}
                                 />

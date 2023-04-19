@@ -15,6 +15,7 @@ import {
     ServiceScreen,
 } from "../pages";
 import { CountScreen } from "../pages/ProfileScreen/Count/CountScreen";
+import { EditCount } from "../pages/ProfileScreen/Count/EditCount";
 import { HelpScreen } from "../pages/ProfileScreen/Help/HelpScreen";
 import { HistoryScreen } from "../pages/ProfileScreen/History/HistoryScreen";
 import { MyServiceScreen } from "../pages/ProfileScreen/MyServices/MyServiceScreen";
@@ -104,6 +105,15 @@ export default function StackNavigator() {
                         component={CountScreen}
                         options={{
                             headerTitle: "Mi cuenta",
+                            headerShown: true,
+                            headerLeft: () => <ArrowBackNavigatoHeader />,
+                        }}
+                    />
+                    <Stack.Screen
+                        name={ROUTES.EDITCOUNT}
+                        component={EditCount}
+                        options={{
+                            headerTitle: "Editar cuenta",
                             headerShown: true,
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}

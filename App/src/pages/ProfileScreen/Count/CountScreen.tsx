@@ -1,14 +1,15 @@
-import { signOut } from "firebase/auth";
+
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import UserContext from "../../../context/UserContext";
 import { FirebaseGetAuth } from "../../../firebase/app";
+import { updateProfile, User, signOut } from "firebase/auth";
 
 // --------------------------------------------------------------------
 
-import { EditIcon } from "../../../components/EditIcon";
 import { LogoProfile } from "../../../components/LogoProfile";
 import { COLORS } from "../../../constants";
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // --------------------------------------------------------------------
 export const CountScreen = ({ navigation }: any) => {
@@ -17,11 +18,20 @@ export const CountScreen = ({ navigation }: any) => {
     const logout = () => {
         signOut(FirebaseGetAuth)
             .then(() => {
-                // Sign-out successful.
             })
             .catch((error) => {
-                // An error happened.
             });
+            window.location.reload()
+    };
+
+    const updateUser = () => {
+        const res = FirebaseGetAuth.currentUser as User
+        updateProfile(res ,{displayName:'',photoURL:''})
+            .then(() => {
+  // Profile updated!
+  // ...
+            }).catch((error) => {
+    });
     };
 
     return (
@@ -53,7 +63,7 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
             <View
@@ -76,7 +86,7 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
             <View
@@ -99,7 +109,7 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
             <View style={{ paddingLeft: 20 }}>
