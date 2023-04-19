@@ -31,7 +31,6 @@ export default function HomeScreen({ navigation }: NavigateProp) {
 
     useEffect(() => {
         onAuthStateChanged(FirebaseGetAuth, (user) => {
-            console.log(user);
             if (user) {
                 dispatch({
                     type: "AUTH",
@@ -54,11 +53,12 @@ export default function HomeScreen({ navigation }: NavigateProp) {
 
             setCategoriesData(dataCat);
             setServicesData(dataServices);
-            console.log(dataCat)
+
             setTimeout(() => {
                 setShowLoader(false);
-            }, 4000);
+            }, 3000);
         }
+
         getData();
     }, []);
 

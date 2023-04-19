@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Picker, Text, View } from "react-native";
+import { getSubCategoriesPerMainCategory } from "../controllers/subCategory.controller";
+import SubCategoryModel from "../models/subCategory.models";
 import ObjectStyles from "../styles/objects/objects";
 
-const category = [
-    { id: "MzerAWuTGCLcN38zWtJB", name: "Hogar" },
+export const DropSubCategory = ({ categoryID, change, active }: any) => {
+    const [subCatData, setSubCatData] = useState<SubCategoryModel[]>([]);
 
-    { id: "X36NrvoLMZsCnF29g8FS", name: "Tecnología" },
+    useEffect(() => {
+        async function getData() {
+            const data = await getSubCategoriesPerMainCategory(categoryID);
 
-    { id: "j6PFgmZO4t4P8eXL9e2W", name: "Profesionales" },
+            setSubCatData(data);
+        }
 
-    { id: "q0p5VQgo0s9cWs0ar2uk", name: "Otros servicios" },
-];
+        getData();
+    }, []);
 
-export const DropdownExample = ({ change, active }: any) => {
     return (
         <View style={ObjectStyles.containerFormInput}>
             <Text style={ObjectStyles.textLabelForm}>
-                Elija la categoría de su servicio
+                Elija una sub categoria
             </Text>
             <Picker
                 selectedValue={active}
@@ -25,7 +29,7 @@ export const DropdownExample = ({ change, active }: any) => {
                 }
                 style={[ObjectStyles.input, { padding: 5 }]}
             >
-                {category.map((item) => (
+                {subCatData.map((item) => (
                     <Picker.Item label={item.name} value={item.id} />
                 ))}
             </Picker>

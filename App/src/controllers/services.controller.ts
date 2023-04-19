@@ -25,7 +25,7 @@ export async function getServices() {
             img: data.img,
             service: data.service,
             rating: data.rating,
-            location: "Villa Mercedes, CABA",
+            location: `${data.address} - ${data.numberAddress}`,
             subCatecoryId: data.subCategory,
         };
         return res;
@@ -47,7 +47,7 @@ export async function getServicesPerCategory(catId: string) {
             img: data.img,
             service: data.service,
             rating: data.rating,
-            location: "Villa Mercedes, CABA",
+            location: `${data.address} - ${data.numberAddress}`,
             subCatecoryId: data.subCategory,
         };
         return res;
@@ -67,9 +67,12 @@ export async function getServicePerId(serId: string) {
             img: data.img,
             service: data.service,
             rating: data.rating,
-            location: "Villa Mercedes, CABA",
+            location: `${data.address} - ${data.numberAddress}`,
             subCatecoryId: data.subCategory,
             description: data.description,
+            moreDescription: data.moreDescription,
+            userId: data.idUser,
+            whats: data.whatsApp,
         };
 
         return res;

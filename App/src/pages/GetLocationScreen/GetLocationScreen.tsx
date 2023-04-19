@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // --------------------------------------------------------------------
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
 import { LoaderContext } from "../../context/LoaderContext";
 import ObjectStyles from "../../styles/objects/objects";
@@ -17,35 +17,40 @@ export default function GetLocationScreen() {
     const { setShowLoader } = useContext(LoaderContext);
     const navigation = useNavigation();
 
+    useEffect(() => {
+        async function isLocationTrue() {
+            const { status } =
+                await Location.requestForegroundPermissionsAsync();
+
+            if (status == "granted") {
+                setShowLoader(true);
+
+                navigation.dispatch(
+                    CommonActions.navigate({
+                        name: ROUTES.HOME,
+                    })
+                );
+            }
+        }
+        isLocationTrue();
+    }, []);
+
     const getLocation = async () => {
         const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== "granted") {
-            console.log("Permiso de ubicación denegado");
             return;
         }
 
         const currentLocation = await Location.getCurrentPositionAsync({});
 
-        console.log("Location:");
-        console.log(currentLocation);
+        setShowLoader(true);
 
         navigation.dispatch(
             CommonActions.navigate({
                 name: ROUTES.HOME,
             })
         );
-
-        setShowLoader(true);
-
-        // const latitude = currentLocation.coords.latitude,
-        //     longitude = currentLocation.coords.longitude;
-
-        // const location = await Location.reverseGeocodeAsync({
-        //     latitude,
-        //     longitude,
-        // });
-        // console.log(location);
     };
 
     return (
