@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { ROUTES } from "../../../constants";
 import UserModel from "../../../models/userChatModel.model";
+import ObjectStyles from "../../../styles/objects/objects";
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -38,8 +39,14 @@ const UserInfo = ({ name, avatar, id, isTalking }: UserModel) => {
                 style={{ width: 40, height: 40, borderRadius: 50 }}
             />
             <View>
-                <Text style={styles.text}>{name}</Text>
-                <Text style={[styles.text, { fontSize: 8 }]}>
+                <Text style={[styles.text, ObjectStyles.fontMain]}>{name}</Text>
+                <Text
+                    style={[
+                        styles.text,
+                        { fontSize: 8 },
+                        ObjectStyles.fontMain,
+                    ]}
+                >
                     {true ? "Conectado" : "Ausente"}
                 </Text>
             </View>

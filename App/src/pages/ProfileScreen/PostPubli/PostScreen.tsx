@@ -42,10 +42,22 @@ export const PostScreen = ({ navigation }: any) => {
                     width: "100%",
                 }}
             >
-                <Text style={{ fontSize: 16, marginBottom: 10 }}>
+                <Text
+                    style={{
+                        fontSize: 16,
+                        marginBottom: 10,
+                        fontFamily: "Main",
+                    }}
+                >
                     Agregá fotos de tu servicio
                 </Text>
-                <Text style={{ fontSize: 12, marginBottom: 10 }}>
+                <Text
+                    style={{
+                        fontSize: 12,
+                        marginBottom: 10,
+                        fontFamily: "Main",
+                    }}
+                >
                     Asegúrate de que sean de calidad para atraer al público
                 </Text>
                 <BtnPhoto imageUri={imageUri} setImageUri={setImageUri} />
@@ -80,5 +92,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: COLORS.white,
         fontSize: 18,
+        fontFamily: "Main",
     },
 });

@@ -75,7 +75,12 @@ const Login = ({ navigation }: Props) => {
 
             <FormAuth>
                 <View style={ObjectStyles.containerFormInput}>
-                    <Text style={ObjectStyles.textLabelForm}>
+                    <Text
+                        style={[
+                            ObjectStyles.textLabelForm,
+                            ObjectStyles.fontMain,
+                        ]}
+                    >
                         Correo electrónico:
                     </Text>
                     <Controller
@@ -87,7 +92,10 @@ const Login = ({ navigation }: Props) => {
                                 onBlur={onBlur}
                                 onChangeText={onChange}
                                 keyboardType="email-address"
-                                style={ObjectStyles.input}
+                                style={[
+                                    ObjectStyles.input,
+                                    ObjectStyles.fontMain,
+                                ]}
                             />
                         )}
                         name="email"
@@ -100,7 +108,14 @@ const Login = ({ navigation }: Props) => {
                 </View>
 
                 <View style={ObjectStyles.containerFormInput}>
-                    <Text style={ObjectStyles.textLabelForm}>Contraseña:</Text>
+                    <Text
+                        style={[
+                            ObjectStyles.textLabelForm,
+                            ObjectStyles.fontMain,
+                        ]}
+                    >
+                        Contraseña:
+                    </Text>
                     <Controller
                         control={control}
                         render={({ field: { onChange, onBlur, value } }) => (
@@ -111,7 +126,10 @@ const Login = ({ navigation }: Props) => {
                                 onChangeText={onChange}
                                 onBlur={onBlur}
                                 value={value}
-                                style={ObjectStyles.input}
+                                style={[
+                                    ObjectStyles.input,
+                                    ObjectStyles.fontMain,
+                                ]}
                             />
                         )}
                         name="password"
@@ -128,9 +146,15 @@ const Login = ({ navigation }: Props) => {
                 />
 
                 <View style={[ObjectStyles.flexBox, style.containerLink]}>
-                    <Text>¿Aun no tienes cuenta?</Text>
+                    <Text style={ObjectStyles.fontMain}>
+                        ¿Aun no tienes cuenta?
+                    </Text>
                     <TouchableOpacity onPress={handlerPagination}>
-                        <Text style={ObjectStyles.link}>Regístrate</Text>
+                        <Text
+                            style={[ObjectStyles.link, ObjectStyles.fontMain]}
+                        >
+                            Regístrate
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </FormAuth>

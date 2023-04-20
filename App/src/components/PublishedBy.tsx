@@ -43,7 +43,9 @@ export default function PublishedBy({ userId, whats }: any) {
 
     return (
         <View style={styles.publishByContainer}>
-            <Text style={{ color: "#1C1B1F" }}>Publicado por:</Text>
+            <Text style={{ color: "#1C1B1F", fontFamily: "Main" }}>
+                Publicado por:
+            </Text>
             <View style={styles.publishedByHeader}>
                 <Image
                     style={{ width: 25, height: 25, borderRadius: 22 }}
@@ -63,7 +65,7 @@ export default function PublishedBy({ userId, whats }: any) {
                     >
                         {dataUser?.name}
                     </Text>
-                    <Text style={{ fontSize: 8 }}>
+                    <Text style={{ fontSize: 8, fontFamily: "Main" }}>
                         Miembro de Servis desde 2022
                     </Text>
                 </View>
@@ -73,7 +75,13 @@ export default function PublishedBy({ userId, whats }: any) {
                     style={styles.btnMessage}
                     onPress={createNewChat}
                 >
-                    <Text style={{ color: "#000", textAlign: "center" }}>
+                    <Text
+                        style={{
+                            color: "#000",
+                            textAlign: "center",
+                            fontFamily: "Main",
+                        }}
+                    >
                         Mensaje
                     </Text>
                 </TouchableOpacity>
@@ -81,7 +89,9 @@ export default function PublishedBy({ userId, whats }: any) {
                     style={styles.btnWhatsApp}
                     onPress={openWhatsApp}
                 >
-                    <Text style={{ color: "#fff" }}>WhatsApp</Text>
+                    <Text style={{ color: "#fff", fontFamily: "Main" }}>
+                        WhatsApp
+                    </Text>
                     <Image
                         style={{ width: 18, height: 18 }}
                         source={require("../assets/icons/WhatsAppIcon.svg")}
@@ -110,6 +120,7 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         textAlign: "center",
         marginTop: 25,
+        fontFamily: "Main",
     },
     btnWhatsApp: {
         paddingVertical: 10,

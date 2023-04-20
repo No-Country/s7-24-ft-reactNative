@@ -38,7 +38,13 @@ export const FinalizadoScreen = ({ route, navigation }: any) => {
                     alignItems: "center",
                 }}
             >
-                <Text style={{ fontSize: 16, color: COLORS.white }}>
+                <Text
+                    style={{
+                        fontSize: 16,
+                        color: COLORS.white,
+                        fontFamily: "Main",
+                    }}
+                >
                     ¡Tu servicio se publicó con éxito!
                 </Text>
                 <Image style={styles.icon} source={{ uri: img }} />
@@ -54,7 +60,13 @@ export const FinalizadoScreen = ({ route, navigation }: any) => {
                     paddingHorizontal: 30,
                 }}
             >
-                <Text style={{ fontSize: 16, textAlign: "center" }}>
+                <Text
+                    style={{
+                        fontSize: 16,
+                        textAlign: "center",
+                        fontFamily: "Main",
+                    }}
+                >
                     Tu servicio pronto empezará a traer clientes, mantén
                     activadas las notificaciones.
                 </Text>
@@ -85,6 +97,7 @@ export const FinalizadoScreen = ({ route, navigation }: any) => {
                         textDecorationLine: "underline",
                         marginVertical: 15,
                         color: COLORS.primary,
+                        fontFamily: "Main",
                     }}
                     onPress={() => navigation.navigate("Home")}
                 >
@@ -118,5 +131,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: COLORS.white,
         fontSize: 18,
+        fontFamily: "Main",
     },
 });

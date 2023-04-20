@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ROUTES } from "../../../constants";
 import ObjectStyles from "../../../styles/objects/objects";
 const NoUsers = ({ navigation }: any) => {
     return (
@@ -14,12 +15,18 @@ const NoUsers = ({ navigation }: any) => {
                 source={require("../../../assets/icons/chatIcon.svg")}
             />
             <Text style={styles.Title}>Aun no tienes mensajes</Text>
-            <Text style={styles.text}>
+            <Text style={[styles.text, ObjectStyles.fontMain]}>
                 Envía tu primer mensaje. Encontraras todas tus conversaciones
                 aquí
             </Text>
-            <TouchableOpacity>
-                <Text style={[ObjectStyles.link, styles.linkChat]}>
+            <TouchableOpacity onPress={() => navigation(ROUTES.HOME)}>
+                <Text
+                    style={[
+                        ObjectStyles.link,
+                        styles.linkChat,
+                        ObjectStyles.fontMain,
+                    ]}
+                >
                     Explore los servicios
                 </Text>
             </TouchableOpacity>

@@ -77,7 +77,13 @@ export default function ServiceCard({ data }: { data: ServiceModel }) {
                         <StarIcon />
                         <StarIcon />
                         <StarIcon />
-                        <Text style={{ fontSize: 7, fontWeight: "500" }}>
+                        <Text
+                            style={{
+                                fontSize: 7,
+                                fontWeight: "500",
+                                fontFamily: "Main",
+                            }}
+                        >
                             {rating}
                         </Text>
                     </View>

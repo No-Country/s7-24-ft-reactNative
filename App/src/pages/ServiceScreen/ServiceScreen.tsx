@@ -14,6 +14,7 @@ import {
     getServicePerId,
 } from "../../controllers/services.controller";
 import ServiceModel from "../../models/services.models";
+import ObjectStyles from "../../styles/objects/objects";
 
 // --------------------------------------------------------------------
 
@@ -65,7 +66,12 @@ export default function ServiceScreen({ route, navigation }: any) {
     return (
         <View style={styles.serviceScreen}>
             <View style={styles.serviceHeader}>
-                <Text style={{ fontSize: 20, fontWeight: "500" }}>
+                <Text
+                    style={[
+                        { fontSize: 20, fontWeight: "500" },
+                        ObjectStyles.fontMain,
+                    ]}
+                >
                     {serviceData?.service}
                 </Text>
                 <View style={{ flexDirection: "row", gap: 3 }}>
@@ -73,7 +79,7 @@ export default function ServiceScreen({ route, navigation }: any) {
                         style={{ width: 17, height: 16 }}
                         source={require("../../assets/icons/StarIcon.svg")}
                     />
-                    <Text>{rating}</Text>
+                    <Text style={ObjectStyles.fontMain}>{rating}</Text>
                 </View>
             </View>
             <View>
@@ -94,11 +100,13 @@ export default function ServiceScreen({ route, navigation }: any) {
             </View>
             <BottomSheetShare img={serviceData?.img} />
             <View style={styles.descriptionContainer}>
-                <Text style={{ color: COLORS.text }}>Descripcion:</Text>
-                <Text style={{ color: COLORS.text }}>
+                <Text style={[{ color: COLORS.text }, ObjectStyles.fontMain]}>
+                    Descripcion:
+                </Text>
+                <Text style={[{ color: COLORS.text }, ObjectStyles.fontMain]}>
                     {serviceData?.description}
                 </Text>
-                <Text style={{ color: COLORS.text }}>
+                <Text style={[{ color: COLORS.text }, ObjectStyles.fontMain]}>
                     {serviceData?.moreDescription}
                 </Text>
             </View>
@@ -108,13 +116,17 @@ export default function ServiceScreen({ route, navigation }: any) {
                     gap: 10,
                 }}
             >
-                <Text style={{ color: COLORS.text }}>Ubicacion:</Text>
+                <Text style={[{ color: COLORS.text }, ObjectStyles.fontMain]}>
+                    Ubicacion:
+                </Text>
                 <View style={styles.locationRow}>
                     <Image
                         style={{ width: 16, height: 22 }}
                         source={require("../../assets/icons/LocationIcon.svg")}
                     />
-                    <Text style={{ color: COLORS.text }}>
+                    <Text
+                        style={[{ color: COLORS.text }, ObjectStyles.fontMain]}
+                    >
                         {serviceData?.location}
                     </Text>
                 </View>

@@ -46,10 +46,22 @@ export const CountScreen = ({ navigation }: any) => {
                 }}
             >
                 <View style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 16, marginVertical: 10 }}>
+                    <Text
+                        style={{
+                            fontSize: 16,
+                            marginVertical: 10,
+                            fontFamily: "Main",
+                        }}
+                    >
                         {state.name}
                     </Text>
-                    <Text style={{ fontSize: 10, marginBottom: 7 }}>
+                    <Text
+                        style={{
+                            fontSize: 10,
+                            marginBottom: 7,
+                            fontFamily: "Main",
+                        }}
+                    >
                         Nombre completo
                     </Text>
                 </View>
@@ -69,10 +81,22 @@ export const CountScreen = ({ navigation }: any) => {
                 }}
             >
                 <View style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 16, marginVertical: 10 }}>
+                    <Text
+                        style={{
+                            fontSize: 16,
+                            marginVertical: 10,
+                            fontFamily: "Main",
+                        }}
+                    >
                         {state.email}
                     </Text>
-                    <Text style={{ fontSize: 10, marginBottom: 7 }}>
+                    <Text
+                        style={{
+                            fontSize: 10,
+                            marginBottom: 7,
+                            fontFamily: "Main",
+                        }}
+                    >
                         E-mail
                     </Text>
                 </View>
@@ -95,7 +119,13 @@ export const CountScreen = ({ navigation }: any) => {
                     <Text style={{ fontSize: 16, marginVertical: 10 }}>
                         ··········
                     </Text>
-                    <Text style={{ fontSize: 10, marginBottom: 7 }}>
+                    <Text
+                        style={{
+                            fontSize: 10,
+                            marginBottom: 7,
+                            fontFamily: "Main",
+                        }}
+                    >
                         Contraseña
                     </Text>
                 </View>
@@ -110,6 +140,7 @@ export const CountScreen = ({ navigation }: any) => {
                         textDecorationLine: "underline",
                         marginVertical: 15,
                         color: COLORS.primary,
+                        fontFamily: "Main",
                     }}
                     onPress={logout}
                 >

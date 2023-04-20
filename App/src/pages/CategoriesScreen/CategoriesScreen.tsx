@@ -9,6 +9,7 @@ import { LoaderContext } from "../../context/LoaderContext";
 import { getCategoryPerId } from "../../controllers/categories.controller";
 import { getServicesPerCategory } from "../../controllers/services.controller";
 import ServiceModel from "../../models/services.models";
+import ObjectStyles from "../../styles/objects/objects";
 
 // --------------------------------------------------------------------
 
@@ -77,7 +78,9 @@ export default function CategoriesScreen({ route, navigation }: any) {
                 changeFilters={changeFilters}
             />
             <View style={{ paddingHorizontal: 24 }}>
-                <Text style={{ fontSize: 15 }}>Destacados</Text>
+                <Text style={[{ fontSize: 15 }, ObjectStyles.fontMain]}>
+                    Destacados
+                </Text>
                 <FlatList
                     style={styles.categoryTable}
                     data={servicesData}

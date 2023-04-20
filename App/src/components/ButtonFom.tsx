@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 39,
         color: RootStyles.colorWhite,
+        fontFamily: "Main",
     },
 });
 export default ButtonFom;

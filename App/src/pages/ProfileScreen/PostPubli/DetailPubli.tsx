@@ -291,6 +291,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: COLORS.white,
         fontSize: 18,
+        fontFamily: "Main",
     },
     input: {
         width: 164,
@@ -302,6 +303,7 @@ const styles = StyleSheet.create({
         backgroundColor: RootStyles.colorWhite,
         color: "rgba(149, 149, 149, 1)",
         boxShadow: " 0px 2px 2px rgba(0, 0, 0, 0.25)",
+        fontFamily: "Main",
     },
     containerStyle: {
         backgroundColor: COLORS.background,
