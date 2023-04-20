@@ -54,9 +54,17 @@ export default function PublishedBy({ userId, whats }: any) {
                     }
                 />
                 <View>
-                    <Text style={{ fontSize: 12 }}>{dataUser?.name}</Text>
+                    <Text
+                        style={{
+                            fontSize: 12,
+                            fontFamily: "Main",
+                            textTransform: "capitalize",
+                        }}
+                    >
+                        {dataUser?.name}
+                    </Text>
                     <Text style={{ fontSize: 8 }}>
-                        Miembro de Servis desde 20221
+                        Miembro de Servis desde 2022
                     </Text>
                 </View>
             </View>

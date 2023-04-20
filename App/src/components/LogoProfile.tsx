@@ -24,6 +24,8 @@ export const LogoProfile = () => {
                     fontSize: 16,
                     display: "flex",
                     alignItems: "center",
+                    fontFamily: "Main",
+                    textTransform: "capitalize",
                 }}
             >
                 Hola, {state.name}!

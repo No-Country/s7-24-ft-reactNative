@@ -24,7 +24,10 @@ const Chats = () => {
                         const idUser = item.data().idUser;
                         if (!idSet.has(idUser)) {
                             idSet.add(idUser);
-                            data.push({ _id: idUser, name: item.data().nameUser });
+                            data.push({
+                                _id: idUser,
+                                name: item.data().nameUser,
+                            });
                         }
                     }
                 });
@@ -33,7 +36,6 @@ const Chats = () => {
         });
     }, []);
 
-
     return (
         <View style={styles.container}>
             {users.length === 0 ? (
@@ -41,6 +43,7 @@ const Chats = () => {
             ) : (
                 <>
                     <FlatList
+                        style={styles.chatsContainer}
                         data={users}
                         renderItem={({ item }) => (
                             <UserInfo
@@ -60,10 +63,12 @@ const Chats = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: "29px",
-
-        height: "100vh",
+        height: "100%",
         width: "100%",
         backgroundColor: "#F7FCF8",
-    }
-})
+    },
+    chatsContainer: {
+        gap: 10,
+    },
+});
 export default Chats;

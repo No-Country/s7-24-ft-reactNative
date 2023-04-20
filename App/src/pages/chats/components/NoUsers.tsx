@@ -3,7 +3,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ObjectStyles from "../../../styles/objects/objects";
 const NoUsers = ({ navigation }: any) => {
     return (
-        <View style={[ObjectStyles.flexBox, { marginHorizontal: 24 }]}>
+        <View
+            style={[
+                ObjectStyles.flexBox,
+                { marginHorizontal: 24, alignSelf: "flex-end", height: "100%" },
+            ]}
+        >
             <Image
                 style={styles.img}
                 source={require("../../../assets/icons/chatIcon.svg")}
@@ -26,7 +31,7 @@ export const styles = StyleSheet.create({
     img: {
         width: 254,
         height: 221,
-        marginBottom: 127,
+        marginBottom: 107,
     },
 
     Title: {

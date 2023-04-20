@@ -166,6 +166,7 @@ export default function StackNavigator() {
                         component={Chat}
                         options={{
                             headerShown: true,
+                            headerTitle: "Mensajes",
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}
                     />
