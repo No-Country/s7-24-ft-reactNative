@@ -89,7 +89,7 @@ export const FinalizadoScreen = ({ route, navigation }: any) => {
                         })
                     }
                 >
-                    <Text style={styles.buttonText}>Ver publicación</Text>
+                    <Text style={styles.buttonText}>Ver mis servicios</Text>
                 </TouchableOpacity>
                 <Text
                     style={{

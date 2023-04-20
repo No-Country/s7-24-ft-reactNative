@@ -12,6 +12,7 @@ export default {
     PROFILE: "Profile",
     HISTORY: "History",
     COUNT: "Count",
+    EDITCOUNT: "EditCount",
     HELP: "Help",
     MYSERVICE: "MyService",
     POST: "Post",

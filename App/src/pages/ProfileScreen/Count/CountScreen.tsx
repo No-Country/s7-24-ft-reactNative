@@ -1,14 +1,15 @@
-import { signOut } from "firebase/auth";
+
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import UserContext from "../../../context/UserContext";
 import { FirebaseGetAuth } from "../../../firebase/app";
+import { updateProfile, User, signOut } from "firebase/auth";
 
 // --------------------------------------------------------------------
 
-import { EditIcon } from "../../../components/EditIcon";
 import { LogoProfile } from "../../../components/LogoProfile";
 import { COLORS } from "../../../constants";
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // --------------------------------------------------------------------
 export const CountScreen = ({ navigation }: any) => {
@@ -17,12 +18,20 @@ export const CountScreen = ({ navigation }: any) => {
     const logout = () => {
         signOut(FirebaseGetAuth)
             .then(() => {
-                /*                 navigation.navigate('Login') */
             })
             .catch((error) => {
-                // An error happened.
             });
-        window.location.reload();
+            window.location.reload()
+    };
+
+    const updateUser = () => {
+        const res = FirebaseGetAuth.currentUser as User
+        updateProfile(res ,{displayName:'',photoURL:''})
+            .then(() => {
+  // Profile updated!
+  // ...
+            }).catch((error) => {
+    });
     };
 
     return (
@@ -34,17 +43,7 @@ export const CountScreen = ({ navigation }: any) => {
         >
             <LogoProfile />
 
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text
                         style={{
@@ -66,20 +65,11 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text
                         style={{
@@ -101,20 +91,10 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
-            <View
-                style={{
-                    backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                }}
-            >
+            <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
                     <Text style={{ fontSize: 16, marginVertical: 10 }}>
                         ··········
@@ -130,7 +110,7 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                    <EditIcon />
+                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
                 </View>
             </View>
             <View style={{ paddingLeft: 20 }}>
@@ -164,4 +144,15 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: 18,
     },
+    container: {
+        backgroundColor: "#ffffff",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    borderRadius: 5,
+                    marginBottom: 5,
+                    marginHorizontal: 12,
+                    shadowOpacity: 0.25,
+                    shadowRadius:3.85
+    }
 });
