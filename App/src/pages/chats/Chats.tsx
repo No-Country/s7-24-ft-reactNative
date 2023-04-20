@@ -1,7 +1,9 @@
+import { onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import { IMessage } from "react-native-gifted-chat";
 import UserContext from "../../context/UserContext";
-import { getDataBase } from "../../services/getDataBase.services";
+import { getDataDB } from "../../services/getDataDB.services";
 import NoUsers from "./components/NoUsers";
 import UserInfo from "./components/UserInfo";
 interface Props {
@@ -9,31 +11,48 @@ interface Props {
     avatar?: string;
     name: string;
 }
+interface User {
+    _id: number;
+    message: string;
+    avatar: string;
+    isTalking: boolean;
+}
+
+interface Message extends IMessage {
+    user: User;
+}
 const Chats = () => {
-    const [users, setUsers] = useState<Props[]>([]);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [users, setUsers] = useState<any>([]);
     const [idUsers, setIdUsers] = useState<string[]>([]);
     const { state } = useContext(UserContext);
 
     useEffect(() => {
         const data: Props[] = [];
         const idSet = new Set<string>();
-        getDataBase("chats").then((res) => {
-            if (res.status && res.result !== null) {
-                res.result.forEach((item) => {
-                    if (state.id === item.data().user._id) {
-                        const idUser = item.data().idUser;
-                        if (!idSet.has(idUser)) {
-                            idSet.add(idUser);
-                            data.push({
-                                _id: idUser,
-                                name: item.data().nameUser,
-                            });
-                        }
-                    }
-                });
-                setUsers(data);
-            }
+        const collectionUser = getDataDB("chats");
+        const q = query(collectionUser,
+            orderBy("createdAt", "desc")
+        );
+
+        onSnapshot(q, (QuerySnapshot) => {
+
+            const data = QuerySnapshot.docs.map((doc) => ({
+                user: doc.data().user,
+                userTwo: doc.data().userTwo
+
+            })).filter(item => item.user._id === state.id)
+            console.log(data);
+
+            const uniqueData = data.filter((item, index, self) =>
+                index === self.findIndex((t) => (
+                    t.user._id === item.user._id && t.userTwo.id === item.userTwo.id
+                ))
+            );
+
+            setUsers(uniqueData);
         });
+
     }, []);
 
     return (
@@ -47,9 +66,9 @@ const Chats = () => {
                         data={users}
                         renderItem={({ item }) => (
                             <UserInfo
-                                avatar={item.avatar}
-                                id={item._id}
-                                name={item.name}
+                                avatar={item.userTwo.avatar}
+                                id={item.userTwo.id}
+                                name={item.userTwo.name}
                                 isTalking={false}
                             />
                         )}
