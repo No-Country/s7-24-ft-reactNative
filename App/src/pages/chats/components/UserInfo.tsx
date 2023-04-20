@@ -9,37 +9,46 @@ import {
     View,
 } from "react-native";
 import { ROUTES } from "../../../constants";
-import UserModel from "../../../models/userChatModel.model";
 import ObjectStyles from "../../../styles/objects/objects";
 
 const deviceWidth = Dimensions.get("window").width;
 
-const UserInfo = ({ name, avatar, id, isTalking }: UserModel) => {
+const UserInfo = ({ item, isTalking }: any) => {
     const navigation = useNavigation();
+    const dataChat = {
+        id: item.data.id,
+        _id: item.data._id,
+        name: item.data.name,
+        photoUrl: item.data.photoUrl,
+    };
+    console.log(dataChat);
 
+    console.log(item);
     const goChat = () => {
         navigation.dispatch(
             CommonActions.navigate({
                 name: ROUTES.CHAT,
                 params: {
-                    dataUser: {
-                        id: id,
-                        name: name,
-                        photoUrl: avatar,
-                    },
+                    dataUser: dataChat,
                 },
             })
         );
     };
 
     return (
-        <TouchableOpacity key={id} style={styles.container} onPress={goChat}>
+        <TouchableOpacity
+            key={item?.data._id}
+            style={styles.container}
+            onPress={goChat}
+        >
             <Image
                 source={require("../../../assets/icons/Ellipse.svg")}
                 style={{ width: 40, height: 40, borderRadius: 50 }}
             />
             <View>
-                <Text style={[styles.text, ObjectStyles.fontMain]}>{name}</Text>
+                <Text style={[styles.text, ObjectStyles.fontMain]}>
+                    {item?.data.name}
+                </Text>
                 <Text
                     style={[
                         styles.text,
