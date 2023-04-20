@@ -1,37 +1,55 @@
-
-import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { User, signOut, updateProfile } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import UserContext from "../../../context/UserContext";
 import { FirebaseGetAuth } from "../../../firebase/app";
-import { updateProfile, User, signOut } from "firebase/auth";
 
 // --------------------------------------------------------------------
 
-import { LogoProfile } from "../../../components/LogoProfile";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { COLORS } from "../../../constants";
-import Icon from 'react-native-vector-icons/FontAwesome'
+import {
+    changeImageUser,
+    getUserPerId,
+} from "../../../controllers/user.controller";
 
 // --------------------------------------------------------------------
 export const CountScreen = ({ navigation }: any) => {
     const { state } = useContext(UserContext);
+    const [dataUser, setDataUser] = useState<any>(null);
+    const [image, setImage] = useState<any>(null);
+
+    useEffect(() => {
+        async function getData() {
+            const userData = await getUserPerId(state.id);
+
+            setImage(userData.photoUrl);
+            setDataUser(userData);
+        }
+        getData();
+    }, [state.id]);
 
     const logout = () => {
         signOut(FirebaseGetAuth)
-            .then(() => {
-            })
-            .catch((error) => {
-            });
-            window.location.reload()
+            .then(() => {})
+            .catch((error) => {});
+        window.location.reload();
     };
 
     const updateUser = () => {
-        const res = FirebaseGetAuth.currentUser as User
-        updateProfile(res ,{displayName:'',photoURL:''})
+        const res = FirebaseGetAuth.currentUser as User;
+        updateProfile(res, { displayName: "", photoURL: "" })
             .then(() => {
-  // Profile updated!
-  // ...
-            }).catch((error) => {
-    });
+                // Profile updated!
+                // ...
+            })
+            .catch((error) => {});
+    };
+
+    const changeImgUser = async () => {
+        const imgUrl = await changeImageUser(state.id);
+
+        setImage(imgUrl);
     };
 
     return (
@@ -41,7 +59,49 @@ export const CountScreen = ({ navigation }: any) => {
                 height: "100%",
             }}
         >
-            <LogoProfile />
+            <View
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginVertical: 25,
+                    paddingLeft: 25,
+                }}
+            >
+                <TouchableOpacity onPress={changeImgUser}>
+                    <Image
+                        style={{ width: 40, height: 40, borderRadius: 20 }}
+                        source={
+                            image == null
+                                ? require("../../../assets/icons/Ellipse.svg")
+                                : { uri: image }
+                        }
+                    />
+                    <Image
+                        style={{
+                            width: 15,
+                            height: 15,
+                            position: "absolute",
+                            bottom: 0,
+                            right: 0,
+                            backgroundColor: "#fff",
+                            borderRadius: 100,
+                        }}
+                        source={require("../../../assets/icons/PlusChat.svg")}
+                    />
+                </TouchableOpacity>
+                <Text
+                    style={{
+                        paddingHorizontal: 10,
+                        fontSize: 16,
+                        display: "flex",
+                        alignItems: "center",
+                        fontFamily: "Main",
+                        textTransform: "capitalize",
+                    }}
+                >
+                    Hola, {dataUser?.name}!
+                </Text>
+            </View>
 
             <View style={styles.container}>
                 <View style={{ paddingLeft: 20 }}>
@@ -65,7 +125,12 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
+                    <Icon
+                        name="pencil"
+                        size={15}
+                        color={"#00000"}
+                        onPress={() => navigation.navigate("EditCount")}
+                    />
                 </View>
             </View>
 
@@ -91,7 +156,12 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
+                    <Icon
+                        name="pencil"
+                        size={15}
+                        color={"#00000"}
+                        onPress={() => navigation.navigate("EditCount")}
+                    />
                 </View>
             </View>
             <View style={styles.container}>
@@ -110,7 +180,12 @@ export const CountScreen = ({ navigation }: any) => {
                     </Text>
                 </View>
                 <View style={{ paddingRight: 20, justifyContent: "center" }}>
-                <Icon name="pencil" size={15} color={"#00000"} onPress={()=> navigation.navigate("EditCount")} />
+                    <Icon
+                        name="pencil"
+                        size={15}
+                        color={"#00000"}
+                        onPress={() => navigation.navigate("EditCount")}
+                    />
                 </View>
             </View>
             <View style={{ paddingLeft: 20 }}>
@@ -146,13 +221,13 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: "#ffffff",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    borderRadius: 5,
-                    marginBottom: 5,
-                    marginHorizontal: 12,
-                    shadowOpacity: 0.25,
-                    shadowRadius:3.85
-    }
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderRadius: 5,
+        marginBottom: 5,
+        marginHorizontal: 12,
+        shadowOpacity: 0.25,
+        shadowRadius: 3.85,
+    },
 });

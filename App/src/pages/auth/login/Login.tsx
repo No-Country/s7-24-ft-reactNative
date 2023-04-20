@@ -63,6 +63,7 @@ const Login = ({ navigation }: Props) => {
                         authorization: "success",
                         email: res.email === null ? "" : res.email,
                         id: res.id,
+                        photoUrl: res.photoURL,
                     },
                 });
             }

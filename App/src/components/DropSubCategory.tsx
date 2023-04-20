@@ -11,11 +11,12 @@ export const DropSubCategory = ({ categoryID, change, active }: any) => {
         async function getData() {
             const data = await getSubCategoriesPerMainCategory(categoryID);
 
+            change(data[0].id);
             setSubCatData(data);
         }
 
         getData();
-    }, []);
+    }, [categoryID]);
 
     return (
         <View style={ObjectStyles.containerFormInput}>

@@ -30,7 +30,9 @@ interface Dates {
 
 export const DetailPubli = ({ navigation, route }: any) => {
     const { imgurl } = route.params;
-    const [selectedValue, setSelectedValue] = useState<string>("");
+    const [selectedValue, setSelectedValue] = useState<string>(
+        "MzerAWuTGCLcN38zWtJB"
+    );
     const [subCat, setSubCat] = useState<string>("");
 
     const [isSelected, setIsSelected] = useState(false);
@@ -81,15 +83,13 @@ export const DetailPubli = ({ navigation, route }: any) => {
                         change={setSelectedValue}
                         active={selectedValue}
                     />
-                    {selectedValue !== "" ? (
-                        <DropSubCategory
-                            categoryID={selectedValue}
-                            change={setSubCat}
-                            active={subCat}
-                        />
-                    ) : (
-                        <></>
-                    )}
+
+                    <DropSubCategory
+                        categoryID={selectedValue}
+                        change={setSubCat}
+                        active={subCat}
+                    />
+
                     <View style={ObjectStyles.containerFormInput}>
                         <Text style={ObjectStyles.textLabelForm}>
                             ¿Cúal es el título de tu publicación?
