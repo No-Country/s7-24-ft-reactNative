@@ -28,19 +28,27 @@ const Chat = ({ route }: any) => {
 
     useEffect(() => {
         const collectionUser = getDataDB("chats");
-        const q = query(collectionUser, orderBy("createdAt", "desc"));
+        const q = query(collectionUser,
+            orderBy("createdAt", "desc")
+        );
 
         onSnapshot(q, (QuerySnapshot) => {
             setMessages(
                 QuerySnapshot.docs.map((doc) => ({
-                    _id: doc.data()._id,
+                    _id: doc.data().id,
                     createdAt: doc.data().createdAt.toDate(),
                     user: doc.data().user,
                     text: doc.data().text,
-                }))
+                    userTwo: doc.data().userTwo
+
+                })).filter(item => item.userTwo.id === dataUser.id && item.user._id === state.id)
             );
         });
+
     }, []);
+
+    console.log(messages);
+
 
     const onSend = useCallback((message: Message[] = []) => {
         setMessages((previousMessages) =>
@@ -48,16 +56,18 @@ const Chat = ({ route }: any) => {
         );
 
         const { _id, createdAt, text, user } = message[message.length - 1];
-        console.log(message);
+
         addDBDoc("chats", {
             _id,
-            idUser: dataUser.id,
-            nameUser: dataUser.name,
             createdAt,
             text,
             user,
+            userTwo: dataUser
         });
+
     }, []);
+
+    console.log(messages);
 
     return (
         <View style={{ height: "100%" }}>
