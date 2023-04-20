@@ -36,14 +36,14 @@ function BottomSheetContent({
     }
 
     function aplicar() {
-        changeFilters(false, newsFilters);
+        changeFilters(2, newsFilters);
     }
 
     return (
         <View style={styles.bottomSheetContainer}>
             <View style={styles.bottomSheetHeader}>
                 <Text style={{ fontSize: 20 }}>Filtrar</Text>
-                <TouchableOpacity onPress={() => changeFilters(true, [])}>
+                <TouchableOpacity onPress={() => changeFilters(1, [])}>
                     <Text style={{ fontSize: 12 }}>Restablecer</Text>
                 </TouchableOpacity>
             </View>

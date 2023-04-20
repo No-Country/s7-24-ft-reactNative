@@ -1,51 +1,67 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // --------------------------------------------------------------------
 
 import { BottomSheetModal, ServiceCard } from "../../components";
 import { COLORS } from "../../constants";
+import { LoaderContext } from "../../context/LoaderContext";
 import { getCategoryPerId } from "../../controllers/categories.controller";
 import { getServicesPerCategory } from "../../controllers/services.controller";
 import ServiceModel from "../../models/services.models";
 
 // --------------------------------------------------------------------
 
+let allServ: any;
+
 export default function CategoriesScreen({ route, navigation }: any) {
     const { id, filter } = route.params;
     const [servicesData, setServicesData] = useState<ServiceModel[]>([]);
     const [catData, setCatDat] = useState<any>({});
     const [activesFilters, setActiveFilters] = useState(filter);
+    const { setShowLoader }: any = useContext(LoaderContext);
 
     useEffect(() => {
         async function getData() {
             const dataCat = await getCategoryPerId(id);
-
+            allServ = await getServicesPerCategory(id);
             setCatDat(dataCat);
-            changeFilters(true, []);
+
+            if (filter.length == 0) {
+                changeFilters(0, []);
+            } else {
+                changeFilters(2, []);
+            }
+
             navigation.setOptions({ title: dataCat.name });
+
+            setTimeout(() => {
+                setShowLoader(false);
+            }, 1000);
         }
 
         getData();
     }, []);
 
-    async function getServices() {
-        const dataServices = await getServicesPerCategory(id);
-
-        return dataServices;
-    }
-
-    async function changeFilters(typeChange: boolean, newFilters: []) {
-        const dataServices = await getServices();
-
-        if (typeChange) {
+    async function changeFilters(typeChange: number, newFilters: []) {
+        if (typeChange == 0) {
+            setServicesData(allServ);
+        }
+        if (typeChange == 1) {
             setActiveFilters([]);
-            setServicesData(dataServices);
-        } else {
-            setActiveFilters([...activesFilters, newFilters]);
+            setServicesData(allServ);
+        }
+        if (typeChange == 2) {
+            const filtro = [...activesFilters, ...newFilters];
 
-            const data = dataServices.filter((e: any) =>
-                activesFilters.includes(e.subCatecoryId)
+            let uniqueArray = filtro.filter(function (value, index, self) {
+                return self.indexOf(value) === index;
+            });
+
+            setActiveFilters(uniqueArray);
+
+            const data = allServ.filter((e: any) =>
+                uniqueArray.includes(e.subCatecoryId)
             );
 
             setServicesData(data);

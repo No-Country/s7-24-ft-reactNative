@@ -14,7 +14,6 @@ import { DropSubCategory } from "../../../components/DropSubCategory";
 import { DropdownExample } from "../../../components/Dropdown";
 import { COLORS } from "../../../constants";
 import UserContext from "../../../context/UserContext";
-import { addDBDoc } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
 import RootStyles from "../../../styles/setting/setting";
 
@@ -65,9 +64,7 @@ export const DetailPubli = ({ navigation, route }: any) => {
             subCategory: subCat,
         };
 
-        addDBDoc("services", template);
-
-        navigation.navigate("Publicacion");
+        navigation.navigate("Publicacion", { template });
     };
 
     return (

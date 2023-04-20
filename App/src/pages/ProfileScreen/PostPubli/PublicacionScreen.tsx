@@ -1,12 +1,26 @@
+import { useContext } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // --------------------------------------------------------------------
 
 import { COLORS } from "../../../constants";
+import { LoaderContext } from "../../../context/LoaderContext";
+import { addDBDoc } from "../../../services/addUserToDB.services";
 
 // --------------------------------------------------------------------
 
-export const PublicacionScreen = ({ navigation }: any) => {
+export const PublicacionScreen = ({ route, navigation }: any) => {
+    const { template } = route.params;
+    const { setShowLoader }: any = useContext(LoaderContext);
+
+    const publish = async () => {
+        setShowLoader(true);
+
+        const idService = await addDBDoc("services", template);
+
+        navigation.navigate("Finalizado", { id: idService, img: template.img });
+    };
+
     return (
         <View style={{ backgroundColor: COLORS.background, height: "100%" }}>
             <View
@@ -46,7 +60,7 @@ export const PublicacionScreen = ({ navigation }: any) => {
             >
                 <TouchableOpacity
                     style={styles.buttonContainer}
-                    onPress={() => navigation.navigate("Finalizado")}
+                    onPress={publish}
                 >
                     <Text style={styles.buttonText}>Publicar</Text>
                 </TouchableOpacity>
@@ -57,7 +71,7 @@ export const PublicacionScreen = ({ navigation }: any) => {
                         marginVertical: 15,
                         color: COLORS.primary,
                     }}
-                    onPress={() => navigation.navigate("DetailP")}
+                    onPress={() => navigation.goBack()}
                 >
                     Revisar
                 </Text>

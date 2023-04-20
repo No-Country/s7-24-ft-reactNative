@@ -20,6 +20,7 @@ import { getServices } from "../../controllers/services.controller";
 import { FirebaseGetAuth } from "../../firebase/app";
 import CategoryModel from "../../models/category.models";
 import ServiceModel from "../../models/services.models";
+import ObjectStyles from "../../styles/objects/objects";
 import { NavigateProp } from "../../types/types";
 // --------------------------------------------------------------------
 
@@ -70,12 +71,14 @@ export default function HomeScreen({ navigation }: NavigateProp) {
                     style={styles.boxBrownImage}
                     source={require("../../assets/images/SettingsHome.svg")}
                 />
-                <Text style={styles.boxBrownText}>
+                <Text style={[styles.boxBrownText, ObjectStyles.fontMain]}>
                     Todo lo que buscas, en un {"\n"} solo lugar.
                 </Text>
             </View>
             <View style={styles.categoriesContainer}>
-                <Text style={{ fontSize: 20 }}>Categorías</Text>
+                <Text style={[{ fontSize: 20 }, ObjectStyles.fontMain]}>
+                    Categorías
+                </Text>
                 <FlatList
                     style={styles.categoryTable}
                     data={categoriesData}
@@ -85,7 +88,12 @@ export default function HomeScreen({ navigation }: NavigateProp) {
                         <View style={{ margin: 10 }} />
                     )}
                 />
-                <Text style={{ fontSize: 15, marginTop: 20 }}>
+                <Text
+                    style={[
+                        { fontSize: 15, marginTop: 20 },
+                        ObjectStyles.fontMain,
+                    ]}
+                >
                     Más recomendados
                 </Text>
                 <FlatList

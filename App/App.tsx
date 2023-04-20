@@ -1,4 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 import { lazy, Suspense } from "react";
 import "react-native-gesture-handler";
 import { Loader } from "./src/components";
@@ -9,6 +10,14 @@ import UserProviderUser from "./src/context/UserProviderUser";
 const IndexPages = lazy(() => import("./src/routes/StackNavigator"));
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        Main: require("./assets/fonts/Montserrat-Medium.ttf"),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
     return (
         <UserProviderUser>
             <LoaderProvider>
