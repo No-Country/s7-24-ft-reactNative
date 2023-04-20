@@ -7,9 +7,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useEffect, useState } from "react";
 import { COLORS, ROUTES } from "../constants";
 import { LoaderContext } from "../context/LoaderContext";
+import { generateRatingStar } from "../controllers/services.controller";
 import { getSubCategoryPerId } from "../controllers/subCategory.controller";
 import ServiceModel from "../models/services.models";
 import SubCategoryModel from "../models/subCategory.models";
+import ObjectStyles from "../styles/objects/objects";
 
 // --------------------------------------------------------------------
 
@@ -26,12 +28,16 @@ export default function ServiceCard({ data }: { data: ServiceModel }) {
     const [nameSubCategory, setNameSubCategory] = useState("");
     const { setShowLoader }: any = useContext(LoaderContext);
     const navigation = useNavigation();
+    const [rating, setRating] = useState(0);
 
     useEffect(() => {
         async function getData() {
             const subCategory = (await getSubCategoryPerId(
                 data.subCatecoryId
             )) as SubCategoryModel;
+            const rat = await generateRatingStar(data.id);
+
+            setRating(rat);
             setNameSubCategory(subCategory.name);
         }
         getData();
@@ -59,25 +65,40 @@ export default function ServiceCard({ data }: { data: ServiceModel }) {
             <Image style={styles.img} source={{ uri: data.img }} />
             <View style={styles.body}>
                 <View style={styles.cardHeaderContainer}>
-                    <Text style={{ fontSize: 15, fontWeight: "500" }}>
+                    <Text
+                        style={[
+                            { fontSize: 15, fontWeight: "500" },
+                            ObjectStyles.fontMain,
+                        ]}
+                    >
                         {nameSubCategory}
                     </Text>
                     <View style={styles.ratingContainer}>
                         <StarIcon />
                         <StarIcon />
                         <StarIcon />
-                        <Text style={{ fontSize: 7, fontWeight: "500" }}>
-                            {data.rating}
+                        <Text
+                            style={{
+                                fontSize: 7,
+                                fontWeight: "500",
+                                fontFamily: "Main",
+                            }}
+                        >
+                            {rating}
                         </Text>
                     </View>
                 </View>
-                <Text style={{ fontSize: 12 }}>{data.service}</Text>
+                <Text style={[{ fontSize: 12 }, ObjectStyles.fontMain]}>
+                    {data.service}
+                </Text>
                 <View style={styles.centerElements}>
                     <Image
                         style={{ width: 6, height: 8 }}
                         source={require("../assets/icons/LocationIcon.svg")}
                     />
-                    <Text style={{ fontSize: 10 }}>{data.location}</Text>
+                    <Text style={[{ fontSize: 10 }, ObjectStyles.fontMain]}>
+                        {data.location}
+                    </Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -2,7 +2,7 @@ interface ServiceModel {
     id: string;
     img: string;
     service: string;
-    rating: number;
+    rating: [];
     location: string;
     subCatecoryId: string;
 }

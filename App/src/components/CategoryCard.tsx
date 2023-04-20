@@ -1,16 +1,22 @@
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 // --------------------------------------------------------------------
 
 import { COLORS, ROUTES } from "../constants";
+import { LoaderContext } from "../context/LoaderContext";
+import ObjectStyles from "../styles/objects/objects";
 
 // --------------------------------------------------------------------
 
 export default function CategoryCard({ data }: any) {
     const navigation = useNavigation();
+    const { setShowLoader }: any = useContext(LoaderContext);
 
     const goToTheCategoryScreen = () => {
+        setShowLoader(true);
+
         navigation.dispatch(
             CommonActions.navigate({
                 name: ROUTES.CATEGORY,
@@ -31,7 +37,16 @@ export default function CategoryCard({ data }: any) {
                 style={{ width: "100%", height: 100 }}
                 source={{ uri: data.img }}
             />
-            <Text style={{ paddingVertical: 10, textAlign: "center" }}>
+            <Text
+                style={[
+                    {
+                        paddingVertical: 10,
+                        textAlign: "center",
+                        fontFamily: "Main",
+                    },
+                    ObjectStyles.fontMain,
+                ]}
+            >
                 {data.name}
             </Text>
         </TouchableOpacity>

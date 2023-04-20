@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import { Image } from "react-native";
 
 // --------------------------------------------------------------------
@@ -11,6 +12,8 @@ export default function TabBarIconNavigatorBottom({
     size,
     iconName,
 }: TabBarComponentProp) {
+    const isFocused = useIsFocused();
+
     return (
         <Image
             style={{
@@ -18,7 +21,11 @@ export default function TabBarIconNavigatorBottom({
                 height: size - 7,
                 tintColor: color,
             }}
-            source={require(`../assets/icons/${iconName}TabBar.svg`)}
+            source={
+                isFocused
+                    ? require(`../assets/icons/${iconName}TabBarActive.svg`)
+                    : require(`../assets/icons/${iconName}TabBar.svg`)
+            }
         />
     );
 }

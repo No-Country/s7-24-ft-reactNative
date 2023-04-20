@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         bottom: 35,
         fontSize: 32,
         color: RootStyles.colorWhite,
+        fontFamily: "Main",
     },
 
     img: {

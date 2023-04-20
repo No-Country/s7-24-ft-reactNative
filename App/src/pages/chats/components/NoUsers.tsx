@@ -1,21 +1,32 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ROUTES } from "../../../constants";
 import ObjectStyles from "../../../styles/objects/objects";
-import { NavigateProp } from "../../../types/types";
-const NoUsers = ({ navigation }: NavigateProp) => {
+const NoUsers = ({ navigation }: any) => {
     return (
-        <View style={[ObjectStyles.flexBox, { marginHorizontal: 24 }]}>
+        <View
+            style={[
+                ObjectStyles.flexBox,
+                { marginHorizontal: 24, alignSelf: "flex-end", height: "100%" },
+            ]}
+        >
             <Image
                 style={styles.img}
                 source={require("../../../assets/icons/chatIcon.svg")}
             />
             <Text style={styles.Title}>Aun no tienes mensajes</Text>
-            <Text style={styles.text}>
+            <Text style={[styles.text, ObjectStyles.fontMain]}>
                 Envía tu primer mensaje. Encontraras todas tus conversaciones
                 aquí
             </Text>
-            <TouchableOpacity>
-                <Text style={[ObjectStyles.link, styles.linkChat]}>
+            <TouchableOpacity onPress={() => navigation(ROUTES.HOME)}>
+                <Text
+                    style={[
+                        ObjectStyles.link,
+                        styles.linkChat,
+                        ObjectStyles.fontMain,
+                    ]}
+                >
                     Explore los servicios
                 </Text>
             </TouchableOpacity>
@@ -27,7 +38,7 @@ export const styles = StyleSheet.create({
     img: {
         width: 254,
         height: 221,
-        marginBottom: 127,
+        marginBottom: 107,
     },
 
     Title: {

@@ -58,6 +58,9 @@ export default function StackNavigator() {
                     backgroundColor: COLORS.background,
                     boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.09)",
                 },
+                headerTitleStyle: {
+                    fontFamily: "Main",
+                },
             }}
         >
             {state.authorization !== "success" ? (
@@ -173,6 +176,7 @@ export default function StackNavigator() {
                         component={Chat}
                         options={{
                             headerShown: true,
+                            headerTitle: "Mensajes",
                             headerLeft: () => <ArrowBackNavigatoHeader />,
                         }}
                     />
