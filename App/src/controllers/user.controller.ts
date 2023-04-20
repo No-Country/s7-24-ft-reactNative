@@ -29,6 +29,7 @@ export async function getUserPerId(userId: string) {
             id: doc.id,
             name: data.name,
             photoUrl: data.photoUrl,
+            _id: data.id,
         };
 
         return res;

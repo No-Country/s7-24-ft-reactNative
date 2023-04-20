@@ -28,27 +28,41 @@ const Chat = ({ route }: any) => {
 
     useEffect(() => {
         const collectionUser = getDataDB("chats");
-        const q = query(collectionUser,
-            orderBy("createdAt", "desc")
-        );
-
+        const q = query(collectionUser, orderBy("createdAt", "desc"));
+        console.log(dataUser);
         onSnapshot(q, (QuerySnapshot) => {
             setMessages(
-                QuerySnapshot.docs.map((doc) => ({
-                    _id: doc.data().id,
-                    createdAt: doc.data().createdAt.toDate(),
-                    user: doc.data().user,
-                    text: doc.data().text,
-                    userTwo: doc.data().userTwo
-
-                })).filter(item => item.userTwo.id === dataUser.id && item.user._id === state.id)
+                QuerySnapshot.docs
+                    .map((doc) => ({
+                        _id: doc.data().id,
+                        createdAt: doc.data().createdAt.toDate(),
+                        user: doc.data().user,
+                        text: doc.data().text,
+                        userTwo: doc.data().userTwo,
+                    }))
+                    .filter((item) => {
+                        console.log(
+                            item.userTwo.id,
+                            dataUser.id,
+                            item.userTwo._id,
+                            dataUser._id,
+                            item.user._id,
+                            state.id
+                        );
+                        console.log(
+                            item.userTwo.id === dataUser.id,
+                            item.userTwo._id === dataUser._id,
+                            item.user._id === state.id
+                        );
+                        return (
+                            (item.userTwo.id === dataUser.id ||
+                                item.userTwo._id === dataUser._id) &&
+                            item.user._id === state.id
+                        );
+                    })
             );
         });
-
     }, []);
-
-    console.log(messages);
-
 
     const onSend = useCallback((message: Message[] = []) => {
         setMessages((previousMessages) =>
@@ -62,9 +76,13 @@ const Chat = ({ route }: any) => {
             createdAt,
             text,
             user,
-            userTwo: dataUser
+            userTwo: {
+                id: dataUser.id,
+                _id: dataUser._id,
+                name: dataUser.name,
+                photoUrl: dataUser.photoUrl,
+            },
         });
-
     }, []);
 
     console.log(messages);
