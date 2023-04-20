@@ -47,8 +47,6 @@ const Chat = ({ route }: any) => {
 
     }, []);
 
-    console.log(messages);
-
 
     const onSend = useCallback((message: Message[] = []) => {
         setMessages((previousMessages) =>

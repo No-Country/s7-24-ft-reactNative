@@ -3,9 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { IMessage } from "react-native-gifted-chat";
 import UserContext from "../../context/UserContext";
+import { getUserPerId } from "../../controllers/user.controller";
 import { getDataDB } from "../../services/getDataDB.services";
 import NoUsers from "./components/NoUsers";
 import UserInfo from "./components/UserInfo";
+
 interface Props {
     _id: string;
     avatar?: string;
@@ -28,6 +30,7 @@ const Chats = () => {
     const { state } = useContext(UserContext);
 
     useEffect(() => {
+
         const data: Props[] = [];
         const idSet = new Set<string>();
         const collectionUser = getDataDB("chats");
@@ -35,14 +38,16 @@ const Chats = () => {
             orderBy("createdAt", "desc")
         );
 
+        const getSession = async () => await getUserPerId(state.id);
+
+
         onSnapshot(q, (QuerySnapshot) => {
 
             const data = QuerySnapshot.docs.map((doc) => ({
                 user: doc.data().user,
                 userTwo: doc.data().userTwo
 
-            })).filter(item => item.user._id === state.id)
-            console.log(data);
+            })).filter(item => item.user._id === state.id || item.userTwo.id === getSession().id)
 
             const uniqueData = data.filter((item, index, self) =>
                 index === self.findIndex((t) => (

@@ -7,7 +7,7 @@ interface Dates {
 	moreInformation: string;
 	phone: number;
 	whatsApp: number;
-
+	
 }
 
 export default Dates;
