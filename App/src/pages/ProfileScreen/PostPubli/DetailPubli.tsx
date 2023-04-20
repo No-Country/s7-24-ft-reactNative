@@ -21,7 +21,7 @@ interface Dates {
     service: string;
     description: string;
     moreDescription: string;
-    rating: number;
+    rating: [];
     address: string;
     numberAddress: number;
     phone: number;
@@ -50,7 +50,7 @@ export const DetailPubli = ({ navigation, route }: any) => {
             moreDescription: "",
             phone: 0,
             whatsApp: 0,
-            rating: 0,
+            rating: [],
         },
     });
 

@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "react-native";
 
 // --------------------------------------------------------------------
 
@@ -113,18 +112,7 @@ export default function BottomTabNavigator() {
                             size={size}
                         />
                     ),
-                    headerLeft: () => {
-                        return (
-                            <Image
-                                style={{
-                                    width: 30,
-                                    height: 29,
-                                    marginLeft: 24,
-                                }}
-                                source={require("../assets/icons/UserIcon.svg")}
-                            />
-                        );
-                    },
+                    headerLeft: () => <ArrowBackNavigatoHeader />,
                 }}
             />
         </Tab.Navigator>

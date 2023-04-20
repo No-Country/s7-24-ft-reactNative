@@ -44,6 +44,10 @@ export default function GetLocationScreen() {
 
         const currentLocation = await Location.getCurrentPositionAsync({});
 
+        goHome();
+    };
+
+    const goHome = () => {
         setShowLoader(true);
 
         navigation.dispatch(
@@ -84,6 +88,21 @@ export default function GetLocationScreen() {
                     style={{ width: 16, height: 16 }}
                     source={require("../../assets/icons/UbicatonIcon.svg")}
                 />
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={goHome}
+                style={[
+                    ObjectStyles.bottomForm,
+                    {
+                        marginTop: 15,
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: 5,
+                    },
+                ]}
+            >
+                <Text style={styles.btnText}>Continuar sin ubicacion</Text>
             </TouchableOpacity>
         </View>
     );
