@@ -20,7 +20,7 @@ export default function BottomLogo() {
                 style={{ width: 24, height: 24 }}
                 source={require("../assets/icons/LogoIcon.svg")}
             />
-            <Text>Servify.</Text>
+            <Text style={{ fontFamily: "Main" }}>Servify.</Text>
         </View>
     );
 }

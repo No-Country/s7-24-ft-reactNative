@@ -18,7 +18,7 @@ export default function LogoNavigatorHeader() {
                 style={{ width: 24, height: 24 }}
                 source={require("../assets/icons/LogoIcon.svg")}
             />
-            <Text style={{ fontSize: 14 }}>Servify.</Text>
+            <Text style={{ fontSize: 14, fontFamily: "Main" }}>Servify.</Text>
         </View>
     );
 }

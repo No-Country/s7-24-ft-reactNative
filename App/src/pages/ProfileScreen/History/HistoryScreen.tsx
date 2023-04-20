@@ -27,7 +27,13 @@ export const HistoryScreen = ({ navigation }: any) => {
                     alignItems: "center",
                 }}
             >
-                <Text style={{ fontSize: 16, marginBottom: 20 }}>
+                <Text
+                    style={{
+                        fontSize: 16,
+                        marginBottom: 20,
+                        fontFamily: "Main",
+                    }}
+                >
                     Aún no tienes búsquedas recientes
                 </Text>
                 <Text
@@ -36,6 +42,7 @@ export const HistoryScreen = ({ navigation }: any) => {
                         fontSize: 12,
                         color: COLORS.primary,
                         textDecorationLine: "underline",
+                        fontFamily: "Main",
                     }}
                 >
                     Explora los servicios

@@ -24,6 +24,7 @@ const ObjectStyles = StyleSheet.create({
         padding: "1em",
         borderRadius: 10,
         fontSize: 14,
+        fontFamily: "Main",
         border: ".2px solid #0C0C0C50",
         backgroundColor: RootStyles.colorWhite,
         color: "rgba(149, 149, 149, 1)",
@@ -44,11 +45,16 @@ const ObjectStyles = StyleSheet.create({
         marginBottom: 12,
         color: RootStyles.colorBck,
         fontSize: 14,
+        fontFamily: "Main",
     },
 
     containerFormInput: {
         display: "flex",
         height: 60,
+    },
+
+    fontMain: {
+        fontFamily: "Main",
     },
 });
 

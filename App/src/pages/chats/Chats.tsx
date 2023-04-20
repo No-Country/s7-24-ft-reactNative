@@ -1,44 +1,49 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import UserContext from "../../context/UserContext";
 import { getDataBase } from "../../services/getDataBase.services";
 import NoUsers from "./components/NoUsers";
 import UserInfo from "./components/UserInfo";
 interface Props {
     _id: string;
-    avatar: string;
+    avatar?: string;
     name: string;
 }
 const Chats = () => {
     const [users, setUsers] = useState<Props[]>([]);
+    const [idUsers, setIdUsers] = useState<string[]>([]);
     const { state } = useContext(UserContext);
 
     useEffect(() => {
-        // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-        const data: any = [];
-
+        const data: Props[] = [];
+        const idSet = new Set<string>();
         getDataBase("chats").then((res) => {
             if (res.status && res.result !== null) {
                 res.result.forEach((item) => {
                     if (state.id === item.data().user._id) {
-                        data.push(item.data().user);
+                        const idUser = item.data().idUser;
+                        if (!idSet.has(idUser)) {
+                            idSet.add(idUser);
+                            data.push({
+                                _id: idUser,
+                                name: item.data().nameUser,
+                            });
+                        }
                     }
                 });
-
                 setUsers(data);
             }
         });
     }, []);
 
-    console.log(users);
-
     return (
-        <View>
+        <View style={styles.container}>
             {users.length === 0 ? (
                 <NoUsers />
             ) : (
                 <>
                     <FlatList
+                        style={styles.chatsContainer}
                         data={users}
                         renderItem={({ item }) => (
                             <UserInfo
@@ -55,4 +60,15 @@ const Chats = () => {
     );
 };
 
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: "29px",
+        height: "100%",
+        width: "100%",
+        backgroundColor: "#F7FCF8",
+    },
+    chatsContainer: {
+        gap: 10,
+    },
+});
 export default Chats;

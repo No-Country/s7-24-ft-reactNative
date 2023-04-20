@@ -3,7 +3,7 @@ import {
     useNavigation,
     useRoute,
 } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     Image,
     StyleSheet,
@@ -16,8 +16,10 @@ import {
 // --------------------------------------------------------------------
 
 import { COLORS, ROUTES } from "../constants";
+import UserContext from "../context/UserContext";
 import { getSubCategories } from "../controllers/subCategory.controller";
 import SubCategoryModel from "../models/subCategory.models";
+import ObjectStyles from "../styles/objects/objects";
 import { historySearch } from "../utils/fakeData";
 
 // --------------------------------------------------------------------
@@ -45,7 +47,7 @@ const Recommendations = ({ recommendation }: any) => {
             style={styles.recommendationContainer}
             onPress={goToTheCategoryScreen}
         >
-            <Text>{recommendation.name}</Text>
+            <Text style={ObjectStyles.fontMain}>{recommendation.name}</Text>
             <Image
                 style={{ width: 14, height: 14 }}
                 source={require("../assets/icons/XIcon.svg")}
@@ -60,6 +62,7 @@ const SearchBar = () => {
     const [suggestions, setSuggestions] = useState<SubCategoryModel[]>([]);
     const [subCatData, setSubCatData] = useState<SubCategoryModel[]>([]);
     const [showHist, setShowHist] = useState(true);
+    const { state } = useContext(UserContext);
 
     const route = useRoute();
 
@@ -98,7 +101,7 @@ const SearchBar = () => {
             >
                 <TextInput
                     placeholder="Buscar"
-                    style={styles.input}
+                    style={[styles.input, ObjectStyles.fontMain]}
                     value={inputController}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     text: {
         color: RootStyles.colorRed,
         fontSize: 8,
+        fontFamily: "Main",
     },
 });
 

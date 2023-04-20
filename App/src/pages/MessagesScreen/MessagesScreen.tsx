@@ -1,14 +1,14 @@
-import { Text, View ,Image} from "react-native";
+import { View } from "react-native";
 import Chats from "../chats/Chats";
 // --------------------------------------------------------------------
 
 export default function MessagesScreen() {
-
-	return (
-		<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-	
-			{/* <Chat /> */}
-			<Chats />
-		</View>
-	);
+    return (
+        <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+            {/* <Chat /> */}
+            <Chats />
+        </View>
+    );
 }

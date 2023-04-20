@@ -14,7 +14,6 @@ import { DropSubCategory } from "../../../components/DropSubCategory";
 import { DropdownExample } from "../../../components/Dropdown";
 import { COLORS } from "../../../constants";
 import UserContext from "../../../context/UserContext";
-import { addDBDoc } from "../../../services/addUserToDB.services";
 import ObjectStyles from "../../../styles/objects/objects";
 import RootStyles from "../../../styles/setting/setting";
 
@@ -22,7 +21,7 @@ interface Dates {
     service: string;
     description: string;
     moreDescription: string;
-    rating: number;
+    rating: [];
     address: string;
     numberAddress: number;
     phone: number;
@@ -51,7 +50,7 @@ export const DetailPubli = ({ navigation, route }: any) => {
             moreDescription: "",
             phone: 0,
             whatsApp: 0,
-            rating: 0,
+            rating: [],
         },
     });
 
@@ -65,9 +64,7 @@ export const DetailPubli = ({ navigation, route }: any) => {
             subCategory: subCat,
         };
 
-        addDBDoc("services", template);
-
-        navigation.navigate("Publicacion");
+        navigation.navigate("Publicacion", { template });
     };
 
     return (
@@ -293,6 +290,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: COLORS.white,
         fontSize: 18,
+        fontFamily: "Main",
     },
     input: {
         width: 164,
@@ -304,6 +302,7 @@ const styles = StyleSheet.create({
         backgroundColor: RootStyles.colorWhite,
         color: "rgba(149, 149, 149, 1)",
         boxShadow: " 0px 2px 2px rgba(0, 0, 0, 0.25)",
+        fontFamily: "Main",
     },
     containerStyle: {
         backgroundColor: COLORS.background,
