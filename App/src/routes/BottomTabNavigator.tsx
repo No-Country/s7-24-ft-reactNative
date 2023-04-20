@@ -34,6 +34,7 @@ export default function BottomTabNavigator() {
                 headerTitleStyle: {
                     fontSize: 20,
                     fontWeight: "500",
+                    fontFamily: "Main",
                 },
                 tabBarStyle: {
                     backgroundColor: COLORS.white,

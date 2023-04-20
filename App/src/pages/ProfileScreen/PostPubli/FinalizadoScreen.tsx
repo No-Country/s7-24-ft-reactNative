@@ -1,12 +1,24 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// --------------------------------------------------------------------
-
-import { COLORS } from "../../../constants";
+import { useContext, useEffect } from "react";
 
 // --------------------------------------------------------------------
 
-export const FinalizadoScreen = ({ navigation }: any) => {
+import { COLORS, ROUTES } from "../../../constants";
+import { LoaderContext } from "../../../context/LoaderContext";
+
+// --------------------------------------------------------------------
+
+export const FinalizadoScreen = ({ route, navigation }: any) => {
+    const { setShowLoader }: any = useContext(LoaderContext);
+    const { id, img } = route.params;
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowLoader(false);
+        }, 2000);
+    }, []);
+
     return (
         <View
             style={{
@@ -29,10 +41,7 @@ export const FinalizadoScreen = ({ navigation }: any) => {
                 <Text style={{ fontSize: 16, color: COLORS.white }}>
                     ¡Tu servicio se publicó con éxito!
                 </Text>
-                <Image
-                    style={styles.icon}
-                    source={require("../../../assets/icons/final.svg")}
-                />
+                <Image style={styles.icon} source={{ uri: img }} />
             </View>
 
             <View
@@ -45,7 +54,7 @@ export const FinalizadoScreen = ({ navigation }: any) => {
                     paddingHorizontal: 30,
                 }}
             >
-                <Text style={{ fontSize: 16 }}>
+                <Text style={{ fontSize: 16, textAlign: "center" }}>
                     Tu servicio pronto empezará a traer clientes, mantén
                     activadas las notificaciones.
                 </Text>
@@ -61,7 +70,12 @@ export const FinalizadoScreen = ({ navigation }: any) => {
             >
                 <TouchableOpacity
                     style={styles.buttonContainer}
-                    onPress={() => navigation.navigate()}
+                    onPress={() =>
+                        navigation.navigate(ROUTES.SERVICE, {
+                            id,
+                            subCatName: "Servicio Creado",
+                        })
+                    }
                 >
                     <Text style={styles.buttonText}>Ver publicación</Text>
                 </TouchableOpacity>

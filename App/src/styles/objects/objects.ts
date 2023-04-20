@@ -50,6 +50,10 @@ const ObjectStyles = StyleSheet.create({
         display: "flex",
         height: 60,
     },
+
+    fontMain: {
+        fontFamily: "Main",
+    },
 });
 
 export default ObjectStyles;
