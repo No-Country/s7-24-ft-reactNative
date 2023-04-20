@@ -36,8 +36,7 @@ export const EditCount = ({ navigation }: any) => {
             .then(() => {
             }).catch((error) => {
     });
-    window.location.reload();
-    navigation.navigate("Count")
+    location.reload()
     };
 
     const updateEmailUser = () => {
@@ -45,7 +44,7 @@ export const EditCount = ({ navigation }: any) => {
         updateEmail(res, inputEmail).then(() => {
         }).catch((error) => {
         });
-        window.location.reload()
+        location.reload()
     };
     return (
         <View
