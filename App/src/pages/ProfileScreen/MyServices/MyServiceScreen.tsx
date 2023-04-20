@@ -34,12 +34,15 @@ export const MyServiceScreen = ({ navigation }: any) => {
     getDataBase("services").then((resp) => {
       if (resp.status) {
         resp.result?.forEach(items => {
-          services.push({
-            nameServices: items.data().service,
-            description: items.data().description,
-            location: items.data().address,
-            img: items.data().img
-          })
+          if (items.data().idUser === state.id) {
+
+            services.push({
+              nameServices: items.data().service,
+              description: items.data().description,
+              location: items.data().address,
+              img: items.data().img
+            })
+          }
         })
       }
       setServicios(services);
@@ -56,6 +59,7 @@ export const MyServiceScreen = ({ navigation }: any) => {
         servicios.map(item => (
           <TouchableOpacity
             style={styles.serviceCardContainer}
+
           >
             <Image style={styles.img} source={{ uri: item.img }} />
             <View style={styles.body}>
