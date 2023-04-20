@@ -39,7 +39,11 @@ export default function CategoryCard({ data }: any) {
             />
             <Text
                 style={[
-                    { paddingVertical: 10, textAlign: "center" },
+                    {
+                        paddingVertical: 10,
+                        textAlign: "center",
+                        fontFamily: "Main",
+                    },
                     ObjectStyles.fontMain,
                 ]}
             >

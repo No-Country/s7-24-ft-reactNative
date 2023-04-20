@@ -8,21 +8,42 @@ import {
     TouchableOpacity,
     View,
   } from "react-native";
+  import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+  import {useContext, useEffect, useState} from 'react'
   
   
   // --------------------------------------------------------------------
   
   import { COLORS, ROUTES } from "../../../constants";
-  import { BtnPhoto } from '../../../components/BtnPhoto'
-import {CategoryCard}  from "../../../components";
-import Toggle from "../../../components/Toggle";
+  import Toggle from "../../../components/Toggle";
+  import UserContext from "../../../context/UserContext";
+  import { getDataBase } from "../../../services/getDataBase.services";
+  import Dates from "../../../models/datesUsers.models";
   
   // --------------------------------------------------------------------
 
   export const MyServiceScreen = ({navigation}:any) => {
+    const [servicios, setServicios] = useState<Dates[]>([])
+    const { state } = useContext(UserContext);
+
+    useEffect(() => {
+    const services:any = []
+    getDataBase("services").then((resp) => {
+      if(resp.status){
+        resp.result?.forEach(items => {
+          if(state.id === items.data().idUser){
+            services.push(items.data())
+          }
+        })
+      }
+    });
+
+    setServicios(services)
+  },[]);
+  console.log(servicios)
+
     return (
-        <View style={{height:'100%', backgroundColor:COLORS.background}}>
-        <View style={{height:'85%', backgroundColor:COLORS.background}}>
+      <KeyboardAwareScrollView style={{height:'100%', backgroundColor:COLORS.background}}>
           <Toggle />
           <TouchableOpacity
         style={styles.serviceCardContainer}
@@ -30,44 +51,24 @@ import Toggle from "../../../components/Toggle";
       <Image style={styles.img} source={require('../../../assets/icons/service.svg')}/>
       <View style={styles.body}>
         <View>
-          <Text style={{ fontSize: 15, fontWeight: "500" }}>Reparación</Text>
+          <Text style={{ fontSize: 15, fontWeight: "500" }}>Reparacion de Pc</Text>
         </View>
-        <Text style={{ fontSize: 12 }}>Reparación de pc</Text>
+        <Text style={{ fontSize: 12 }}>Reparaciones</Text>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
           <Image
             style={{ width: 6, height: 8 }}
             source={require("../../../assets/icons/LocationIcon.svg")}
           />
-          <Text style={{ fontSize: 10 }}>Lomas de zamora</Text>
+          <Text style={{ fontSize: 10 }}>Lomas de Zamora</Text>
         </View>
       </View>
     </TouchableOpacity>
-    <Toggle />
-          <TouchableOpacity
-        style={styles.serviceCardContainer}
-        >
-      <Image style={styles.img} source={require('../../../assets/icons/service.svg')}/>
-      <View style={styles.body}>
-        <View>
-          <Text style={{ fontSize: 15, fontWeight: "500" }}>Reparación</Text>
-        </View>
-        <Text style={{ fontSize: 12 }}>Reparación de pc</Text>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-          <Image
-            style={{ width: 6, height: 8 }}
-            source={require("../../../assets/icons/LocationIcon.svg")}
-          />
-          <Text style={{ fontSize: 10 }}>Lomas de zamora</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-    </View>
-          <View style={{display:'flex', justifyContent:'flex-end', alignItems:'center', width: '100%'}}>
+          <View style={{alignItems:'center', width: '100%'}}>
               <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("DetailP")}>
                  <Text style={styles.buttonText}>Agregar servicio</Text>
               </TouchableOpacity>
           </View>
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 

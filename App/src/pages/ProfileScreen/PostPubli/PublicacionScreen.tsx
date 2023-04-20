@@ -44,8 +44,22 @@ export const PublicacionScreen = ({ route, navigation }: any) => {
                     width: "100%",
                 }}
             >
-                <Text style={{ fontSize: 20, marginBottom: 10 }}>¡Listo!</Text>
-                <Text style={{ fontSize: 13, marginBottom: 10 }}>
+                <Text
+                    style={{
+                        fontSize: 20,
+                        marginBottom: 10,
+                        fontFamily: "Main",
+                    }}
+                >
+                    ¡Listo!
+                </Text>
+                <Text
+                    style={{
+                        fontSize: 13,
+                        marginBottom: 10,
+                        fontFamily: "Main",
+                    }}
+                >
                     Publicarás gratis por 30 días
                 </Text>
             </View>
@@ -62,7 +76,9 @@ export const PublicacionScreen = ({ route, navigation }: any) => {
                     style={styles.buttonContainer}
                     onPress={publish}
                 >
-                    <Text style={styles.buttonText}>Publicar</Text>
+                    <Text style={[styles.buttonText, { fontFamily: "Main" }]}>
+                        Publicar
+                    </Text>
                 </TouchableOpacity>
                 <Text
                     style={{
@@ -70,6 +86,7 @@ export const PublicacionScreen = ({ route, navigation }: any) => {
                         textDecorationLine: "underline",
                         marginVertical: 15,
                         color: COLORS.primary,
+                        fontFamily: "Main",
                     }}
                     onPress={() => navigation.goBack()}
                 >

@@ -9,7 +9,7 @@ interface User {
 	locality: string;
 	address: string;
 	numberAddress: number;
-	service: string;
+	service: string[];
 	descriptionService: string;
 	moreInformation: string;
 	phone: number;

@@ -18,6 +18,7 @@ export function HelpScreen({ navigation }: any) {
                     fontWeight: "500",
                     marginHorizontal: 12,
                     marginBottom: 15,
+                    fontFamily: "Main",
                 }}
             >
                 ¿En qué podemos ayudarte?

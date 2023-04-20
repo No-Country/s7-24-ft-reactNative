@@ -27,6 +27,11 @@ const reducer = (state: User, action: Action) => {
 				...state,
 				...action.payload,
 			};
+		case "SET-SERVICE":
+			return {
+				...state,
+				...action.payload,
+			}
 
 
 		default: {

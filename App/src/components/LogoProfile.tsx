@@ -1,9 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import UserContext from "../context/UserContext";
+import { getUserPerId } from "../controllers/user.controller";
 
 export const LogoProfile = () => {
     const { state } = useContext(UserContext);
+    const [dataUser, setDataUser] = useState<any>(null);
+
+    useEffect(() => {
+        async function getData() {
+            const userData = await getUserPerId(state.id);
+
+            setDataUser(userData);
+        }
+        getData();
+    }, [state.id]);
 
     return (
         <View
@@ -16,7 +27,11 @@ export const LogoProfile = () => {
         >
             <Image
                 style={styles.icon}
-                source={require("../assets/icons/Ellipse.svg")}
+                source={
+                    dataUser?.photoUrl == ""
+                        ? require("../assets/icons/Ellipse.svg")
+                        : { uri: dataUser?.photoUrl }
+                }
             />
             <Text
                 style={{
@@ -28,7 +43,7 @@ export const LogoProfile = () => {
                     textTransform: "capitalize",
                 }}
             >
-                Hola, {state.name}!
+                Hola, {dataUser?.name}!
             </Text>
         </View>
     );
@@ -38,5 +53,6 @@ const styles = StyleSheet.create({
     icon: {
         width: 30,
         height: 30,
+        borderRadius: 15,
     },
 });

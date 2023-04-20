@@ -65,7 +65,9 @@ export default function GetLocationScreen() {
                 { marginHorizontal: 24 },
             ]}
         >
-            <Text style={ObjectStyles.titleForm}>¡Bienvenido!</Text>
+            <Text style={[ObjectStyles.titleForm, ObjectStyles.fontMain]}>
+                ¡Bienvenido!
+            </Text>
             <Image
                 style={{ width: 179, height: 234 }}
                 source={require("../../assets/images/GetLocation.svg")}
@@ -83,7 +85,9 @@ export default function GetLocationScreen() {
                     },
                 ]}
             >
-                <Text style={styles.btnText}>Activar ubicacion</Text>
+                <Text style={[styles.btnText, ObjectStyles.fontMain]}>
+                    Activar ubicacion
+                </Text>
                 <Image
                     style={{ width: 16, height: 16 }}
                     source={require("../../assets/icons/UbicatonIcon.svg")}
@@ -102,7 +106,9 @@ export default function GetLocationScreen() {
                     },
                 ]}
             >
-                <Text style={styles.btnText}>Continuar sin ubicacion</Text>
+                <Text style={[styles.btnText, ObjectStyles.fontMain]}>
+                    Continuar sin ubicacion
+                </Text>
             </TouchableOpacity>
         </View>
     );

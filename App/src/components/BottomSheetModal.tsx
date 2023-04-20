@@ -42,12 +42,23 @@ function BottomSheetContent({
     return (
         <View style={styles.bottomSheetContainer}>
             <View style={styles.bottomSheetHeader}>
-                <Text style={{ fontSize: 20 }}>Filtrar</Text>
+                <Text style={{ fontSize: 20, fontFamily: "Main" }}>
+                    Filtrar
+                </Text>
                 <TouchableOpacity onPress={() => changeFilters(1, [])}>
-                    <Text style={{ fontSize: 12 }}>Restablecer</Text>
+                    <Text style={{ fontSize: 12, fontFamily: "Main" }}>
+                        Restablecer
+                    </Text>
                 </TouchableOpacity>
             </View>
-            <Text style={{ fontWeight: "600", marginTop: 30, marginLeft: 5 }}>
+            <Text
+                style={{
+                    fontWeight: "600",
+                    marginTop: 30,
+                    marginLeft: 5,
+                    fontFamily: "Main",
+                }}
+            >
                 {title}
             </Text>
             <View style={styles.subCategoriesContainer}>
@@ -78,6 +89,7 @@ function BottomSheetContent({
                                     )
                                         ? "#fff"
                                         : "#000",
+                                    fontFamily: "Main",
                                 }}
                             >
                                 {e.name}
@@ -120,7 +132,9 @@ export default function BottomSheetModal({
                 style={styles.btnFilter}
                 onPress={() => refRBSheet.current?.open()}
             >
-                <Text style={{ fontSize: 10 }}>Filtrar</Text>
+                <Text style={{ fontSize: 10, fontFamily: "Main" }}>
+                    Filtrar
+                </Text>
                 <Image
                     style={{ width: 10, height: 10 }}
                     source={require("../assets/icons/FilterIcon.svg")}
@@ -200,5 +214,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 39,
         color: COLORS.white,
+        fontFamily: "Main",
     },
 });

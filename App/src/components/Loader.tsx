@@ -31,7 +31,8 @@ export default function Loader() {
 
 const styles = StyleSheet.create({
     loaderContainer: {
-        flex: 1,
+        width: "100%",
+        height: "100%",
         backgroundColor: COLORS.white,
         justifyContent: "center",
         alignItems: "center",
