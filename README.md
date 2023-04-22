@@ -37,6 +37,10 @@ En resumen, este proyecto de React Native busca simplificar el proceso de encont
 <br />
 <br />
 
+### 📚 Diseño
+
+  <a href="https://www.figma.com/file/2B3dWqNUxa6LNYZwQgtb86/No-country?node-id=564-4733&t=DnIhdn2vqH4tX0zB-0">Visitar</a>
+
 ### 📚 Tecnologías
 
 -   Frontend
